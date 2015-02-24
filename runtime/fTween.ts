@@ -1,7 +1,9 @@
-/// <reference path="../../../tween.js/sp-tween.js.d.ts" />
+/// <reference path="../gitignore/node0.11.d.ts" />
+/// <reference path="../node_modules/superpowers-tween/superpowers-tween.d.ts" />
 
-import TWEEN = require("sp-tween")
-import EventEmitter = require("events").EventEmitter
+import TWEEN = require("TWEEN");
+import events = require("events");
+import EventEmitter = events.EventEmitter;
 
 /**
 * @interface fTweenListener
@@ -32,31 +34,26 @@ export interface InterpolationFunction {
 
 /**
 * @interface fTweenParams
-* @property {object} from - The object containing the start values. Optional only if the 'target' property is set in the parameters.
+* @property {object} from - The object containing the start values. Optional 
 * @property {object} to - The object containing the end values.
 * @property {number} duration - The time in __milliseconds__ to complete the tweener.
-* @property {object} target - An object from which the values of the properties may be get, and on which auto tween the properties.
-* @property {boolean} autoUpdateTarget - Tell whether to automatically update the properties on the target (true) or not (false). If set to true, the onUpdate callback can't be set.
 * @property {number} delay - The time in milliseconds before the tweener's values actually starts to updates after the tweener has been started.
 * @property {number} repeat - The number of times the tweener will repeat, after having completed once.
 * @property {boolean} yoyo - After having completed once and when repeat is strictly positive, tell whether the tweener restart from its original state (false) (from 'from' to 'to', and repeat) or its current state (true) (from 'from' to 'to', then from 'to' to 'from', and repeat).
 * @property {EasingFunction} easing - The easing function to use. If set as a string, it must contains the family and the variant, separated by a period (ie: "Linear.None", "Cubic.InOut").
 * @property {InterpolationFunction} interpolation - The interpolation function to use. As a string: ie: "Linear", "Bezier".
 * @property {number} start - The time at which to start the tweener. fTweens are automatically started at the time they are created, so you may set the property to false to prevent it to be started at all, or set any other time you like. 
-* @property {fTweenListener} onStart - The callback when the tweener starts.
-* @property {fTweenListener} onPause - The callback when the tweener pauses.
-* @property {fTweenListener} onResume - The callback when the tweener resume after a pause.
-* @property {fTweenUpdateListener} onUpdate - The callback when the tweener updates. Can not be set when the target is automatically updated.
-* @property {fTweenListener} onComplete - The callback when the tweener completes.
-* @property {fTweenListener} onStop - The callback when the tweener stops.
-* @property {object} eventsContext - The context object the callbacks shoud be called on (the value of their 'this' variable).
+* @property {fTweenListener} onStart - The listener for when the tweener starts.
+* @property {fTweenListener} onPause - The listener for when the tweener pauses.
+* @property {fTweenListener} onResume - The listener for when the tweener resume after a pause.
+* @property {fTweenUpdateListener} onUpdate - The listener for when the tweener updates. 
+* @property {fTweenListener} onComplete - The listener for when the tweener completes.
+* @property {fTweenListener} onStop - The listener for when the tweener stops.
 */
 export interface fTweenParams {
   from?: Object;
   to?: Object;
   duration?: number;
-  target?: Object;
-  autoTweenTarget?: boolean;
   delay?: number;
   repeat?: number;
   yoyo?: boolean;
@@ -68,7 +65,6 @@ export interface fTweenParams {
   onUpdate?: fTweenUpdateListener;
   onComplete?: fTweenListener;
   onStop?: fTweenListener;
-  eventsContext?: Object;
   start?: number;
 }
 
@@ -91,73 +87,14 @@ var shortEventNames = [
   "stop"
 ];
 
-/**
-* Extends dest (in place) with the values found in source, based on the keys found in ref (if ref is not defined ref=source)
-*/
-var _extends = function( dest, source, ref ) {
-  var key, nKey, value, nSource;
-  for ( key in ref ) {
-    if( dest[ key ] === undefined ) {
-      value = source[ key ];
-      if ( value === Object( value ) ) {
-        nSource = value;
-        value = {};
-        for ( nKey in nSource ) {
-          value[ nKey ] = nSource[ nKey ];
-        }
-      }
-      dest[ key ] = value;
-    }
-  }
-}
-
-// replace the all the content of dest by a copy of the content of source
-var _exactCopy = function( dest, source ) {
-  var key, nKey, sourceValue, destValue, nObject, nDestValue;
-
-  // add or update in dest from the values in source.
-  for ( key in source ) {
-    
-    sourceValue = source[ key ];
-    destValue = dest[ key ];
-    if ( sourceValue === Object( sourceValue ) ) {
-      // TODO: it's probably a Vector3 or some other similar kind of data
-      // check if there is a clone() function available
-
-      if ( destValue === undefined ) {
-        destValue = {};
-      }
-
-      for ( nKey in sourceValue ) {
-        nDestValue = parseFloat( sourceValue[ nKey ] );
-        if ( isNaN( nDestValue ) === false ) { // true for numbers and string that convert to numbers
-          destValue[ nKey ] = nDestValue;
-        }
-      }
-    }
-    else {
-      destValue = sourceValue;
-    }
-    
-    dest[ key ] = destValue;
-  }
-
-  // remove from dest the keys that are not in source
-  var keys = Object.keys( dest );
-  for ( var i = 0; i < keys.length; i++ ) {
-    if ( source[ keys[ i ] ] === undefined ) {
-      delete dest[ keys[ i ] ];
-    }
-  }
-}
 
 // the 'this' variable inside the callbacks is the 'from' object
-var _onStart = function() { this._tweener.emit( "onStart",  this ); }
-var _onPause = function() { this._tweener.emit( "onPause",  this ); }
-var _onResume = function() { this._tweener.emit( "onResume", this ); }
-var _onUpdate = function( progression: number ) { this._tweener.emit( "onUpdate", this, progression ); }
-var _onComplete = function() { this._tweener.emit( "onComplete", this ); }
-var _onStop = function() { this._tweener.emit( "onStop", this ); }
+var _onStart: TWEEN.TweenCallback = function() { this._tweener.emit( "onStart",  this ); }
+var _onPause: TWEEN.TweenCallback = function() { this._tweener.emit( "onPause",  this ); }
+var _onResume: TWEEN.TweenCallback = function() { this._tweener.emit( "onResume", this ); }
+var _onUpdate: TWEEN.TweenUpdateCallback = function( progression: number ) { this._tweener.emit( "onUpdate", this, progression ); }
+var _onComplete: TWEEN.TweenCallback = function() { this._tweener.emit( "onComplete", this ); }
+var _onStop: TWEEN.TweenCallback = function() { this._tweener.emit( "onStop", this ); }
 
 export class fTween extends EventEmitter {
 
@@ -171,11 +108,10 @@ export class fTween extends EventEmitter {
   */
   static Interpolation: TweenInterpolation = TWEEN.Interpolation;
 
-
-  constructor( time: number, onComplete: fTweenListener, params?: fTweenParams );
-  constructor( to: Object, duration: number, params?: fTweenParams );
   constructor( from: Object, to: Object, duration: number, params?: fTweenParams );
-  constructor( to: Object, duration: number, target: Object, params?: fTweenParams );
+  constructor( to: Object, duration: number, params?: fTweenParams );
+  constructor( params: fTweenParams );
+  constructor( time: number, onComplete: fTweenListener, params?: fTweenParams );
 
   /**
   * Creates a new fTween instance. 
@@ -183,7 +119,7 @@ export class fTween extends EventEmitter {
   * @param {fTweenParams} [params={}] - The list of parameters. See the arguments list of set() for the list of its expected properties.
   * @returns {fTween} The new fTween instance.
   */
-  constructor( params: fTweenParams = {} ) {
+  constructor( ...args ) {
     super();
 
     this._tween = new TWEEN.Tween()
@@ -217,10 +153,6 @@ export class fTween extends EventEmitter {
       this.to = params.to;
       delete params.to;
     }
-    if ( params.target !== undefined ) {
-      this.target = params.target;
-      delete params.target;
-    }
 
     var start = params.start;
     delete params.start;
@@ -242,46 +174,6 @@ export class fTween extends EventEmitter {
   // --------------------------------------------------------------------------------
   // some helpers
 
-  // called by from() setter
-  private _populateFromTarget() {
-    var key, nKey, targetValue, nObject, nTargetValue;
-    for ( key in this._to ) {
-
-      if( this._from[ key ] === undefined ) {
-        targetValue = this._target[ key ];
-
-        if ( targetValue === Object( targetValue ) ) {
-          // 17/02 TODO: it's probably a Vector3 or some other similar kind of data
-          // check if there is a clone() function available
-          // 18/02: actually if this is a vector3, it is mostlikely newly created and we don't event need to copy it
-
-          if ( typeof targetValue.clone === "function" ) {
-            targetValue = targetValue.clone();
-          }
-          else {
-            nObject = targetValue;
-            targetValue = {};
-            for ( nKey in nObject ) {
-              nTargetValue = nObject[ nKey ];
-              if ( typeof nTargetValue === "number" ) {
-                targetValue[ nKey ] = nTargetValue;
-              }
-            }
-          }
-        }
-
-        else if ( targetValue === undefined ) {
-          console.log( "Tweener._populateFromTarget(): WARNING: The value of the property '"+key+"' in the 'to' object is undefined on the 'from' object (that's fine) but also on the 'target' object (that's NOT OK). Setting a value of '0' on the 'from' object." );
-          targetValue = 0;
-        }
-
-        this._from[ key ] = targetValue;
-      }
-
-    }
-    this._isFromPopulated = true;
-  }
-
   // called by duration, delay, time setter
   private _checkMilliseconds( value: number, propName: string ) {
     if ( value >= 500 ) {
@@ -296,21 +188,11 @@ export class fTween extends EventEmitter {
   private _tween: TWEEN.Tween;
   get _inner(): TWEEN.Tween { return this._tween; }
 
-  // keep the original values in the from object of an absolute tween
-  // set in start(), used in reset()
-  private _resetFrom: Object = {}; 
-
-
-  private _isFromPopulated: boolean = false;
-
   /**
-  * @property {object} from - The object containing the start values. Optional only if the 'target' property is set.
+  * @property {object} from - The object containing the start values.
   */
   private _from: Object; // from has to exist but is completely optionnal
   set from( from: Object ) {
-    if ( this._to !== undefined && this._target !== undefined ) {
-      this._populateFromTarget();
-    }
     from._tweener = this; // used in the callbacks
     this._from = from;  
     this._tween.from( from );
@@ -322,9 +204,6 @@ export class fTween extends EventEmitter {
   set to( to: Object ) {
     this._to = to;
     this._tween.to( to );
-    if ( this._from !== undefined && this._target !== undefined ) {
-      this._populateFromTarget();
-    }
   }
   get to(): Object { return this._to; }
 
@@ -409,52 +288,6 @@ export class fTween extends EventEmitter {
   get isCompleted(): boolean { return this._isCompleted; }
 
   // --------------------------------------------------------------------------------
-  // target
-
-  private _autoUpdateListener: fTweenUpdateListener = function( object: Object, progression: number ) {
-    // because the function has been binded to the target object,
-    // the 'this' variable here is the target object
-    for ( var key in object ) {
-      // TODO: allow the key to be a dynamic property
-      if ( key !== "_tweener" ) {
-        this[ key ] = object[ key ];
-      }
-    }
-  }
-
-  private _autoUpdateBindedListener: fTweenUpdateListener;
-  private _autoUpdateTarget: boolean = true;
-  set autoUpdateTarget( autoUpdateTarget: boolean ) { 
-    this._setupAutoUpdate( autoUpdateTarget );
-    this._autoUpdateTarget = autoUpdateTarget; 
-  }
-  get autoUpdateTarget(): boolean { return this._autoUpdateTarget; }
-
-  private _setupAutoUpdate( setup: boolean = true ) {
-    if ( setup === true ) {
-      if ( this._autoUpdateBindedListener !== undefined ) {
-        this._setupAutoUpdate( false );
-      }
-      this._autoUpdateBindedListener = this._autoUpdateListener.bind( this._target );
-      this.on( "onUpdate", this._autoUpdateBindedListener );
-    } 
-    else if ( this._autoUpdateBindedListener !== undefined ) {
-      this.removeListener( "onUpdate", this._autoUpdateBindedListener );
-      this._autoUpdateBindedListener = undefined;
-    }
-  }
-
-  private _target: Object;
-  set target( target: Object ) { 
-    this._target = target;
-    this._setupAutoUpdate( this._autoUpdateTarget );
-    if ( this._from !== undefined && this._to !== undefined ) {
-      this._populateFromTarget();
-    }
-  }
-  get target(): Object { return this._target; }
-
-  // --------------------------------------------------------------------------------
   // Events
 
   on( eventName: string, listener: fTweenListener|fTweenUpdateListener ) {
@@ -465,8 +298,6 @@ export class fTween extends EventEmitter {
       console.log( "fTween.on(): ERROR: wrong event name: "+eventName );
       return;
     }
-    // listener = listener.bind( context || this.target || this );
-    // TODO: check if it's really usefull to set an automatic context
     super.on( eventName, listener );
   }
 
@@ -481,9 +312,6 @@ export class fTween extends EventEmitter {
 
     if ( this._from === undefined ) {
       this.from = {};
-    }
-    if ( this._isRelative === false ) {
-      _exactCopy( this._resetFrom, this._from );
     }
 
     this._isCompleted = false;
@@ -504,14 +332,6 @@ export class fTween extends EventEmitter {
     this._tween.resume(); 
   }
   stop() { this._tween.stop(); }
-
-  /*reset() {
-    this._isCompleted = false;
-    if ( this._isRelative === false ) {
-      _exactCopy( this._from, this._resetFrom );
-    }
-    this.emit( "reset", this._from );
-  }*/
   
   destroy() {
     this.stop();
@@ -519,8 +339,6 @@ export class fTween extends EventEmitter {
     this._tween = null;
     this._from = null;
     this._to = null;
-    this._target = null;
-    this._autoUpdateBindedListener = null;
     this.removeAllListeners();
   }
 
@@ -538,13 +356,13 @@ requestAnimationFrame( fTween.update );
 // --------------------------------------------------------------------------------
 
 export class Actor {
-  animate( to: Object, duration: number, params?: Object ): fTween {
-    return new fTween( to, duration, this, params );
+  animate( to: Object, duration: number, params?: fTweenParams ): fTween {
+    return new fTween( this, to, duration, params );
   }
 }
 
 export class ActorComponent {
-  animate( to: Object, duration: number, params?: Object ): fTween {
-    return new fTween( to, duration, this, params );
+  animate( to: Object, duration: number, params?: fTweenParams ): fTween {
+    return new fTween( this, to, duration, params );
   }
 }
