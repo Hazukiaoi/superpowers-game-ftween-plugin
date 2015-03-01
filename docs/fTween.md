@@ -76,13 +76,13 @@ Except for `start` and the listeners, you can set all these properties directly 
 
 - `from` (object) [optional]: the object containing the properties to tween, which values are considered as their start values. Values found in the `to` object and not in the `from` object will be defaulted to 0. Only number values or objects that contains numbers will be tweened.
 
+- `isRelative` (boolean) [default=false]: tell whether to consider number values in the to object as relative (true) or absolute (false). Note that string values in the `to` object are always considered as relative.
+
 - `delay` (number) [default=0] : the time __in second__ it takes for the tween to actually start after the `start()` function has been called.
 
 - `repeat` (number) [default=0]: the number of times the tween will repeat after having run at least once.
 
 - `yoyo` (boolean) [default=false]: when repeat > 0, tell whether the behavior of the tween will be _like a yoyo_, i.e. it will bounce to and from the start and end values, instead of just repeating the same sequence from the beginning.
-
-- `isRelative` (boolean) [default=false]: tell whether to consider number values in the to object as relative (true) or absolute (false). Note that string values in the `to` object are always considered as relative.
 
 - `easing` (EasingFunction) [default=fTween.Easing.Linear.None]: The easing function to use while tweening. 
 
