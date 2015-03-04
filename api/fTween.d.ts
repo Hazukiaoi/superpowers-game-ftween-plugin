@@ -1,19 +1,20 @@
 
 declare module fTween {
-  class Tween {
-    static Easing: SPTWEEN.TweenEasing;
-    static Interpolation: SPTWEEN.TweenInterpolation;
-    static update(time?: number);
+  Easing: SPTWEEN.TweenEasing;
+  Interpolation: SPTWEEN.TweenInterpolation;
+  
+  update(time?: number): void;
 
+  class Tween {
     constructor(from: Object, to: Object, duration: number, params?: Params);
     constructor(to: Object, duration: number, params?: Params);
     constructor(time: number, onComplete: Listener, params?: Params);
-    constructor(params: Params);
+    constructor(params?: Params);
     
     set(params: Params);
     on(eventName: string, listener: Listener): Tween;
     on(eventName: string, listener: UpdateListener): Tween;
-    on(eventName: string, listener: Function): Tween;
+    off(eventName: string, listener: off): Tween;
     start(time?: number);
     pause();
     resume();
@@ -34,6 +35,7 @@ declare module fTween {
     interpolation: SPTWEEN.InterpolationFunction;
     isPaused: boolean;
     isCompleted: boolean;
+    isDestroyed: boolean;
   } 
 
   interface Listener {
@@ -55,6 +57,7 @@ declare module fTween {
     yoyo?: boolean;
     easing?: SPTWEEN.EasingFunction;
     interpolation?: SPTWEEN.InterpolationFunction;
+    destroyOnComplete?: boolean;
     onStart?: Listener;
     onPause?: Listener;
     onResume?: Listener;

@@ -1,114 +1,147 @@
-# Animations with fTween
+# Animations with the fTween module
 
-The fTween plugin allows to easily create tweens that animate properties on objects.
+The `fTween` plugin for Superpowers allows to easily create tweens that animate properties on objects.  
 This enables you to create fade or slide effects, or simple timer for instance, in no time and no hassle.
 
+## Tweens and the fTween.Tween class
 
-## Animate actors and components
-
-The easiest way to animate properties on actors and components is to use the `animate()` function that has this signature :  
-`animate( to: Object, duration: number, params?: fTweenParams ): fTween`
-
-    // suppose we are inside a behavior
-    this.actor.animate( { localPosition: Math.Vector3(10,0,0) }, 5 );
-    // this animate the actor's local position form its current position to {10,0,0} in 5 seconds
-
-    // animate() is also available on any ActorComponent children
-    this.actor.spriteRenderer.animate( { opacity: 0 }, 0.5 );
-    // this fades out the renderer in 0.5 seconds
-
-You can animate several properties at the same time as long as their values are a number or an object that only contains number (typically Vector3 and the likes):
-
-    this.actor.animate( {
-      localPosition: Math.Vector3(10,0,0),
-      localEulerAngles: Math.Vector3(0,180,0),
-    }, 5, { isRelative: true } );
-    // this animate the actor's local position as well as its local euler angles.
-
-Note the third argument in the last example. It's a table of parameters that allows you to better control the ways the values are animated.  
-
-For instance you can set an easing function so that the values are not tween linearly, or you can setup listeners to be called when the animation is completed.  
-See below for the full list of its properties and values.
-
-In the above case the values in the `to` object have been marked as relative.  
-That means that the current values will be animated __by__ the amount set in the 'to' object instead of __to__ this amount.
-So instead of being moved __to__ {10,0,0} as in the first example, the actor will be moved __by__ 10 units toward the positive X.
-
-
-## Tweens and the fTween class
-
-As you may have noticed in the examples above, the `animate()` function returns an instance of type `fTween`.
-
-The `fTween` class is the go-to way to create any animations, the `animate()` function is just a shortcut for one of its constructors.
+The `fTween` module mostly brings the `fTween.Tween` class and some interfaces.  
+The `fTween.Tween` class is the go-to way to create any animations, aka __tweens__ (which are instances of `fTween.Tween`).
 
 Simply speaking, a tween is an object that updates the properties of an object __from__ a start value (the values in the `from` object) __to__ an end value (the values in the `to` object) during a __duration__, optionally using an __easing__ (or interpolation) function and some other optional parameters.
 
-Here is three of `fTween` constructors:
+Here is three of `fTween.Tween` constructors:
 
-    ( from: Object, to: Object, duration: number, params?: fTweenParams ): fTween
-    ( to: Object, duration: number, params?: fTweenParams ): fTween
-    ( params?: fTweenParams ): fTween
+    ( from: Object, to: Object, duration: number, params?: fTween.Params ): fTween.Tween
+    ( to: Object, duration: number, params?: fTween.Params ): fTween.Tween
+    ( params?: fTween.Params ): fTween.Tween
 
+## Examples
+
+Let's start right away with examples :
+
+### 1/
+    
+    // the values in the from object may be numbers or objects that contains numbers (like Vector3)
+    var from = {
+        opacity: 1,
+        position: { x: 0, y: 0, z: 0 }
+    };
+    var to = {
+        opacity: 0,
+        position: { x: 10, y: -5, z: 0 }
+    };
+    var tween = new fTween.Tween( from, to, 3 );
+
+This tween will animate the opacity from 1 to 0 and the postion from `{0,0,0}` to `{10,-5,0}` in 3 seconds.
+    
+### 2/
+    
+    var to = {
+        opacity: 0,
+        position: { x: 10, y: -5, z: 0 }
+    };
+    var tween = new fTween.Tween( to, 3 );
+
+As you can see, the `from` object has not been supplied because it is completely optional.  
+Even if you supply an incomplete `from` object, the missing properties will be created on it with `0` (or an object that contains zeros) as value.
+
+### 3/
+
+The `from` object can also be instances like an actor:
+
+    class TweenBehavior extends Sup.Behavior {
+        awake() {
+            var tween = new fTween.Tween( this.actor, { position: { x: 10, y: -5, z: 0 } }, 3 );
+        }
+    }
+
+In this case, there is a catch, because actors don't have a `position` property.  
+But they have two functions named `setPosition()` and `getPosition()` that are used to set and get its position.
+
+So when the name of a property in the `to` object match the name of a couple of setter/getter functions (the functions that begin by `set` or `get`) in the `from` object, the property is not created on it as in the second example: the value of the property is set/get via the functions instead.
+
+It means that this example would effectively move the actor from its current position to `{10,-5,0}` because its position is automatically set on each update of the tween.  
+Pretty handy!
+
+### 4/
+
+So far we have used two constructors
+    
+    ( from: Object, to: Object, duration: number, params?: fTween.Params ): fTween.Tween
+    ( to: Object, duration: number, params?: fTween.Params ): fTween.Tween
+
+Let's use a third one :  
+`( params?: fTween.Params ): fTween.Tween`
+
+    var tween = new fTween.Tween( {
+        to: { opacity: 1 },
+        duration: 0.5,
+        delay: 1,
+        isRelative: true,
+        easing: fTween.Easing.Quadratic.Out
+    } );
+
+
+## Tween properties and params argument
+
+As you have seen in the examples above the tween may have quite many properties to control how the values gets animated.
+
+[Find all these properties](/classes/ftween.tween.html#_inner) in the __Accessors__ sections of the class' page.
+
+Also, all the constructors, as well as the `set()` function share a `params` argument which is an object in which you can set the tween's properties (and more) in mass.  
+[Check out the `fTween.Params` interface](/interfaces/ftween.params.html) for more informations about the keys you can set in the `params` argument.
+
+
+
+
+
+
+## Creating aliases of fTween.Tween
+
+If you are not happy about the name `fTween.Tween`, feel free to create an alias like this:
+
+    var Tween = fTween.Tween;
+    // or
+    var Anim = fTween.Tween;
+
+Now you can write:
+
+    var tween = new Anim( [...] );
 
 ## Timer
 
 Just want to do something after some time ?
 Just create a tween with this constructor:  
-`( time: number, onComplete: fTweenListener, params?: fTweenParams ): fTween`
+`( time: number, onComplete: fTween.Listener, params?: fTween.Params ): fTween.Tween`
 
-    new fTween( 2, function() {
-      console.log( "timer is up!" );
+    new fTween.Tween( 2, function() {
+      console.log( "Time's up!" );
       doSomething();
     } );
     // this prints the message and calls doSomething() after 2 seconds
 
-In the case of "timer", the object you may get via the listeners contains the `elapsedTime` and `remainingTime`properties.
+In the case of such timer, the `from` object you may get via the listeners contains the `elapsedTime` and `remainingTime`properties.
 
 
 ## Properties
 
-This section describe the possible values in objects of type `fTweenParams`, to be passed to the params arguments of the constructors or the `set()` function.  
-Except for `start` and the listeners, you can set all these properties directly on the fTween instance, too.
-
-- `to` (object): the object containing the end values. The end values (as well as the values nested in objects) may be array (for interpolation) or string (the value is considered as relative, even if the tween itself is not marked as relative), in addition to numbers.
-
-- `duration` (number): the time __in second__ it takes for the tween to complete.
-
-- `from` (object) [optional]: the object containing the properties to tween, which values are considered as their start values. Values found in the `to` object and not in the `from` object will be defaulted to 0. Only number values or objects that contains numbers will be tweened.
-
-- `isRelative` (boolean) [default=false]: tell whether to consider number values in the to object as relative (true) or absolute (false). Note that string values in the `to` object are always considered as relative.
-
-- `delay` (number) [default=0] : the time __in second__ it takes for the tween to actually start after the `start()` function has been called.
-
-- `repeat` (number) [default=0]: the number of times the tween will repeat after having run at least once.
-
-- `yoyo` (boolean) [default=false]: when repeat > 0, tell whether the behavior of the tween will be _like a yoyo_, i.e. it will bounce to and from the start and end values, instead of just repeating the same sequence from the beginning.
-
-- `easing` (EasingFunction) [default=fTween.Easing.Linear.None]: The easing function to use while tweening. 
-
-- `interpolation` (InterpolationFunction) [default=fTween.Interpolation.Linear]: The interpolation function to use while tweening the properties set as array in the `to` object. 
-
-- `onStart`, `onPause`, `onResume`, `onComplete` or `onStop` (fTweenListener) [optional]: the listener function for the specified event. See the Listeners section below for more information.
-
-- `onUpdate` (fTweenUpdateListener) [optional]: the listener function for the `onUpdate` event. See the Listeners section below for more information.
-
-- `start` (number) [optional]: the time (a timestamp in millisecond) to start the tween at. Set as a negative value to prevent the tween to start automatically.
 
 
 ## Playback control
 
-When you create a new fTween instance and pass (at least) the 'to' object and a positive duration, __the tween will automatically start__.  
-You can prevent this behavior by setting the start property with a negative number.
+When you create a new tween instance and pass (at least) the 'to' object and a positive duration, __the tween will automatically start__.  
+You can prevent this behavior by setting the start property with a negative number in the `params` argument.
 
-    new fTween( { value: 10 }, 2 ); // starts right away
+    new fTween.Tween( { value: 10 }, 2 ); // starts right away
 
-    var tween = new fTween( { value: 10 }, 2, { start: -1 } ); 
+    var tween = new fTween.Tween( { value: 10 }, 2, { start: -1 } ); 
     // don't automatically starts, wait for the start() function to be called:
     tween.start();
 
 You can start, pause, resume and stop the tween whenever you call the function of the same name.
   
-    var tween = new fTween( { value: 10 }, 2, { start: -1 } ); 
+    var tween = new fTween.Tween( { value: 10 }, 2, { start: -1 } ); 
     tween.start();
     tween.pause();
     // tweener.isPaused is now true;
@@ -118,14 +151,14 @@ You can start, pause, resume and stop the tween whenever you call the function o
 
 Note that there is a difference between:
   
-    var tween = new fTween( { value: 10 }, 2, { start: -1 } ); 
+    var tween = new fTween.Tween( { value: 10 }, 2, { start: -1 } ); 
     // and
-    var tween = new fTween( { value: 10 }, 2 ); 
+    var tween = new fTween.Tween( { value: 10 }, 2 ); 
     tween.pause(); // or tween.stop();
 
-In this last case, tween has been started _before_ being paused or stopped. Some operations have been done on the `from` object and setting the target or a new `from` object will result in unexpected behaviors and maybe errors.
+In this last case, tween has been started _before_ being paused or stopped. Some operations have been done on the `from` object and setting a new `from` object will result in unexpected behaviors and maybe errors.
 
-__As a rule of tumb, your shouldn't modify any of your tween's property while it is started.__
+__As a rule of thumbs, your shouldn't modify any of your tween's property while it is started.__
 
 
 ## Listeners
@@ -138,7 +171,7 @@ The functions must respect the `fTweenListener` signature (or `fTweenUpdateListe
 They receive a reference of the `from` object as their first argument.  
 The `onUpdate` listeners also receive a second argument: the progression of the tween as a percentage between 0 and 1.
 
-    var tween = new fTween( ... )
+    var tween = new fTween.Tween( ... )
     tween.addListener( "onUpdate", function( object: Object, progression: number ) { ... } )
 
     // the on() function does the same thing:

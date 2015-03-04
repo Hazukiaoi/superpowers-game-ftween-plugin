@@ -5,85 +5,69 @@ declare var EventEmitter3;
 var eventNames = [ "onStart", "onPause", "onResume", "onUpdate", "onComplete", "onStop" ];
 var shortEventNames = [ "start", "pause", "resume", "update", "complete", "stop" ];
 
+
+
 module fTween  {
+
+  /**
+  * To be called from your game as often as possible (on every update).
+  * Call `SPTWEEN.update()` once to run all tweens once.
+  * @param time The current timestamp in milliseconds.
+  */
+  function update( time?: number ) {
+    SPTWEEN.update();
+  }
+
+  /**
+  * The object containing the easing functions segregated into families (ie: `fTween.Easing.Cubic`) and variants (ie: `fTween.Easing.Cubic.In`).
+  */
+  var Easing = SPTWEEN.Easing;
+  
+  /**
+  * The object containing the interpolation functions (ie: `fTween.Interpolation.Cubic`).
+  */
+  var Interpolation = SPTWEEN.Interpolation;
+
+
   export class Tween {
-
-    /**
-    * The object containing the easing functions segregated into families (ie: `fTween.Tween.Easing.Cubic`) and variants (ie: `fTween.Tween.Easing.Cubic.In`).
-    */
-    static Easing = SPTWEEN.Easing;
-    
-    /**
-    * The object containing the interpolation functions (ie: `fTween.Tween.Interpolation.Cubic`).
-    */
-    static Interpolation = SPTWEEN.Interpolation;
-
-    /**
-    * To be called from your game as often as possible (on every update), call `SPTWEEN.update()` to run all tween once.
-    * @param time - The current timestamp in milliseconds.
-    */
-    static update( time?: number ) {
-      SPTWEEN.update();
-    }
-
-    // --------------------------------------------------------------------------------
-    // constructors
-    
     /**
     * Returns an instance of `fTween.Tween`.
-    * @param from - The object containing the start values.
-    * @param to - The object containing the end values.
-    * @param duration - The time in seconds to complete the tween.
-    * @param params - An object containing additional parameters.
+    * @param from The object containing the start values.
+    * @param to The object containing the end values.
+    * @param duration The time in seconds to complete the tween.
+    * @param params An object containing parameters.
     * @returns The tween instance.
     */
     constructor( from: Object, to: Object, duration: number, params?: Params );
+    constructor( to: Object, duration: number, params?: Params );
+    constructor( params?: fTween.Params );
     
     /**
-    * Returns an instance of `fTween.Tween`.
-    * @param to - The object containing the end values.
-    * @param duration - The time in seconds to complete the tween.
-    * @param params - An object containing additional parameters.
-    * @returns The tween instance.
-    */
-    constructor( to: Object, duration: number, params?: Params );
-
-    /**
-    * Returns an instance of `fTween.Tween`.
-    * @param time - The time in seconds to complete the timer. Setting the `time` property makes the `from`, `to` and `duration` being ignored.
-    * @param onComplete - The listener for the `onComplete` event.
-    * @param params - An object containing additional parameters.
-    * @returns The tween instance.
+    * @param time The time in seconds to complete the timer. Setting the `time` property makes the `from`, `to` and `duration` being ignored.
+    * @param onComplete The listener for the `onComplete` event.
     */
     constructor( time: number, onComplete: Listener, params?: Params );
-    /**
-    * @param params - An object containing parameters.
-    * @returns The tween instance.
-    */
-    constructor( params: fTween.Params );
 
-    // constructor( from: any, to?: any, duration?: any, params?: Params ) {
     constructor( ...args: any[] ) {
-      
       var argsCount = args.length;
       var types: string[] = [];
       for ( var i=0; i<argsCount; i++ ) {
         types[i] = typeof args[i];
       }
-      var params: fTween.Params;
+      var params: any = {};
 
-      if ( argsCount === 4 && types[0] === "object" && types[1] === "object" && types[2] === "number" ) {
+      if ( (argsCount === 3 || argsCount === 4) && types[0] === "object" && types[1] === "object" && types[2] === "number" ) {
         params = args[3] || {};
         params.from = args[0];
         params.to = args[1];
         params.duration = args[2];
       }
-      else if ( argsCount === 3 && types[0] === "object" && types[1] === "number" ) {
+      else if ( (argsCount === 2 || argsCount === 3) && types[0] === "object" && types[1] === "number" ) {
         params = args[2] || {};
         params.to = args[0];
         params.duration = args[1];
       }
-      else if ( argsCount === 3 && types[0] === "number" && types[1] === "Listener" ) {
+      else if ( (argsCount === 2 || argsCount === 3) && types[0] === "number" && types[1] === "function" ) {
         params = args[2] || {};
         params.time = args[0];
         params.onComplete = args[1];
@@ -91,29 +75,18 @@ module fTween  {
       else if ( argsCount === 1 && args[0] !== null && typeof args[0] === "object") {
         params = args[0] || {};
       }
-      else {
-        throw "fTween.Tween(): Unknow constructor"; // TODO: add types to the error message
+      else if (argsCount > 0) {
+        console.error( "fTween.Tween(): Unknow constructor with "+argsCount+" arguments, see details below" );
+        for (var i = 0; i < args.length; i++) {
+          console.log( "argument #"+i+": type="+types[i]+" value=", args[i]);
+        }
       }
-
-      // this._emitter = new EventEmitter3();
-      // this._tween = new SPTWEEN.Tween( {} );
-
-      var self = this;
-      // the 'this' variable inside the callbacks is the 'from' object
-      // TODO: only register a callback when a function listen for the event (especially onUpdate)
-      this._tween.onStart( function() { self._emitter.emit( "onStart", this ); } )
-      .onPause( function() { self._emitter.emit( "onPause", this ); } )
-      .onResume( function() { self._emitter.emit( "onResume", this ); } )
-      .onUpdate( function(progression:number) { self._emitter.emit( "onUpdate", this, progression ); } )
-      .onComplete( function() { 
-        self._isComplete = true;
-        self._emitter.emit( "onComplete", this ); 
-      } )
-      .onStop( function() { self._emitter.emit( "onStop", this ); } );
-
+      
       var start = params.start;
       delete params.start;
-      this.set( params );
+      if ( Object.keys( params ).length > 0 ) {
+        this.set( params );
+      }
 
       if ( this._to !== undefined && this._duration > 0 &&
         (start === undefined || start >= 0) ) {
@@ -126,9 +99,14 @@ module fTween  {
 
     /**
     * Sets several of the tweener's properties at once.
-    * @param params - The list of parameters.
+    * @param params The list of parameters.
     */
     set( params: fTween.Params ) {
+      if ( this._isDestroyed === true ) {
+        console.error("fTween.Tween(): This tween instance has been destroyed. It can not be used anymore. Create a new instance.");
+        return;
+      }
+
       if ( params.from !== undefined ) {
         this.from = params.from;
         delete params.from;
@@ -155,19 +133,17 @@ module fTween  {
       }
     }
 
+
     /**
     * Make the provided listener function listen for the specified event.
-    * @param eventName - The event name.
-    * @param listener - The listener function.
+    * @param eventName The event name.
+    * @param listener The listener function.
     * @returns The tween instance.
     */
     on( eventName: string, listener: Listener ): Tween;
     
     /**
-    * Make the provided listener function listen for the specified event.
-    * @param eventName - The event name.
-    * @param listener - The listener function for the `onUpdate` event.
-    * @returns The tween instance.
+    * @param listener The listener function for the `onUpdate` event.
     */
     on( eventName: string, listener: UpdateListener ): Tween;
 
@@ -180,13 +156,38 @@ module fTween  {
         return;
       }
       this._emitter.on( eventName, listener );
+
+      if ( this._emitter.listeners( eventName ).length === 1 ) { // first listener for this event
+        var ftween = this;
+        var func: any;
+        // the 'this' variable inside the callbacks is the 'from' object
+        if ( eventName === "onUpdate" ) {
+          func = function( progression: number ) {
+            ftween._emitter.emit( eventName, this, progression );
+          };
+        }
+        else if ( eventName === "onComplete" ) {
+          func = function() {
+            ftween._isComplete = true;
+            ftween._emitter.emit( "onComplete", this );
+            if ( ftween._destroyOnComplete === true ) {
+              ftween.destroy();
+            }
+          };
+        }
+        else {
+          func = function() { ftween._emitter.emit( eventName, this ); };
+        }
+        this._tween[ eventName ]( func );
+      }
       return this;
     }
 
+
     /**
     * Remove the provided listener function from listening for the specified event.
-    * @param eventName - The event name.
-    * @param listener - The listener function.
+    * @param eventName The event name.
+    * @param listener The listener function.
     * @returns The tween instance.
     */
     off( eventName: string, listener: Function ): Tween {
@@ -198,13 +199,17 @@ module fTween  {
         return;
       }
       this._emitter.removeListener( eventName, listener );
+
+      if ( this._emitter.listeners( eventName ).length === 0 ) {
+        this._tween[ eventName ]( null );
+      }
       return this;
     }
 
     /**
     * Starts the tween.
     * Tweens are automatically started after their creation if the duration and the `to` object are supplied. You can prevent this by setting the `start` property to a negative value in the constructor's `params` argument. 
-    * @param time - The time (a timetamp in milliseconds) at which to start the tween.
+    * @param time The time (a timetamp in milliseconds) at which to start the tween.
     */
     start( time?: number ) {
       if ( this._to === undefined || this._duration === 0  ) {
@@ -257,14 +262,15 @@ module fTween  {
       this._to = null;
       this._emitter.removeAllListeners();
       this._emitter = null;
+      this._isDestroyed = true;
     }
 
     /**
     * Check that the provided value is not too big.
     * If that's the case, suppose that it is a number of milliseconds instead of seconds and display a warning.
     * Called by duration, delay and time setters.
-    * @param value - The value.
-    * @param propName - The name of the evaluated property.
+    * @param value The value.
+    * @param propName The name of the evaluated property.
     */
     private _checkMilliseconds( value: number, propName: string ) {
       if ( value >= 500 ) {
@@ -428,26 +434,43 @@ module fTween  {
     */
     get isComplete(): boolean { return this._isComplete; }
 
+
+    private _destroyOnComplete: boolean = true;
+    /**
+    * Tell whether to destroy the tween once it has completed (true), or not (false).
+    */
+    set destroyOnComplete( destroyOnComplete: boolean ) {
+      this._destroyOnComplete = destroyOnComplete;
+    }
+    get destroyOnComplete(): boolean { return this._destroyOnComplete; }
+
+
+    private _isDestroyed: boolean = false; 
+    /**
+    * The tween's destroyed state.
+    */
+    get isDestroyed(): boolean { return this._isDestroyed; }
+
   } // end of fTween.Tween class
 
   // --------------------------------------------------------------------------------
 
   /**
   * Signature for `fTween.Tween`'s listener functions.
-  * @param object - The `from` object containing the values.
+  * @param object The `from` object containing the values.
   */
   export interface Listener {
-    (object: Object): void;
+    (object?: Object): void;
   }
 
   
   /**
   * Signature for `fTween.Tween`'s `onUpdate` listener function.
-  * @param object - The `from` object containing the values.
-  * @param progression - The tween's percentage of progression as a number between 0 and 1.
+  * @param object The `from` object containing the values.
+  * @param progression The tween's percentage of progression as a number between 0 and 1.
   */
   export interface UpdateListener {
-    (object: Object, progression: number): void;
+    (object?: Object, progression?: number): void;
   }
 
   export interface EasingFunction {
@@ -502,6 +525,10 @@ module fTween  {
     */
     interpolation?: InterpolationFunction;
     /**
+    * Tell whether to destroy the tween once it has completed (true), or not (false).
+    */
+    destroyOnComplete?: boolean;
+    /**
     * The listener for the `onStart` event.
     */
     onStart?: Listener;
@@ -531,6 +558,8 @@ module fTween  {
     start?: number;
   }
 } // end of fTween module
+
+var fAnimate: typeof fTween.Tween = fTween.Tween;
 
 /*
 var proto: any = Sup.Actor.prototype;

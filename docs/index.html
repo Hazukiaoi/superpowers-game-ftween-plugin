@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>fTween</title>
+	<title>fTween plugin</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">fTween</a>
+					<a href="index.html" class="title">fTween plugin</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -57,7 +57,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> fTween</h1>
+			<h1> fTween plugin</h1>
 		</div>
 	</div>
 </header>
@@ -65,82 +65,88 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="animations-with-ftween">Animations with fTween</h1>
-				<p>The fTween plugin allows to easily create tweens that animate properties on objects.
-				This enables you to create fade or slide effects, or simple timer for instance, in no time and no hassle.</p>
-				<h2 id="animate-actors-and-components">Animate actors and components</h2>
-				<p>The easiest way to animate properties on actors and components is to use the <code>animate()</code> function that has this signature :<br><code>animate( to: Object, duration: number, params?: fTweenParams ): fTween</code></p>
-				<pre><code><span class="hljs-comment">// suppose we are inside a behavior</span>
-<span class="hljs-tag">this</span><span class="hljs-class">.actor</span><span class="hljs-class">.animate</span>( { <span class="hljs-attribute">localPosition</span>: Math.<span class="hljs-function">Vector3</span>(<span class="hljs-number">10</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>) }, <span class="hljs-number">5</span> );
-<span class="hljs-comment">// this animate the actor's local position form its current position to {10,0,0} in 5 seconds</span>
-
-<span class="hljs-comment">// animate() is also available on any ActorComponent children</span>
-<span class="hljs-tag">this</span><span class="hljs-class">.actor</span><span class="hljs-class">.spriteRenderer</span><span class="hljs-class">.animate</span>( { <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span> }, <span class="hljs-number">0.5</span> );
-<span class="hljs-comment">// this fades out the renderer in 0.5 seconds</span>
-</code></pre><p>You can animate several properties at the same time as long as their values are a number or an object that only contains number (typically Vector3 and the likes):</p>
-				<pre><code><span class="hljs-tag">this</span><span class="hljs-class">.actor</span><span class="hljs-class">.animate</span>( {
-  <span class="hljs-tag">localPosition</span>: <span class="hljs-tag">Math</span><span class="hljs-class">.Vector3</span>(<span class="hljs-number">10</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>),
-  <span class="hljs-tag">localEulerAngles</span>: <span class="hljs-tag">Math</span><span class="hljs-class">.Vector3</span>(<span class="hljs-number">0</span>,<span class="hljs-number">180</span>,<span class="hljs-number">0</span>),
-}, <span class="hljs-tag">5</span>, { <span class="hljs-attribute">isRelative</span>: true } );
-<span class="hljs-comment">// this animate the actor's local position as well as its local euler angles.</span>
-</code></pre><p>Note the third argument in the last example. It&#39;s a table of parameters that allows you to better control the ways the values are animated.  </p>
-				<p>For instance you can set an easing function so that the values are not tween linearly, or you can setup listeners to be called when the animation is completed.<br>See below for the full list of its properties and values.</p>
-				<p>In the above case the values in the <code>to</code> object have been marked as relative.<br>That means that the current values will be animated <strong>by</strong> the amount set in the &#39;to&#39; object instead of <strong>to</strong> this amount.
-				So instead of being moved <strong>to</strong> {10,0,0} as in the first example, the actor will be moved <strong>by</strong> 10 units toward the positive X.</p>
-				<h2 id="tweens-and-the-ftween-class">Tweens and the fTween class</h2>
-				<p>As you may have noticed in the examples above, the <code>animate()</code> function returns an instance of type <code>fTween</code>.</p>
-				<p>The <code>fTween</code> class is the go-to way to create any animations, the <code>animate()</code> function is just a shortcut for one of its constructors.</p>
+				<h1 id="animations-with-the-ftween-module">Animations with the fTween module</h1>
+				<p>The <code>fTween</code> plugin for Superpowers allows to easily create tweens that animate properties on objects.<br>This enables you to create fade or slide effects, or simple timer for instance, in no time and no hassle.</p>
+				<h2 id="tweens-and-the-ftween-tween-class">Tweens and the fTween.Tween class</h2>
+				<p>The <code>fTween</code> module mostly brings the <code>fTween.Tween</code> class and some interfaces.<br>The <code>fTween.Tween</code> class is the go-to way to create any animations, aka <strong>tweens</strong> (which are instances of <code>fTween.Tween</code>).</p>
 				<p>Simply speaking, a tween is an object that updates the properties of an object <strong>from</strong> a start value (the values in the <code>from</code> object) <strong>to</strong> an end value (the values in the <code>to</code> object) during a <strong>duration</strong>, optionally using an <strong>easing</strong> (or interpolation) function and some other optional parameters.</p>
-				<p>Here is three of <code>fTween</code> constructors:</p>
-				<pre><code>( <span class="hljs-string">from:</span> Object, <span class="hljs-string">to:</span> Object, <span class="hljs-string">duration:</span> number, params?: fTweenParams ): fTween
-( <span class="hljs-string">to:</span> Object, <span class="hljs-string">duration:</span> number, params?: fTweenParams ): fTween
-( params?: fTweenParams ): fTween
+				<p>Here is three of <code>fTween.Tween</code> constructors:</p>
+				<pre><code>( from: Object, <span class="hljs-keyword">to</span>: Object, <span class="hljs-built_in">duration</span>: number, <span class="hljs-keyword">params</span><span class="hljs-subst">?</span>: fTween<span class="hljs-built_in">.</span><span class="hljs-keyword">Params</span> ): fTween<span class="hljs-built_in">.</span>Tween
+( <span class="hljs-keyword">to</span>: Object, <span class="hljs-built_in">duration</span>: number, <span class="hljs-keyword">params</span><span class="hljs-subst">?</span>: fTween<span class="hljs-built_in">.</span><span class="hljs-keyword">Params</span> ): fTween<span class="hljs-built_in">.</span>Tween
+( <span class="hljs-keyword">params</span><span class="hljs-subst">?</span>: fTween<span class="hljs-built_in">.</span><span class="hljs-keyword">Params</span> ): fTween<span class="hljs-built_in">.</span>Tween
+</code></pre><h2 id="examples">Examples</h2>
+				<p>Let&#39;s start right away with examples :</p>
+				<h3 id="1-">1/</h3>
+				<pre><code><span class="hljs-comment">// the values in the from object may be numbers or objects that contains numbers (like Vector3)</span>
+<span class="hljs-keyword">var</span> <span class="hljs-keyword">from</span> = <span class="hljs-comment">{
+    opacity: 1,
+    position: { x: 0, y: 0, z: 0 }</span>
+};
+<span class="hljs-keyword">var</span> <span class="hljs-keyword">to</span> = <span class="hljs-comment">{
+    opacity: 0,
+    position: { x: 10, y: -5, z: 0 }</span>
+};
+<span class="hljs-keyword">var</span> tween = <span class="hljs-keyword">new</span> fTween.Tween( <span class="hljs-keyword">from</span>, <span class="hljs-keyword">to</span>, <span class="hljs-number">3</span> );
+</code></pre><p>This tween will animate the opacity from 1 to 0 and the postion from <code>{0,0,0}</code> to <code>{10,-5,0}</code> in 3 seconds.</p>
+				<h3 id="2-">2/</h3>
+				<pre><code><span class="hljs-built_in">var</span> <span class="hljs-keyword">to</span> <span class="hljs-subst">=</span> {
+    opacity: <span class="hljs-number">0</span>,
+    position: { x: <span class="hljs-number">10</span>, y: <span class="hljs-subst">-</span><span class="hljs-number">5</span>, z: <span class="hljs-number">0</span> }
+};
+<span class="hljs-built_in">var</span> tween <span class="hljs-subst">=</span> <span class="hljs-literal">new</span> fTween<span class="hljs-built_in">.</span>Tween( <span class="hljs-keyword">to</span>, <span class="hljs-number">3</span> );
+</code></pre><p>As you can see, the <code>from</code> object has not been supplied because it is completely optional.<br>Even if you supply an incomplete <code>from</code> object, the missing properties will be created on it with <code>0</code> (or an object that contains zeros) as value.</p>
+				<h3 id="3-">3/</h3>
+				<p>The <code>from</code> object can also be instances like an actor:</p>
+				<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TweenBehavior</span> <span class="hljs-keyword"><span class="hljs-keyword">extends</span></span> <span class="hljs-title">Sup</span>.<span class="hljs-title">Behavior</span> {</span>
+    awake() {
+        <span class="hljs-keyword">var</span> tween = <span class="hljs-keyword">new</span> fTween.<span class="hljs-type">Tween</span>( <span class="hljs-keyword">this</span>.actor, { position: { x: <span class="hljs-number">10</span>, y: -<span class="hljs-number">5</span>, z: <span class="hljs-number">0</span> } }, <span class="hljs-number">3</span> );
+    }
+}
+</code></pre><p>In this case, there is a catch, because actors don&#39;t have a <code>position</code> property.<br>But they have two functions named <code>setPosition()</code> and <code>getPosition()</code> that are used to set and get its position.</p>
+				<p>So when the name of a property in the <code>to</code> object match the name of a couple of setter/getter functions (the functions that begin by <code>set</code> or <code>get</code>) in the <code>from</code> object, the property is not created on it as in the second example: the value of the property is set/get via the functions instead.</p>
+				<p>It means that this example would effectively move the actor from its current position to <code>{10,-5,0}</code> because its position is automatically set on each update of the tween.<br>Pretty handy!</p>
+				<h3 id="4-">4/</h3>
+				<p>So far we have used two constructors</p>
+				<pre><code>( from: Object, <span class="hljs-keyword">to</span>: Object, <span class="hljs-built_in">duration</span>: number, <span class="hljs-keyword">params</span><span class="hljs-subst">?</span>: fTween<span class="hljs-built_in">.</span><span class="hljs-keyword">Params</span> ): fTween<span class="hljs-built_in">.</span>Tween
+( <span class="hljs-keyword">to</span>: Object, <span class="hljs-built_in">duration</span>: number, <span class="hljs-keyword">params</span><span class="hljs-subst">?</span>: fTween<span class="hljs-built_in">.</span><span class="hljs-keyword">Params</span> ): fTween<span class="hljs-built_in">.</span>Tween
+</code></pre><p>Let&#39;s use a third one :<br><code>( params?: fTween.Params ): fTween.Tween</code></p>
+				<pre><code><span class="hljs-built_in">var</span> tween <span class="hljs-subst">=</span> <span class="hljs-literal">new</span> fTween<span class="hljs-built_in">.</span>Tween( {
+    <span class="hljs-keyword">to</span>: { opacity: <span class="hljs-number">1</span> },
+    <span class="hljs-built_in">duration</span>: <span class="hljs-number">0.5</span>,
+    delay: <span class="hljs-number">1</span>,
+    isRelative: <span class="hljs-literal">true</span>,
+    easing: fTween<span class="hljs-built_in">.</span>Easing<span class="hljs-built_in">.</span>Quadratic<span class="hljs-built_in">.</span>Out
+} );
+</code></pre><h2 id="tween-properties-and-params-argument">Tween properties and params argument</h2>
+				<p>As you have seen in the examples above the tween may have quite many properties to control how the values gets animated.</p>
+				<p><a href="/classes/ftween.tween.html#_inner">Find all these properties</a> in the <strong>Accessors</strong> sections of the class&#39; page.</p>
+				<p>Also, all the constructors, as well as the <code>set()</code> function share a <code>params</code> argument which is an object in which you can set the tween&#39;s properties (and more) in mass.<br><a href="/interfaces/ftween.params.html">Check out the <code>fTween.Params</code> interface</a> for more informations about the keys you can set in the <code>params</code> argument.</p>
+				<h2 id="creating-aliases-of-ftween-tween">Creating aliases of fTween.Tween</h2>
+				<p>If you are not happy about the name <code>fTween.Tween</code>, feel free to create an alias like this:</p>
+				<pre><code><span class="hljs-keyword">var</span> Tween = fTween.Tween;
+<span class="hljs-comment">// or</span>
+<span class="hljs-keyword">var</span> Anim = fTween.Tween;
+</code></pre><p>Now you can write:</p>
+				<pre><code>var tween = new Anim( [<span class="hljs-keyword">...</span>] );
 </code></pre><h2 id="timer">Timer</h2>
 				<p>Just want to do something after some time ?
-				Just create a tween with this constructor:<br><code>( time: number, onComplete: fTweenListener, params?: fTweenParams ): fTween</code></p>
-				<pre><code><span class="hljs-keyword">new</span> fTween( <span class="hljs-number">2</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
-  <span class="hljs-built_in">console</span>.log( <span class="hljs-string">"timer is up!"</span> );
+				Just create a tween with this constructor:<br><code>( time: number, onComplete: fTween.Listener, params?: fTween.Params ): fTween.Tween</code></p>
+				<pre><code><span class="hljs-keyword">new</span> fTween.Tween( <span class="hljs-number">2</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-built_in">console</span>.log( <span class="hljs-string">"Time's up!"</span> );
   doSomething();
 } );
 <span class="hljs-comment">// this prints the message and calls doSomething() after 2 seconds</span>
-</code></pre><p>In the case of &quot;timer&quot;, the object you may get via the listeners contains the <code>elapsedTime</code> and <code>remainingTime</code>properties.</p>
+</code></pre><p>In the case of such timer, the <code>from</code> object you may get via the listeners contains the <code>elapsedTime</code> and <code>remainingTime</code>properties.</p>
 				<h2 id="properties">Properties</h2>
-				<p>This section describe the possible values in objects of type <code>fTweenParams</code>, to be passed to the params arguments of the constructors or the <code>set()</code> function.<br>Except for <code>start</code> and the listeners, you can set all these properties directly on the fTween instance, too.</p>
-				<ul>
-					<li><p><code>to</code> (object): the object containing the end values. The end values (as well as the values nested in objects) may be array (for interpolation) or string (the value is considered as relative, even if the tween itself is not marked as relative), in addition to numbers.</p>
-					</li>
-					<li><p><code>duration</code> (number): the time <strong>in second</strong> it takes for the tween to complete.</p>
-					</li>
-					<li><p><code>from</code> (object) [optional]: the object containing the properties to tween, which values are considered as their start values. Values found in the <code>to</code> object and not in the <code>from</code> object will be defaulted to 0. Only number values or objects that contains numbers will be tweened.</p>
-					</li>
-					<li><p><code>isRelative</code> (boolean) [default=false]: tell whether to consider number values in the to object as relative (true) or absolute (false). Note that string values in the <code>to</code> object are always considered as relative.</p>
-					</li>
-					<li><p><code>delay</code> (number) [default=0] : the time <strong>in second</strong> it takes for the tween to actually start after the <code>start()</code> function has been called.</p>
-					</li>
-					<li><p><code>repeat</code> (number) [default=0]: the number of times the tween will repeat after having run at least once.</p>
-					</li>
-					<li><p><code>yoyo</code> (boolean) [default=false]: when repeat &gt; 0, tell whether the behavior of the tween will be <em>like a yoyo</em>, i.e. it will bounce to and from the start and end values, instead of just repeating the same sequence from the beginning.</p>
-					</li>
-					<li><p><code>easing</code> (EasingFunction) [default=fTween.Easing.Linear.None]: The easing function to use while tweening. </p>
-					</li>
-					<li><p><code>interpolation</code> (InterpolationFunction) [default=fTween.Interpolation.Linear]: The interpolation function to use while tweening the properties set as array in the <code>to</code> object. </p>
-					</li>
-					<li><p><code>onStart</code>, <code>onPause</code>, <code>onResume</code>, <code>onComplete</code> or <code>onStop</code> (fTweenListener) [optional]: the listener function for the specified event. See the Listeners section below for more information.</p>
-					</li>
-					<li><p><code>onUpdate</code> (fTweenUpdateListener) [optional]: the listener function for the <code>onUpdate</code> event. See the Listeners section below for more information.</p>
-					</li>
-					<li><p><code>start</code> (number) [optional]: the time (a timestamp in millisecond) to start the tween at. Set as a negative value to prevent the tween to start automatically.</p>
-					</li>
-				</ul>
 				<h2 id="playback-control">Playback control</h2>
-				<p>When you create a new fTween instance and pass (at least) the &#39;to&#39; object and a positive duration, <strong>the tween will automatically start</strong>.<br>You can prevent this behavior by setting the start property with a negative number.</p>
-				<pre><code><span class="hljs-keyword">new</span> fTween( { <span class="hljs-keyword">value</span>: <span class="hljs-number">10</span> }, <span class="hljs-number">2</span> ); <span class="hljs-comment">// starts right away</span>
+				<p>When you create a new tween instance and pass (at least) the &#39;to&#39; object and a positive duration, <strong>the tween will automatically start</strong>.<br>You can prevent this behavior by setting the start property with a negative number in the <code>params</code> argument.</p>
+				<pre><code><span class="hljs-keyword">new</span> fTween.Tween( { <span class="hljs-keyword">value</span>: <span class="hljs-number">10</span> }, <span class="hljs-number">2</span> ); <span class="hljs-comment">// starts right away</span>
 
-<span class="hljs-keyword">var</span> tween = <span class="hljs-keyword">new</span> fTween( { <span class="hljs-keyword">value</span>: <span class="hljs-number">10</span> }, <span class="hljs-number">2</span>, { start: -<span class="hljs-number">1</span> } ); 
+<span class="hljs-keyword">var</span> tween = <span class="hljs-keyword">new</span> fTween.Tween( { <span class="hljs-keyword">value</span>: <span class="hljs-number">10</span> }, <span class="hljs-number">2</span>, { start: -<span class="hljs-number">1</span> } ); 
 <span class="hljs-comment">// don't automatically starts, wait for the start() function to be called:</span>
 tween.start();
 </code></pre><p>You can start, pause, resume and stop the tween whenever you call the function of the same name.</p>
-				<pre><code><span class="hljs-reserved">var</span> tween = <span class="hljs-keyword">new</span> fTween( { <span class="hljs-attribute">value</span>: <span class="hljs-number">10</span> }, <span class="hljs-number">2</span>, { <span class="hljs-attribute">start</span>: -<span class="hljs-number">1</span> } ); 
+				<pre><code><span class="hljs-reserved">var</span> tween = <span class="hljs-keyword">new</span> fTween.Tween( { <span class="hljs-attribute">value</span>: <span class="hljs-number">10</span> }, <span class="hljs-number">2</span>, { <span class="hljs-attribute">start</span>: -<span class="hljs-number">1</span> } ); 
 tween.start();
 tween.pause();
 <span class="hljs-regexp">//</span> tweener.isPaused <span class="hljs-keyword">is</span> now <span class="hljs-literal">true</span>;
@@ -148,17 +154,17 @@ tween.resume();
 tween.stop();
 tween.destroy();
 </code></pre><p>Note that there is a difference between:</p>
-				<pre><code><span class="hljs-keyword">var</span> tween = <span class="hljs-keyword">new</span> fTween( { <span class="hljs-keyword">value</span>: <span class="hljs-number">10</span> }, <span class="hljs-number">2</span>, { start: -<span class="hljs-number">1</span> } ); 
+				<pre><code><span class="hljs-keyword">var</span> tween = <span class="hljs-keyword">new</span> fTween.Tween( { <span class="hljs-keyword">value</span>: <span class="hljs-number">10</span> }, <span class="hljs-number">2</span>, { start: -<span class="hljs-number">1</span> } ); 
 <span class="hljs-comment">// and</span>
-<span class="hljs-keyword">var</span> tween = <span class="hljs-keyword">new</span> fTween( { <span class="hljs-keyword">value</span>: <span class="hljs-number">10</span> }, <span class="hljs-number">2</span> ); 
+<span class="hljs-keyword">var</span> tween = <span class="hljs-keyword">new</span> fTween.Tween( { <span class="hljs-keyword">value</span>: <span class="hljs-number">10</span> }, <span class="hljs-number">2</span> ); 
 tween.pause(); <span class="hljs-comment">// or tween.stop();</span>
-</code></pre><p>In this last case, tween has been started <em>before</em> being paused or stopped. Some operations have been done on the <code>from</code> object and setting the target or a new <code>from</code> object will result in unexpected behaviors and maybe errors.</p>
-				<p><strong>As a rule of tumb, your shouldn&#39;t modify any of your tween&#39;s property while it is started.</strong></p>
+</code></pre><p>In this last case, tween has been started <em>before</em> being paused or stopped. Some operations have been done on the <code>from</code> object and setting a new <code>from</code> object will result in unexpected behaviors and maybe errors.</p>
+				<p><strong>As a rule of thumbs, your shouldn&#39;t modify any of your tween&#39;s property while it is started.</strong></p>
 				<h2 id="listeners">Listeners</h2>
 				<p>The fTween class extends node&#39;s EventEmitter and emit the following events : <code>onStart</code>, <code>onPause</code>, <code>onResume</code>, <code>onUpdate</code>, <code>onComplete</code> and <code>onStop</code>.</p>
 				<p>You can set a function to listen for the event as with any event emitter via the <code>addListener()</code>, or <code>on()</code> function.</p>
 				<p>The functions must respect the <code>fTweenListener</code> signature (or <code>fTweenUpdateListener</code> for the <code>onUpdate</code> event).<br>They receive a reference of the <code>from</code> object as their first argument.<br>The <code>onUpdate</code> listeners also receive a second argument: the progression of the tween as a percentage between 0 and 1.</p>
-				<pre><code>var tween = new fTween( <span class="hljs-keyword">...</span> )
+				<pre><code>var tween = new fTween.Tween( <span class="hljs-keyword">...</span> )
 tween.addListener( <span class="hljs-string">"onUpdate"</span>, <span class="hljs-keyword">function</span>( object: Object, progression: number ) { <span class="hljs-keyword">...</span> } )
 
 // the on() <span class="hljs-keyword">function</span> does the same thing:
@@ -228,6 +234,9 @@ tween.removeListener( <span class="hljs-string">"onUpdate"</span>, onUpdate );
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#eventnames" class="tsd-kind-icon">event<wbr>Names</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#fanimate" class="tsd-kind-icon">f<wbr>Animate</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#shorteventnames" class="tsd-kind-icon">short<wbr>Event<wbr>Names</a>
