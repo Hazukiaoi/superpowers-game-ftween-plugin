@@ -1,0 +1,45 @@
+{
+  "name": "superpowers-florentpoujol-ftween-plugin",
+  "version": "0.1.0",
+  "description": "Integration of Superpowers-tween.js and fTween module to the Superpowers HTML5 game engine.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/florentpoujol/superpowers-ftween-plugin"
+  },
+  "author": {
+    "name": "Florent Poujol",
+    "email": "florent.poujol@gmail.com",
+    "url": "http://florentpoujol.fr"
+  },
+  "dependencies": {
+    "fs-extra": "^0.16.3"
+
+  },
+  "devDependencies": {
+    "typedoc": "0.2.x",
+    "typescript": "1.4.x"
+  },
+  "tags": [
+    "superpowers", 
+    "plugin",
+    "tween",
+    "interpolation",
+    "easing",
+    "animation"
+  ],
+  "bugs": {
+    "url": "https://github.com/florentpoujol/superpowers-fTween-plugin/issues"
+  },
+  "scripts": {
+    "install": "node publishToSup.js",
+    "devinstall": "node publishToSup.js ../../superpowers",
+    "gendoc": "typedoc --out docs/ api/fTween.ts --mode file --module commonjs --target ES5 --theme default --name fTween --readme fTween.md --verbose --includeDeclarations",
+    "compilets": "tsc api/fTween.ts --module commonjs --target ES5"
+  },
+  "maintainers": [
+    {
+      "name": "Florent Poujol",
+      "email": "florent.poujol@gmail.com"
+    }
+  ]
+}

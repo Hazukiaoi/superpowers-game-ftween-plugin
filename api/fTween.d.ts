@@ -1,33 +1,26 @@
-declare module Sup {
-  class Actor {
-    animate(to: Object, duration: number, params?: fTween.Params): fTween.Tween;
-  }
-
-  class ActorComponent {
-    animate(to: Object, duration: number, params?: fTween.Params): fTween.Tween;
-  }
-}
 
 declare module fTween {
   class Tween {
     static Easing: SPTWEEN.TweenEasing;
     static Interpolation: SPTWEEN.TweenInterpolation;
-    static update(time?: number): void;
+    static update(time?: number);
 
     constructor(from: Object, to: Object, duration: number, params?: Params);
     constructor(to: Object, duration: number, params?: Params);
     constructor(time: number, onComplete: Listener, params?: Params);
     constructor(params: Params);
     
-    set(params: Params): void;
-    addListener(event: string, listener: Function): Tween;
+    set(params: Params);
+    on(eventName: string, listener: Listener): Tween;
+    on(eventName: string, listener: UpdateListener): Tween;
     on(eventName: string, listener: Function): Tween;
-    start(time?: number): Tween;
-    pause(): Tween;
-    resume(): Tween;
-    stop(): Tween;
+    start(time?: number);
+    pause();
+    resume();
+    stop();
     destroy();
 
+    emitter: any;
     _inner: SPTWEEN.Tween;
     to: Object;
     duration: number;
@@ -56,7 +49,7 @@ declare module fTween {
     to?: Object;
     duration?: number;
     time?: number;
-    isRelative: boolean;
+    isRelative?: boolean;
     delay?: number;
     repeat?: number;
     yoyo?: boolean;
@@ -69,5 +62,12 @@ declare module fTween {
     onComplete?: Listener;
     onStop?: Listener;
     start?: number;
+  }
+
+  interface EasingFunction {
+    (k:number): number;
+  }
+  interface InterpolationFunction {
+    (v:number[], k:number): number;
   }
 }
