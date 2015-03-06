@@ -1,6 +1,4 @@
-if window? 
-  window.SPTWEEN = require( '../lib/sup-tween.js' )
-  window.EventEmitter3 = require( '../lib/EventEmitter3.js' )
+if window? then window.SPTWEEN = require( '../lib/sup-tween.js' )
 
 fs = require 'fs'
 

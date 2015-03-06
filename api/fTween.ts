@@ -1,10 +1,7 @@
 /// <reference path="../lib/sup-tween.js.d.ts" />
 
-declare var EventEmitter3;
 var eventNames = [ "onStart", "onPause", "onResume", "onUpdate", "onComplete", "onStop" ];
 var shortEventNames = [ "start", "pause", "resume", "update", "complete", "stop" ];
-
-// All the tweens will udate automatically because SPTWEEN gets called by the plugin's earlyUpdate function (see in engine/ folder).
 
 module fTween  {
 
@@ -18,6 +15,14 @@ module fTween  {
   */
   var Interpolation = SPTWEEN.Interpolation;
 
+  /**
+  * To be called from your game as often as possible (on every update).
+  * Call `SPTWEEN.update()` once to run all tweens once.
+  * @param time The current timestamp in milliseconds.
+  */
+  function update( time?: number ) {
+    SPTWEEN.update();
+  }
 
   export class Tween {
     /**
@@ -30,7 +35,8 @@ module fTween  {
     */
     constructor( from: Object, to: Object, duration: number, params?: Params );
     constructor( to: Object, duration: number, params?: Params );
-    constructor( params?: fTween.Params );
+    constructor( params: fTween.Params );
+    constructor();
     
     /**
     * @param time The time in seconds to complete the timer. Setting the `time` property makes the `from`, `to` and `duration` being ignored.
@@ -274,7 +280,7 @@ module fTween  {
     // Ideally, I would have made the Tween calss extends EventEmitter
     // but it doesn't seem to be possible with the current state of Superpowers
     // used by the SPTWEEN callbacks (set in the constructor) and by on() and off()
-    private _emitter = new EventEmitter3();
+    private _emitter = new Event.EventEmitter();
 
 
     private _tween = new SPTWEEN.Tween();
