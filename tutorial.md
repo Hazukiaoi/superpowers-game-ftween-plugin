@@ -3,9 +3,13 @@
 The `fTween` plugin for Superpowers allows to easily create tweens that animate properties on objects.  
 This enables you to create fade or slide effects, or simple timer for instance, in no time and no hassle.
 
+- Read below for a tutorial and detailed explanations.
+- Or dive into the reference with the links on the right.
+- [Or back to the repository.](https://github.com/florentpoujol/superpowers-ftween-plugin)
+
 ## Tweens and the fTween.Tween class
 
-The `fTween` module mostly brings the `fTween.Tween` class and some interfaces.  
+The `fTween` module mostly brings the `fTween.Tween` class, plus some interfaces.  
 The `fTween.Tween` class is the go-to way to create any animations, aka __tweens__ (which are instances of `fTween.Tween`).
 
 Simply speaking, a tween is an object that updates the properties of an object __from__ a start value (the values in the `from` object) __to__ an end value (the values in the `to` object) during a __duration__, optionally using an __easing__ (or interpolation) function and some other optional parameters.
@@ -33,7 +37,7 @@ Let's start right away with examples :
     };
     var tween = new fTween.Tween( from, to, 3 );
 
-This tween will animate the opacity from 1 to 0 and the postion from `{0,0,0}` to `{10,-5,0}` in 3 seconds.
+This tween will animate the opacity from 1 to 0 and the postion from `{0,0,0}` to `{10,-5,0}` over 3 seconds.
     
 ### 2/
     
@@ -44,25 +48,96 @@ This tween will animate the opacity from 1 to 0 and the postion from `{0,0,0}` t
     var tween = new fTween.Tween( to, 3 );
 
 As you can see, the `from` object has not been supplied because it is completely optional.  
-Even if you supply an incomplete `from` object, the missing properties will be created on it with `0` (or an object that contains zeros) as value.
+Even if you supply an incomplete `from` object, the missing properties (in comparison with the ones in the `to` object) will be created on it with `0` (or an object that contains zeros) as value.
 
-### 3/
+### 3/ Tween instances directly, with dynamic properties
 
 The `from` object can also be instances like an actor:
 
     class TweenBehavior extends Sup.Behavior {
         awake() {
-            var tween = new fTween.Tween( this.actor, { position: { x: 10, y: -5, z: 0 } }, 3 );
+            var tween = new fTween.Tween( 
+                this.actor, 
+                { position: { x: 10, y: -5, z: 0 } }, 
+                3
+            );
         }
     }
 
 In this case, there is a catch, because actors don't have a `position` property.  
-But they have two functions named `setPosition()` and `getPosition()` that are used to set and get its position.
+But they have two functions named `getPosition()` and `setPosition()` that are used to get and set its position.
 
-So when the name of a property in the `to` object match the name of a couple of setter/getter functions (the functions that begin by `set` or `get`) in the `from` object, the property is not created on it as in the second example: the value of the property is set/get via the functions instead.
+So when the name of a property in the `to` object match the name of a couple of getter/setter functions (the functions that begin by `get` or `set`) in the `from` object, the property is not created on it as in the second example: the value of the property is get/set via the functions instead.
 
 It means that this example would effectively move the actor from its current position to `{10,-5,0}` because its position is automatically set on each update of the tween.  
 Pretty handy!
+
+--
+For comparison, here is the code you would need to achieve that if you used the `TWEEN`/`SPTWEEN` module or the `Tween` actor component.
+    
+
+    class TweenBehavior extends Sup.Behavior {
+        awake() {
+            // setup
+            var currentPos = this.actor.getPosition();
+
+            var self = this;
+            var onUpdate = function() {
+                self.actor.setPosition( this );
+            }
+
+
+            // with TWEEN:
+            new TWEEN.Tween( currentPos )
+            .to( { x: 10, y: -5, z: 0 }, 3000 )
+            .onUpdate( onUpdate )
+            .start();
+
+            // this also require to call TWEEN.update() or tween.update() as often as possible in order for the tween to update.
+            // note that with SPTWEEN, the same code is needed but the manuall update isn't
+
+
+            // with the Tween actor component:
+            new Tween( this.actor, currentPos )
+            .to( { x: 10, y: -5, z: 0 }, 3000 )
+            .onUpdate( onUpdate )
+            .start();
+            // using the TWeen actor component makes the tween update automatically
+        }
+    }
+
+The advantage of using fTween is event greater when you want to tween several properties at the same time :
+    
+    // with fTween:
+    var to = { 
+        position: { x: 10, y: -5, z: 0 },
+        localEulerAngles: { x: 10, y: -5, z: 0 },
+    };
+
+    var tween = new fTween.Tween( this.actor, to, 3);
+
+    // with TWEEN:
+    var currentPos = this.actor.getPosition();
+    var currentAngles = this.actor.getLocalEulerAngles();
+    var from = {
+        posX: currentPos.x, posY: currentPos.y, posZ: currentPos.z,
+        angleX: currentAngles.x, angleY: currentAngles.y, angleZ: currentAngles.z
+    }
+    var to = {
+        posX: 10, posY: -5, posZ: 0,
+        angleX: 10, angleY: -5, angleZ: 0,
+    }
+
+    var self = this;
+    var onUpdate = function() {
+        self.actor.setPosition( new Sup.Math.Vector3( this.posX, this.posY, this.posZ ) );
+        self.actor.setLocalEulerAngles( { x: this.angleX, y: this.angleY, z: this.angleZ } ) ); // this also works with a simple object instead of a Vector3
+    }
+
+    new TWEEN.Tween( from )
+    .to( to, 3000 )
+    .onUpdate( onUpdate )
+    .start();
 
 ### 4/
 
@@ -94,9 +169,6 @@ Also, all the constructors, as well as the `set()` function share a `params` arg
 
 
 
-
-
-
 ## Creating aliases of fTween.Tween
 
 If you are not happy about the name `fTween.Tween`, feel free to create an alias like this:
@@ -122,10 +194,6 @@ Just create a tween with this constructor:
     // this prints the message and calls doSomething() after 2 seconds
 
 In the case of such timer, the `from` object you may get via the listeners contains the `elapsedTime` and `remainingTime`properties.
-
-
-## Properties
-
 
 
 ## Playback control

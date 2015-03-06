@@ -8,4 +8,4 @@ Just so that you don't get confused, be aware that the `tweenjs` plugin (by Spar
 
 ## Documentation
 
-http://florentpoujol.github.io/superpowers-fTween-plugin
+http://florentpoujol.github.io/superpowers-ftween-plugin
