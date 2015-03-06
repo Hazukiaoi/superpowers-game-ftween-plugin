@@ -3,8 +3,6 @@ declare module fTween {
   var Easing: SPTWEEN.TweenEasing;
   var Interpolation: SPTWEEN.TweenInterpolation;
   
-  function update(time?: number): void;
-
   class Tween {
     constructor(from: Object, to: Object, duration: number, params?: Params);
     constructor(to: Object, duration: number, params?: Params);

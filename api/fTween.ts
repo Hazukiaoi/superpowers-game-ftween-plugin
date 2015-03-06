@@ -4,16 +4,9 @@ declare var EventEmitter3;
 var eventNames = [ "onStart", "onPause", "onResume", "onUpdate", "onComplete", "onStop" ];
 var shortEventNames = [ "start", "pause", "resume", "update", "complete", "stop" ];
 
-module fTween  {
+// All the tweens will udate automatically because SPTWEEN gets called by the plugin's earlyUpdate function (see in engine/ folder).
 
-  /**
-  * To be called from your game as often as possible (on every update).
-  * Call `SPTWEEN.update()` once to run all tweens once.
-  * @param time The current timestamp in milliseconds.
-  */
-  function update( time?: number ) {
-    SPTWEEN.update();
-  }
+module fTween  {
 
   /**
   * The object containing the easing functions segregated into families (ie: `fTween.Easing.Cubic`) and variants (ie: `fTween.Easing.Cubic.In`).
