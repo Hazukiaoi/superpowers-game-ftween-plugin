@@ -1,11 +1,8 @@
 /// <reference path="../lib/sup-tween.js.d.ts" />
 
-
 declare var EventEmitter3;
 var eventNames = [ "onStart", "onPause", "onResume", "onUpdate", "onComplete", "onStop" ];
 var shortEventNames = [ "start", "pause", "resume", "update", "complete", "stop" ];
-
-
 
 module fTween  {
 

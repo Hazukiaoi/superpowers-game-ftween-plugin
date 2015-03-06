@@ -1,9 +1,9 @@
 
 declare module fTween {
-  Easing: SPTWEEN.TweenEasing;
-  Interpolation: SPTWEEN.TweenInterpolation;
+  var Easing: SPTWEEN.TweenEasing;
+  var Interpolation: SPTWEEN.TweenInterpolation;
   
-  update(time?: number): void;
+  function update(time?: number): void;
 
   class Tween {
     constructor(from: Object, to: Object, duration: number, params?: Params);
@@ -14,7 +14,7 @@ declare module fTween {
     set(params: Params);
     on(eventName: string, listener: Listener): Tween;
     on(eventName: string, listener: UpdateListener): Tween;
-    off(eventName: string, listener: off): Tween;
+    off(eventName: string, listener: Function): Tween;
     start(time?: number);
     pause();
     resume();

@@ -1,7 +1,7 @@
 {
   "name": "superpowers-florentpoujol-ftween-plugin",
   "version": "0.1.0",
-  "description": "Integration of Superpowers-tween.js and fTween module to the Superpowers HTML5 game engine.",
+  "description": "Integration of Superpowers-tween.js and fTween module to Superpowers, the extensible HTML5 2D+3D game engine.",
   "repository": {
     "type": "git",
     "url": "https://github.com/florentpoujol/superpowers-ftween-plugin"
@@ -29,8 +29,9 @@
     "url": "https://github.com/florentpoujol/superpowers-fTween-plugin/issues"
   },
   "scripts": {
-    "gendoc": "typedoc --out docs/ api/fTween.ts --mode file --target ES5 --name \"fTween plugin\" --readme fTween.md --verbose --includeDeclarations",
-    "compilets": "tsc api/fTween.ts --module commonjs --target ES5"
+    "gendoc": "typedoc --out docs/ api/fTween.ts --mode file --target ES5 --name \"fTween plugin\" --readme tutorial.md --verbose --includeDeclarations",
+    "compilets": "tsc api/fTween.ts --module commonjs --target ES5",
+    "mklink": "mklink /j \"../../superpowers/plugins/florentpoujol/fTween\" \"./\""
   },
   "maintainers": [
     {
