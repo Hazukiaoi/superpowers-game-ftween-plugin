@@ -57,9 +57,9 @@ The `from` object can also be instances like an actor:
     class TweenBehavior extends Sup.Behavior {
         awake() {
             var tween = new fTween.Tween( 
-                this.actor, 
-                { position: { x: 10, y: -5, z: 0 } }, 
-                3
+                this.actor,                           // from
+                { position: { x: 10, y: -5, z: 0 } }, // to
+                3                                     // duration
             );
         }
     }
@@ -73,7 +73,7 @@ It means that this example would effectively move the actor from its current pos
 Pretty handy!
 
 --
-For comparison, here is the code you would need to achieve that if you used the `TWEEN`/`SPTWEEN` module or the `Tween` actor component.
+For comparison, here is the code you would need to achieve that if you used the `TWEEN`/`SUPTWEEN` module or the `Tween` actor component.
     
 
     class TweenBehavior extends Sup.Behavior {
@@ -86,7 +86,6 @@ For comparison, here is the code you would need to achieve that if you used the 
                 self.actor.setPosition( this );
             }
 
-
             // with TWEEN:
             new TWEEN.Tween( currentPos )
             .to( { x: 10, y: -5, z: 0 }, 3000 )
@@ -94,15 +93,13 @@ For comparison, here is the code you would need to achieve that if you used the 
             .start();
 
             // this also require to call TWEEN.update() or tween.update() as often as possible in order for the tween to update.
-            // note that with SPTWEEN, the same code is needed but the manuall update isn't
-
 
             // with the Tween actor component:
             new Tween( this.actor, currentPos )
             .to( { x: 10, y: -5, z: 0 }, 3000 )
             .onUpdate( onUpdate )
             .start();
-            // using the TWeen actor component makes the tween update automatically
+            // using the Tween actor component makes the tween update automatically
         }
     }
 
@@ -139,35 +136,42 @@ The advantage of using fTween is event greater when you want to tween several pr
     .onUpdate( onUpdate )
     .start();
 
-### 4/
+### 4/ Set properties in mass with the params argument
 
-So far we have used two constructors
-    
-    ( from: Object, to: Object, duration: number, params?: fTween.Params ): fTween.Tween
-    ( to: Object, duration: number, params?: fTween.Params ): fTween.Tween
-
-Let's use a third one :  
-`( params?: fTween.Params ): fTween.Tween`
+Let's use one more constructor :  
+`( params: fTween.Params ): fTween.Tween`  
 
     var tween = new fTween.Tween( {
         to: { opacity: 1 },
         duration: 0.5,
+        delay: 1,                           // the tween will start running with a delay of 1 second
+        isRelative: true,                   // the values in the to object are realtive from the one in the from object
+        easing: fTween.Easing.Quadratic.Out // use a quadratic out easing instead of a linear one
+    } );
+
+    // this is equivalent to:
+    var tween = new fTween.Tween( { opacity: 1 }, 0.5, {
         delay: 1,
         isRelative: true,
         easing: fTween.Easing.Quadratic.Out
     } );
 
-
-## Tween properties and params argument
-
-As you have seen in the examples above the tween may have quite many properties to control how the values gets animated.
-
-[Find all these properties](/classes/ftween.tween.html#_inner) in the __Accessors__ sections of the class' page.
-
-Also, all the constructors, as well as the `set()` function share a `params` argument which is an object in which you can set the tween's properties (and more) in mass.  
-[Check out the `fTween.Params` interface](/interfaces/ftween.params.html) for more informations about the keys you can set in the `params` argument.
+All the constructors, as well as the `set()` function share a `params` argument which is an object in which you can set the tween's properties (and more) in mass.  
+[Check out the `fTween.Params` interface](interfaces/ftween.params.html) for more informations about all the properties you can set in the `params` argument.
 
 
+## Tween properties
+
+As you have seen in the examples above the tween may have quite many properties beside the `from` and `to` object and the duration to control how the values gets animated.
+
+[Find all these properties](classes/ftween.tween.html#_inner) in the __Accessors__ section of the class' page.
+   
+    // same example as above:
+    var tween = new fTween.Tween( { opacity: 1 }, 0.5, {
+        isRelative: true,
+    } );
+    tween.delay = 1;
+    tween.easing = fTween.Easing.Quadratic.Out;
 
 ## Creating aliases of fTween.Tween
 
@@ -183,22 +187,22 @@ Now you can write:
 
 ## Timer
 
-Just want to do something after some time ?
-Just create a tween with this constructor:  
-`( time: number, onComplete: fTween.Listener, params?: fTween.Params ): fTween.Tween`
+Just want to do something after some time ?  
+Then just create a tween with this fourth constructor:  
+`( time: number, onComplete: fTween.TweenCallback, params?: fTween.Params ): fTween.Tween`
 
     new fTween.Tween( 2, function() {
-      console.log( "Time's up!" );
+      Sup.log( "Time's up! Remaining time:"+this.remainingTime ); // 0
       doSomething();
     } );
     // this prints the message and calls doSomething() after 2 seconds
 
-In the case of such timer, the `from` object you may get via the listeners contains the `elapsedTime` and `remainingTime`properties.
+In the case of such timer, the `from` object you may get via the `this` variable of the callbacks contains the `elapsedTime` and `remainingTime` properties.
 
 
 ## Playback control
 
-When you create a new tween instance and pass (at least) the 'to' object and a positive duration, __the tween will automatically start__.  
+When you create a new tween instance and pass (at least) the `to` object and a positive duration, __the tween will automatically start__.  
 You can prevent this behavior by setting the start property with a negative number in the `params` argument.
 
     new fTween.Tween( { value: 10 }, 2 ); // starts right away
@@ -229,36 +233,30 @@ In this last case, tween has been started _before_ being paused or stopped. Some
 __As a rule of thumbs, your shouldn't modify any of your tween's property while it is started.__
 
 
-## Listeners
+## Callbacks
 
-The fTween class extends node's EventEmitter and emit the following events : `onStart`, `onPause`, `onResume`, `onUpdate`, `onComplete` and `onStop`.
+You may set callbacks for the following events: `onStart`, `onPause`, `onResume`, `onUpdate`, `onComplete` and `onStop` via the `on()` function
 
-You can set a function to listen for the event as with any event emitter via the `addListener()`, or `on()` function.
+The callbacks must respect the `fTween.TweenCallback` signature (or `fTween.TweenUpdateCallback` for the `onUpdate` event).  
+They are called in the context of the `from`, so their `this` variable is the `from` object.
+The `onUpdate` callback also receive an argument: the progression of the tween as a percentage between 0 and 1.
 
-The functions must respect the `fTweenListener` signature (or `fTweenUpdateListener` for the `onUpdate` event).  
-They receive a reference of the `from` object as their first argument.  
-The `onUpdate` listeners also receive a second argument: the progression of the tween as a percentage between 0 and 1.
+    var tween = new fTween.Tween( ... );
+    tween.on( "onUpdate", function( progression: number ) { ... } );
 
-    var tween = new fTween.Tween( ... )
-    tween.addListener( "onUpdate", function( object: Object, progression: number ) { ... } )
+    // as shotcut, you may provide the "short" event name
+    tween.on( "complete", function() { ... } )
 
-    // the on() function does the same thing:
-    tween.on( "onComplete", function( object: Object ) { ... } )
-
-    // but it also allows you to use the "short" event name
-    tween.on( "complete", function( object: Object ) { ... } )
-
-    // you can also set a listener via the params object passed to the constructor or the set() function:
+    // you can also set a callback via the `params` object passed to the constructors or the `set()` function:
     tween.set( {
-      onStop: function( object: Object ) { ... }
+      onStop: function() { ... }
     } );
 
-Remove a listener via the `removeListener( "onStart")` function. 
+Remove a callback the same way: 
   
-    var onUpdate = function( ... ) { ... }
-    tween.on( "update", onUpdate );
+    tween.on( "update", function( ... ) { ... } );
     ...
-    tween.removeListener( "onUpdate", onUpdate );
+    tween.on( "update", null );
 
 
 ## Easing functions
@@ -267,7 +265,7 @@ Easing functions impact how the values in the `from` object change over time.
 They can be divided into several big families:
 
 - `Linear` is the default easing. It’s the simplest easing function.
-- `Quad`, `Cubic`, `Quart`, `Quint`, `Expo`, `Sine` and `Circ` are all "smooth" curves that will make transitions look natural.
+- `Quadratic`, `Cubic`, `Quartic`, `Quintic`, `Sinusoidal`, `Exponential`, and `Circular` are all "smooth" curves that will make transitions look natural.
 - The `Elastic` family simulates inertia in the easing, like an elastic gum.
 - The `Back` family starts by moving the easing slightly "backwards" before moving it forward.
 - The `Bounce` family simulates the motion of an object bouncing.

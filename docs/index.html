@@ -105,9 +105,9 @@
 				<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TweenBehavior</span> <span class="hljs-keyword"><span class="hljs-keyword">extends</span></span> <span class="hljs-title">Sup</span>.<span class="hljs-title">Behavior</span> {</span>
     awake() {
         <span class="hljs-keyword">var</span> tween = <span class="hljs-keyword">new</span> fTween.<span class="hljs-type">Tween</span>( 
-            <span class="hljs-keyword">this</span>.actor, 
-            { position: { x: <span class="hljs-number">10</span>, y: -<span class="hljs-number">5</span>, z: <span class="hljs-number">0</span> } }, 
-            <span class="hljs-number">3</span>
+            <span class="hljs-keyword">this</span>.actor,                           <span class="hljs-comment">// from</span>
+            { position: { x: <span class="hljs-number">10</span>, y: -<span class="hljs-number">5</span>, z: <span class="hljs-number">0</span> } }, <span class="hljs-comment">// to</span>
+            <span class="hljs-number">3</span>                                     <span class="hljs-comment">// duration</span>
         );
     }
 }
@@ -115,7 +115,7 @@
 				<p>So when the name of a property in the <code>to</code> object match the name of a couple of getter/setter functions (the functions that begin by <code>get</code> or <code>set</code>) in the <code>from</code> object, the property is not created on it as in the second example: the value of the property is get/set via the functions instead.</p>
 				<p>It means that this example would effectively move the actor from its current position to <code>{10,-5,0}</code> because its position is automatically set on each update of the tween.<br>Pretty handy!</p>
 				<p>--
-				For comparison, here is the code you would need to achieve that if you used the <code>TWEEN</code>/<code>SPTWEEN</code> module or the <code>Tween</code> actor component.</p>
+				For comparison, here is the code you would need to achieve that if you used the <code>TWEEN</code>/<code>SUPTWEEN</code> module or the <code>Tween</code> actor component.</p>
 				<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TweenBehavior</span> <span class="hljs-keyword"><span class="hljs-keyword">extends</span></span> <span class="hljs-title">Sup</span>.<span class="hljs-title">Behavior</span> {</span>
     awake() {
         <span class="hljs-comment">// setup</span>
@@ -126,7 +126,6 @@
             self.actor.setPosition( <span class="hljs-keyword">this</span> );
         }
 
-
         <span class="hljs-comment">// with TWEEN:</span>
         <span class="hljs-keyword">new</span> <span class="hljs-type">TWEEN</span>.<span class="hljs-type">Tween</span>( currentPos )
         .to( { x: <span class="hljs-number">10</span>, y: -<span class="hljs-number">5</span>, z: <span class="hljs-number">0</span> }, <span class="hljs-number">3000</span> )
@@ -134,15 +133,13 @@
         .start();
 
         <span class="hljs-comment">// this also require to call TWEEN.update() or tween.update() as often as possible in order for the tween to update.</span>
-        <span class="hljs-comment">// note that with SPTWEEN, the same code is needed but the manuall update isn't</span>
-
 
         <span class="hljs-comment">// with the Tween actor component:</span>
         <span class="hljs-keyword">new</span> <span class="hljs-type">Tween</span>( <span class="hljs-keyword">this</span>.actor, currentPos )
         .to( { x: <span class="hljs-number">10</span>, y: -<span class="hljs-number">5</span>, z: <span class="hljs-number">0</span> }, <span class="hljs-number">3000</span> )
         .onUpdate( onUpdate )
         .start();
-        <span class="hljs-comment">// using the TWeen actor component makes the tween update automatically</span>
+        <span class="hljs-comment">// using the Tween actor component makes the tween update automatically</span>
     }
 }
 </code></pre><p>The advantage of using fTween is event greater when you want to tween several properties at the same time :</p>
@@ -176,23 +173,33 @@ var onUpdate = function() {
 .to( to, <span class="hljs-number">3000</span> )
 .onUpdate( onUpdate )
 .start();
-</code></pre><h3 id="4-">4/</h3>
-				<p>So far we have used two constructors</p>
-				<pre><code>( from: Object, <span class="hljs-keyword">to</span>: Object, <span class="hljs-built_in">duration</span>: number, <span class="hljs-keyword">params</span><span class="hljs-subst">?</span>: fTween<span class="hljs-built_in">.</span><span class="hljs-keyword">Params</span> ): fTween<span class="hljs-built_in">.</span>Tween
-( <span class="hljs-keyword">to</span>: Object, <span class="hljs-built_in">duration</span>: number, <span class="hljs-keyword">params</span><span class="hljs-subst">?</span>: fTween<span class="hljs-built_in">.</span><span class="hljs-keyword">Params</span> ): fTween<span class="hljs-built_in">.</span>Tween
-</code></pre><p>Let&#39;s use a third one :<br><code>( params?: fTween.Params ): fTween.Tween</code></p>
+</code></pre><h3 id="4-set-properties-in-mass-with-the-params-argument">4/ Set properties in mass with the params argument</h3>
+				<p>Let&#39;s use one more constructor :<br><code>( params: fTween.Params ): fTween.Tween</code>  </p>
 				<pre><code><span class="hljs-built_in">var</span> tween <span class="hljs-subst">=</span> <span class="hljs-literal">new</span> fTween<span class="hljs-built_in">.</span>Tween( {
     <span class="hljs-keyword">to</span>: { opacity: <span class="hljs-number">1</span> },
     <span class="hljs-built_in">duration</span>: <span class="hljs-number">0.5</span>,
+    delay: <span class="hljs-number">1</span>,                           <span class="hljs-comment">// the tween will start running with a delay of 1 second</span>
+    isRelative: <span class="hljs-literal">true</span>,                   <span class="hljs-comment">// the values in the to object are realtive from the one in the from object</span>
+    easing: fTween<span class="hljs-built_in">.</span>Easing<span class="hljs-built_in">.</span>Quadratic<span class="hljs-built_in">.</span>Out <span class="hljs-comment">// use a quadratic out easing instead of a linear one</span>
+} );
+
+<span class="hljs-comment">// this is equivalent to:</span>
+<span class="hljs-built_in">var</span> tween <span class="hljs-subst">=</span> <span class="hljs-literal">new</span> fTween<span class="hljs-built_in">.</span>Tween( { opacity: <span class="hljs-number">1</span> }, <span class="hljs-number">0.5</span>, {
     delay: <span class="hljs-number">1</span>,
     isRelative: <span class="hljs-literal">true</span>,
     easing: fTween<span class="hljs-built_in">.</span>Easing<span class="hljs-built_in">.</span>Quadratic<span class="hljs-built_in">.</span>Out
 } );
-</code></pre><h2 id="tween-properties-and-params-argument">Tween properties and params argument</h2>
-				<p>As you have seen in the examples above the tween may have quite many properties to control how the values gets animated.</p>
-				<p><a href="/classes/ftween.tween.html#_inner">Find all these properties</a> in the <strong>Accessors</strong> sections of the class&#39; page.</p>
-				<p>Also, all the constructors, as well as the <code>set()</code> function share a <code>params</code> argument which is an object in which you can set the tween&#39;s properties (and more) in mass.<br><a href="/interfaces/ftween.params.html">Check out the <code>fTween.Params</code> interface</a> for more informations about the keys you can set in the <code>params</code> argument.</p>
-				<h2 id="creating-aliases-of-ftween-tween">Creating aliases of fTween.Tween</h2>
+</code></pre><p>All the constructors, as well as the <code>set()</code> function share a <code>params</code> argument which is an object in which you can set the tween&#39;s properties (and more) in mass.<br><a href="interfaces/ftween.params.html">Check out the <code>fTween.Params</code> interface</a> for more informations about all the properties you can set in the <code>params</code> argument.</p>
+				<h2 id="tween-properties">Tween properties</h2>
+				<p>As you have seen in the examples above the tween may have quite many properties beside the <code>from</code> and <code>to</code> object and the duration to control how the values gets animated.</p>
+				<p><a href="classes/ftween.tween.html#_inner">Find all these properties</a> in the <strong>Accessors</strong> section of the class&#39; page.</p>
+				<pre><code><span class="hljs-comment">// same example as above:</span>
+<span class="hljs-keyword">var</span> tween = <span class="hljs-keyword">new</span> fTween.Tween( { opacity: <span class="hljs-number">1</span> }, <span class="hljs-number">0.5</span>, {
+    isRelative: <span class="hljs-literal">true</span>,
+} );
+tween.delay = <span class="hljs-number">1</span>;
+tween.easing = fTween.Easing.Quadratic.Out;
+</code></pre><h2 id="creating-aliases-of-ftween-tween">Creating aliases of fTween.Tween</h2>
 				<p>If you are not happy about the name <code>fTween.Tween</code>, feel free to create an alias like this:</p>
 				<pre><code><span class="hljs-keyword">var</span> Tween = fTween.Tween;
 <span class="hljs-comment">// or</span>
@@ -200,16 +207,15 @@ var onUpdate = function() {
 </code></pre><p>Now you can write:</p>
 				<pre><code>var tween = new Anim( [<span class="hljs-keyword">...</span>] );
 </code></pre><h2 id="timer">Timer</h2>
-				<p>Just want to do something after some time ?
-				Just create a tween with this constructor:<br><code>( time: number, onComplete: fTween.Listener, params?: fTween.Params ): fTween.Tween</code></p>
+				<p>Just want to do something after some time ?<br>Then just create a tween with this fourth constructor:<br><code>( time: number, onComplete: fTween.TweenCallback, params?: fTween.Params ): fTween.Tween</code></p>
 				<pre><code><span class="hljs-keyword">new</span> fTween.Tween( <span class="hljs-number">2</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
-  <span class="hljs-built_in">console</span>.log( <span class="hljs-string">"Time's up!"</span> );
+  Sup.log( <span class="hljs-string">"Time's up! Remaining time:"</span>+<span class="hljs-keyword">this</span>.remainingTime ); <span class="hljs-comment">// 0</span>
   doSomething();
 } );
 <span class="hljs-comment">// this prints the message and calls doSomething() after 2 seconds</span>
-</code></pre><p>In the case of such timer, the <code>from</code> object you may get via the listeners contains the <code>elapsedTime</code> and <code>remainingTime</code>properties.</p>
+</code></pre><p>In the case of such timer, the <code>from</code> object you may get via the <code>this</code> variable of the callbacks contains the <code>elapsedTime</code> and <code>remainingTime</code> properties.</p>
 				<h2 id="playback-control">Playback control</h2>
-				<p>When you create a new tween instance and pass (at least) the &#39;to&#39; object and a positive duration, <strong>the tween will automatically start</strong>.<br>You can prevent this behavior by setting the start property with a negative number in the <code>params</code> argument.</p>
+				<p>When you create a new tween instance and pass (at least) the <code>to</code> object and a positive duration, <strong>the tween will automatically start</strong>.<br>You can prevent this behavior by setting the start property with a negative number in the <code>params</code> argument.</p>
 				<pre><code><span class="hljs-keyword">new</span> fTween.Tween( { <span class="hljs-keyword">value</span>: <span class="hljs-number">10</span> }, <span class="hljs-number">2</span> ); <span class="hljs-comment">// starts right away</span>
 
 <span class="hljs-keyword">var</span> tween = <span class="hljs-keyword">new</span> fTween.Tween( { <span class="hljs-keyword">value</span>: <span class="hljs-number">10</span> }, <span class="hljs-number">2</span>, { start: -<span class="hljs-number">1</span> } ); 
@@ -230,34 +236,30 @@ tween.destroy();
 tween.pause(); <span class="hljs-comment">// or tween.stop();</span>
 </code></pre><p>In this last case, tween has been started <em>before</em> being paused or stopped. Some operations have been done on the <code>from</code> object and setting a new <code>from</code> object will result in unexpected behaviors and maybe errors.</p>
 				<p><strong>As a rule of thumbs, your shouldn&#39;t modify any of your tween&#39;s property while it is started.</strong></p>
-				<h2 id="listeners">Listeners</h2>
-				<p>The fTween class extends node&#39;s EventEmitter and emit the following events : <code>onStart</code>, <code>onPause</code>, <code>onResume</code>, <code>onUpdate</code>, <code>onComplete</code> and <code>onStop</code>.</p>
-				<p>You can set a function to listen for the event as with any event emitter via the <code>addListener()</code>, or <code>on()</code> function.</p>
-				<p>The functions must respect the <code>fTweenListener</code> signature (or <code>fTweenUpdateListener</code> for the <code>onUpdate</code> event).<br>They receive a reference of the <code>from</code> object as their first argument.<br>The <code>onUpdate</code> listeners also receive a second argument: the progression of the tween as a percentage between 0 and 1.</p>
-				<pre><code>var tween = new fTween.Tween( <span class="hljs-keyword">...</span> )
-tween.addListener( <span class="hljs-string">"onUpdate"</span>, <span class="hljs-keyword">function</span>( object: Object, progression: number ) { <span class="hljs-keyword">...</span> } )
+				<h2 id="callbacks">Callbacks</h2>
+				<p>You may set callbacks for the following events: <code>onStart</code>, <code>onPause</code>, <code>onResume</code>, <code>onUpdate</code>, <code>onComplete</code> and <code>onStop</code> via the <code>on()</code> function</p>
+				<p>The callbacks must respect the <code>fTween.TweenCallback</code> signature (or <code>fTween.TweenUpdateCallback</code> for the <code>onUpdate</code> event).<br>They are called in the context of the <code>from</code>, so their <code>this</code> variable is the <code>from</code> object.
+				The <code>onUpdate</code> callback also receive an argument: the progression of the tween as a percentage between 0 and 1.</p>
+				<pre><code>var tween = new fTween.Tween( <span class="hljs-keyword">...</span> );
+tween.on( <span class="hljs-string">"onUpdate"</span>, <span class="hljs-keyword">function</span>( progression: number ) { <span class="hljs-keyword">...</span> } );
 
-// the on() <span class="hljs-keyword">function</span> does the same thing:
-tween.on( <span class="hljs-string">"onComplete"</span>, <span class="hljs-keyword">function</span>( object: Object ) { <span class="hljs-keyword">...</span> } )
+// as shotcut, you may provide the <span class="hljs-string">"short"</span> event name
+tween.on( <span class="hljs-string">"complete"</span>, <span class="hljs-keyword">function</span>() { <span class="hljs-keyword">...</span> } )
 
-// but it also allows you to use the <span class="hljs-string">"short"</span> event name
-tween.on( <span class="hljs-string">"complete"</span>, <span class="hljs-keyword">function</span>( object: Object ) { <span class="hljs-keyword">...</span> } )
-
-// you can also set a listener via the params object passed to the constructor or the set() <span class="hljs-keyword">function</span>:
+// you can also set a callback via the `params` object passed to the constructors or the `set()` <span class="hljs-keyword">function</span>:
 tween.set( {
-  onStop: <span class="hljs-keyword">function</span>( object: Object ) { <span class="hljs-keyword">...</span> }
+  onStop: <span class="hljs-keyword">function</span>() { <span class="hljs-keyword">...</span> }
 } );
-</code></pre><p>Remove a listener via the <code>removeListener( &quot;onStart&quot;)</code> function. </p>
-				<pre><code>var onUpdate = <span class="hljs-keyword">function</span>( <span class="hljs-keyword">...</span> ) { <span class="hljs-keyword">...</span> }
-tween.on( <span class="hljs-string">"update"</span>, onUpdate );
+</code></pre><p>Remove a callback the same way: </p>
+				<pre><code>tween.on( <span class="hljs-string">"update"</span>, <span class="hljs-keyword">function</span>( <span class="hljs-keyword">...</span> ) { <span class="hljs-keyword">...</span> } );
 <span class="hljs-keyword">...</span>
-tween.removeListener( <span class="hljs-string">"onUpdate"</span>, onUpdate );
+tween.on( <span class="hljs-string">"update"</span>, null );
 </code></pre><h2 id="easing-functions">Easing functions</h2>
 				<p>Easing functions impact how the values in the <code>from</code> object change over time.
 				They can be divided into several big families:</p>
 				<ul>
 					<li><code>Linear</code> is the default easing. It’s the simplest easing function.</li>
-					<li><code>Quad</code>, <code>Cubic</code>, <code>Quart</code>, <code>Quint</code>, <code>Expo</code>, <code>Sine</code> and <code>Circ</code> are all &quot;smooth&quot; curves that will make transitions look natural.</li>
+					<li><code>Quadratic</code>, <code>Cubic</code>, <code>Quartic</code>, <code>Quintic</code>, <code>Sinusoidal</code>, <code>Exponential</code>, and <code>Circular</code> are all &quot;smooth&quot; curves that will make transitions look natural.</li>
 					<li>The <code>Elastic</code> family simulates inertia in the easing, like an elastic gum.</li>
 					<li>The <code>Back</code> family starts by moving the easing slightly &quot;backwards&quot; before moving it forward.</li>
 					<li>The <code>Bounce</code> family simulates the motion of an object bouncing.</li>
@@ -301,9 +303,6 @@ tween.removeListener( <span class="hljs-string">"onUpdate"</span>, onUpdate );
 				<ul class="before-current">
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#eventnames" class="tsd-kind-icon">event<wbr>Names</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#fanimate" class="tsd-kind-icon">f<wbr>Animate</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#shorteventnames" class="tsd-kind-icon">short<wbr>Event<wbr>Names</a>

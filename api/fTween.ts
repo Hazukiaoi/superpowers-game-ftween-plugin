@@ -111,10 +111,11 @@ module fTween  {
       delete params.start;
             
       for ( var key in params ) {
-        if ( eventNames.indexOf( key ) !== -1 || shortEventNames.indexOf( key ) !== -1 ) {
+        if ( eventNames.indexOf( key ) !== -1 ) {
           this.on( key, params[ key ] )
         }
         else {
+          // TODO FIXME: can a local property can be set this way ?
           this[ key ] = params[ key ];
         }
       }
@@ -126,15 +127,15 @@ module fTween  {
 
 
     /**
-    * Make the provided listener function listen for the specified event.
+    * Make the provided callback be called when the specified event occurs.
     * @param eventName The event name.
-    * @param listener The listener function.
+    * @param callback The callback function.
     * @returns The tween instance.
     */
     on( eventName: string, callback?: TweenCallback ): Tween;
     
     /**
-    * @param listener The listener function for the `onUpdate` event.
+    * @param listener The callback function for the `onUpdate` event.
     */
     on( eventName: string, callback?: TweenUpdateCallback ): Tween;
 
@@ -398,7 +399,7 @@ module fTween  {
 
     private _isDestroyed: boolean = false; 
     /**
-    * The tween's destroyed state.
+    * The tween's destroyed state. Call destroy() to destroy a tween and free some objects for GC.
     */
     get isDestroyed(): boolean { return this._isDestroyed; }
 
@@ -406,17 +407,43 @@ module fTween  {
 
   // --------------------------------------------------------------------------------
 
+  /**
+  * Signature for the easing functions. All available easing function can be found inside the `fTween.Easing` object.
+  */
   export interface EasingFunction {
+    /**
+    * @param k The progression toward the end (between 0 and 1).
+    * @returns The eased progression (between 0 and 1), taking the easing into account.
+    */
     (k:number): number;
   }
+
+  /**
+  * Signature for the interpolation functions. All available interpolation functions can be found inside the `fTween.Interpolation` object.
+  */
   export interface InterpolationFunction {
+    /**
+    * @param v The list of values to interpolate through.
+    * @param k The progression toward the end (between 0 and 1).
+    * @returns The interpolatied value.
+    */
     (v:number[], k:number): number;
   }
 
+  /**
+  * Signature for all callbacks except `onUpdate`, to be set via the `fTween.Tween.on()` function.
+  */
   export interface TweenCallback {
     (): void;
   }
+
+  /**
+  * Signature for the `onUpdate` callback, to be set via the `fTween.Tween.on()` function.
+  */
   export interface TweenUpdateCallback {
+    /**
+    * @param progression The progression of the tween as a number between 0 and 1.
+    */
     (progression:number): void;
   }
 
@@ -449,7 +476,7 @@ module fTween  {
     */
     delay?: number;
     /**
-    * The number of times the tween will repeat, after having completed once.
+    * The number of times the tween will repeat, __after having completed once__.
     */
     repeat?: number;
     /**
@@ -498,20 +525,3 @@ module fTween  {
     start?: number;
   }
 } // end of fTween module
-
-var fAnimate: typeof fTween.Tween = fTween.Tween;
-
-/*
-var proto: any = Sup.Actor.prototype;
-var proto2 = Sup.Actor.prototype;
-// storing the prototype in a variable of type any is necessary
-// doing otherwise cause an error of type "'animate' does not exist on type 'Actor'"
-proto.animate = function( to:Object, duration:number, params?:fTween.Params ) {
-  return new fTween.Tween( this, to, duration, params );
-};
-
-var proto: any = Sup.ActorComponent.prototype;
-proto.animate = function( to:Object, duration:number, params?:fTween.Params ) {
-  return new fTween.Tween( this, to, duration, params );
-};
-*/
