@@ -97,11 +97,6 @@ module fTween  {
     * @param params The list of parameters.
     */
     set( params: Params ) {
-      if ( this._isDestroyed === true ) {
-        console.error("fTween.Tween(): This tween instance has been destroyed. It can not be used anymore. Create a new instance.");
-        return;
-      }
-
       if ( params.from !== undefined ) {
         this.from = params.from;
         delete params.from;
