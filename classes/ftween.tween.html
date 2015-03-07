@@ -95,7 +95,6 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="ftween.tween.html#_destroyoncomplete" class="tsd-kind-icon">_destroy<wbr>OnComplete</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="ftween.tween.html#_duration" class="tsd-kind-icon">_duration</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="ftween.tween.html#_easing" class="tsd-kind-icon">_easing</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="ftween.tween.html#_emitter" class="tsd-kind-icon">_emitter</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="ftween.tween.html#_from" class="tsd-kind-icon">_from</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="ftween.tween.html#_interpolation" class="tsd-kind-icon">_interpolation</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="ftween.tween.html#_iscomplete" class="tsd-kind-icon">_is<wbr>Complete</a></li>
@@ -133,7 +132,6 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="ftween.tween.html#_checkmilliseconds" class="tsd-kind-icon">_check<wbr>Milliseconds</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ftween.tween.html#destroy" class="tsd-kind-icon">destroy</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ftween.tween.html#off" class="tsd-kind-icon">off</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ftween.tween.html#on" class="tsd-kind-icon">on</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ftween.tween.html#pause" class="tsd-kind-icon">pause</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ftween.tween.html#resume" class="tsd-kind-icon">resume</a></li>
@@ -153,14 +151,15 @@
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">new <wbr>Tween<span class="tsd-signature-symbol">(</span>from<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span>, to<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span>, duration<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, params<span class="tsd-signature-symbol">?: </span><a href="../interfaces/ftween.params.html" class="tsd-signature-type">Params</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ftween.tween.html" class="tsd-signature-type">Tween</a></li>
 						<li class="tsd-signature tsd-kind-icon">new <wbr>Tween<span class="tsd-signature-symbol">(</span>to<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span>, duration<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, params<span class="tsd-signature-symbol">?: </span><a href="../interfaces/ftween.params.html" class="tsd-signature-type">Params</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ftween.tween.html" class="tsd-signature-type">Tween</a></li>
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Tween<span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">?: </span><a href="../interfaces/ftween.params.html" class="tsd-signature-type">Params</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ftween.tween.html" class="tsd-signature-type">Tween</a></li>
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Tween<span class="tsd-signature-symbol">(</span>time<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, onComplete<span class="tsd-signature-symbol">: </span><a href="../interfaces/ftween.listener.html" class="tsd-signature-type">Listener</a>, params<span class="tsd-signature-symbol">?: </span><a href="../interfaces/ftween.params.html" class="tsd-signature-type">Params</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ftween.tween.html" class="tsd-signature-type">Tween</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Tween<span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">: </span><a href="../interfaces/ftween.params.html" class="tsd-signature-type">Params</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ftween.tween.html" class="tsd-signature-type">Tween</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Tween<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ftween.tween.html" class="tsd-signature-type">Tween</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Tween<span class="tsd-signature-symbol">(</span>time<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, onComplete<span class="tsd-signature-symbol">: </span><a href="../interfaces/ftween.tweencallback.html" class="tsd-signature-type">TweenCallback</a>, params<span class="tsd-signature-symbol">?: </span><a href="../interfaces/ftween.params.html" class="tsd-signature-type">Params</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ftween.tween.html" class="tsd-signature-type">Tween</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L32">api/fTween.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L27">api/fTween.ts:27</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -211,7 +210,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L41">api/fTween.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L36">api/fTween.ts:36</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -254,7 +253,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L42">api/fTween.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L37">api/fTween.ts:37</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -265,7 +264,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> params: <a href="../interfaces/ftween.params.html" class="tsd-signature-type">Params</a></h5>
+									<h5>params: <a href="../interfaces/ftween.params.html" class="tsd-signature-type">Params</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>An object containing parameters.</p>
@@ -281,7 +280,23 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L43">api/fTween.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L38">api/fTween.ts:38</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns an instance of <code>fTween.Tween</code>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns 
+								<a href="ftween.tween.html" class="tsd-signature-type">Tween</a>
+							</h4>
+							<p>The tween instance.</p>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L39">api/fTween.ts:39</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -300,7 +315,7 @@
 									</div>
 								</li>
 								<li>
-									<h5>onComplete: <a href="../interfaces/ftween.listener.html" class="tsd-signature-type">Listener</a></h5>
+									<h5>onComplete: <a href="../interfaces/ftween.tweencallback.html" class="tsd-signature-type">TweenCallback</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>The listener for the <code>onComplete</code> event.</p>
@@ -332,7 +347,7 @@
 					<div class="tsd-signature tsd-kind-icon">_delay<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L360">api/fTween.ts:360</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L312">api/fTween.ts:312</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -342,7 +357,7 @@
 					<div class="tsd-signature tsd-kind-icon">_destroy<wbr>OnComplete<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L438">api/fTween.ts:438</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L390">api/fTween.ts:390</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -352,7 +367,7 @@
 					<div class="tsd-signature tsd-kind-icon">_duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L308">api/fTween.ts:308</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L260">api/fTween.ts:260</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -362,17 +377,7 @@
 					<div class="tsd-signature tsd-kind-icon">_easing<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ftween.easingfunction.html" class="tsd-signature-type">EasingFunction</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L400">api/fTween.ts:400</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="_emitter" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _emitter</h3>
-					<div class="tsd-signature tsd-kind-icon">_emitter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L287">api/fTween.ts:287</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L352">api/fTween.ts:352</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -382,7 +387,7 @@
 					<div class="tsd-signature tsd-kind-icon">_from<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L338">api/fTween.ts:338</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L290">api/fTween.ts:290</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -392,7 +397,7 @@
 					<div class="tsd-signature tsd-kind-icon">_interpolation<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ftween.interpolationfunction.html" class="tsd-signature-type">InterpolationFunction</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L411">api/fTween.ts:411</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L363">api/fTween.ts:363</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -402,7 +407,7 @@
 					<div class="tsd-signature tsd-kind-icon">_is<wbr>Complete<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L431">api/fTween.ts:431</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L383">api/fTween.ts:383</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -412,7 +417,7 @@
 					<div class="tsd-signature tsd-kind-icon">_is<wbr>Destroyed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L448">api/fTween.ts:448</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L400">api/fTween.ts:400</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -422,7 +427,7 @@
 					<div class="tsd-signature tsd-kind-icon">_is<wbr>Paused<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L422">api/fTween.ts:422</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L374">api/fTween.ts:374</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -432,7 +437,7 @@
 					<div class="tsd-signature tsd-kind-icon">_is<wbr>Relative<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L349">api/fTween.ts:349</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L301">api/fTween.ts:301</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -442,7 +447,7 @@
 					<div class="tsd-signature tsd-kind-icon">_repeat<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L375">api/fTween.ts:375</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L327">api/fTween.ts:327</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -452,17 +457,17 @@
 					<div class="tsd-signature tsd-kind-icon">_to<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L297">api/fTween.ts:297</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L249">api/fTween.ts:249</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="_tween" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _tween</h3>
-					<div class="tsd-signature tsd-kind-icon">_tween<span class="tsd-signature-symbol">:</span> <a href="sptween.tween.html" class="tsd-signature-type">Tween</a></div>
+					<div class="tsd-signature tsd-kind-icon">_tween<span class="tsd-signature-symbol">:</span> <a href="suptween.tween.html" class="tsd-signature-type">Tween</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L290">api/fTween.ts:290</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L242">api/fTween.ts:242</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -472,7 +477,7 @@
 					<div class="tsd-signature tsd-kind-icon">_yoyo<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L389">api/fTween.ts:389</a></li>
+							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L341">api/fTween.ts:341</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -483,22 +488,22 @@
 					<a name="_inner" class="tsd-anchor"></a>
 					<h3>_inner</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> _inner<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="sptween.tween.html" class="tsd-signature-type">Tween</a></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> _inner<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="suptween.tween.html" class="tsd-signature-type">Tween</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L294">api/fTween.ts:294</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L246">api/fTween.ts:246</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>The <code>SPTWEEN.Tween</code> instance that actually perform the tweening.</p>
+									<p>The <code>SUPTWEEN.Tween</code> instance that actually perform the tweening.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns 
-								<a href="sptween.tween.html" class="tsd-signature-type">Tween</a>
+								<a href="suptween.tween.html" class="tsd-signature-type">Tween</a>
 							</h4>
 						</li>
 					</ul>
@@ -514,7 +519,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L372">api/fTween.ts:372</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L324">api/fTween.ts:324</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -529,7 +534,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L364">api/fTween.ts:364</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L316">api/fTween.ts:316</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -560,7 +565,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L445">api/fTween.ts:445</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L397">api/fTween.ts:397</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -575,7 +580,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L442">api/fTween.ts:442</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L394">api/fTween.ts:394</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -606,7 +611,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L320">api/fTween.ts:320</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L272">api/fTween.ts:272</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -621,7 +626,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L312">api/fTween.ts:312</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L264">api/fTween.ts:264</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -652,7 +657,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L408">api/fTween.ts:408</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L360">api/fTween.ts:360</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -667,7 +672,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L404">api/fTween.ts:404</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L356">api/fTween.ts:356</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -698,7 +703,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L346">api/fTween.ts:346</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L298">api/fTween.ts:298</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -713,7 +718,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L342">api/fTween.ts:342</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L294">api/fTween.ts:294</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -744,7 +749,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L419">api/fTween.ts:419</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L371">api/fTween.ts:371</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -759,7 +764,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L415">api/fTween.ts:415</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L367">api/fTween.ts:367</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -789,7 +794,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L435">api/fTween.ts:435</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L387">api/fTween.ts:387</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -813,12 +818,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L452">api/fTween.ts:452</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L404">api/fTween.ts:404</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>The tween&#39;s destroyed state.</p>
+									<p>The tween&#39;s destroyed state. Call destroy() to destroy a tween and free some objects for GC.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns 
@@ -837,7 +842,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L426">api/fTween.ts:426</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L378">api/fTween.ts:378</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -862,7 +867,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L357">api/fTween.ts:357</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L309">api/fTween.ts:309</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -877,7 +882,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L353">api/fTween.ts:353</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L305">api/fTween.ts:305</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -908,7 +913,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L386">api/fTween.ts:386</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L338">api/fTween.ts:338</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -923,7 +928,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L379">api/fTween.ts:379</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L331">api/fTween.ts:331</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -954,7 +959,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L335">api/fTween.ts:335</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L287">api/fTween.ts:287</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -969,7 +974,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L326">api/fTween.ts:326</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L278">api/fTween.ts:278</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1000,7 +1005,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L305">api/fTween.ts:305</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L257">api/fTween.ts:257</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1015,7 +1020,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L301">api/fTween.ts:301</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L253">api/fTween.ts:253</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1046,7 +1051,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L397">api/fTween.ts:397</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L349">api/fTween.ts:349</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1061,7 +1066,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L393">api/fTween.ts:393</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L345">api/fTween.ts:345</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1094,7 +1099,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L275">api/fTween.ts:275</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L233">api/fTween.ts:233</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1135,7 +1140,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L258">api/fTween.ts:258</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L218">api/fTween.ts:218</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1150,62 +1155,22 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="off" class="tsd-anchor"></a>
-					<h3>off</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">off<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ftween.tween.html" class="tsd-signature-type">Tween</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L193">api/fTween.ts:193</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Remove the provided listener function from listening for the specified event.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>eventName: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The event name.</p>
-									</div>
-								</li>
-								<li>
-									<h5>listener: <span class="tsd-signature-type">Function</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The listener function.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns 
-								<a href="ftween.tween.html" class="tsd-signature-type">Tween</a>
-							</h4>
-							<p>The tween instance.</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="on" class="tsd-anchor"></a>
 					<h3>on</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, listener<span class="tsd-signature-symbol">: </span><a href="../interfaces/ftween.listener.html" class="tsd-signature-type">Listener</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ftween.tween.html" class="tsd-signature-type">Tween</a></li>
-						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, listener<span class="tsd-signature-symbol">: </span><a href="../interfaces/ftween.updatelistener.html" class="tsd-signature-type">UpdateListener</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ftween.tween.html" class="tsd-signature-type">Tween</a></li>
+						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, callback<span class="tsd-signature-symbol">?: </span><a href="../interfaces/ftween.tweencallback.html" class="tsd-signature-type">TweenCallback</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ftween.tween.html" class="tsd-signature-type">Tween</a></li>
+						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, callback<span class="tsd-signature-symbol">?: </span><a href="../interfaces/ftween.tweenupdatecallback.html" class="tsd-signature-type">TweenUpdateCallback</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ftween.tween.html" class="tsd-signature-type">Tween</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L143">api/fTween.ts:143</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L135">api/fTween.ts:135</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Make the provided listener function listen for the specified event.</p>
+									<p>Make the provided callback be called when the specified event occurs.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1217,9 +1182,9 @@
 									</div>
 								</li>
 								<li>
-									<h5>listener: <a href="../interfaces/ftween.listener.html" class="tsd-signature-type">Listener</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> callback: <a href="../interfaces/ftween.tweencallback.html" class="tsd-signature-type">TweenCallback</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The listener function.</p>
+										<p>The callback function.</p>
 									</div>
 								</li>
 							</ul>
@@ -1231,7 +1196,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L148">api/fTween.ts:148</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L140">api/fTween.ts:140</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1242,10 +1207,7 @@
 									<h5>eventName: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5>listener: <a href="../interfaces/ftween.updatelistener.html" class="tsd-signature-type">UpdateListener</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The listener function for the <code>onUpdate</code> event.</p>
-									</div>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> callback: <a href="../interfaces/ftween.tweenupdatecallback.html" class="tsd-signature-type">TweenUpdateCallback</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns 
@@ -1264,7 +1226,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L236">api/fTween.ts:236</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L196">api/fTween.ts:196</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1288,7 +1250,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L244">api/fTween.ts:244</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L204">api/fTween.ts:204</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1312,7 +1274,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L104">api/fTween.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L100">api/fTween.ts:100</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1345,7 +1307,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L214">api/fTween.ts:214</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L174">api/fTween.ts:174</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1379,7 +1341,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L253">api/fTween.ts:253</a></li>
+									<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/master/api/fTween.ts#L213">api/fTween.ts:213</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1412,7 +1374,7 @@
 						<span>Externals</span>
 					</li>
 					<li class=" tsd-kind-module tsd-is-external tsd-is-not-exported">
-						<a href="../modules/sptween.html">SPTWEEN</a>
+						<a href="../modules/suptween.html">SUPTWEEN</a>
 					</li>
 				</ul>
 			</nav>
@@ -1437,9 +1399,6 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="ftween.tween.html#_easing" class="tsd-kind-icon">_easing</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="ftween.tween.html#_emitter" class="tsd-kind-icon">_emitter</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="ftween.tween.html#_from" class="tsd-kind-icon">_from</a>
@@ -1523,9 +1482,6 @@
 								<a href="ftween.tween.html#destroy" class="tsd-kind-icon">destroy</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="ftween.tween.html#off" class="tsd-kind-icon">off</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="ftween.tween.html#on" class="tsd-kind-icon">on</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -1554,13 +1510,13 @@
 						<a href="../interfaces/ftween.interpolationfunction.html" class="tsd-kind-icon">Interpolation<wbr>Function</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/ftween.listener.html" class="tsd-kind-icon">Listener</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/ftween.params.html" class="tsd-kind-icon">Params</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/ftween.updatelistener.html" class="tsd-kind-icon">Update<wbr>Listener</a>
+						<a href="../interfaces/ftween.tweencallback.html" class="tsd-kind-icon">Tween<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/ftween.tweenupdatecallback.html" class="tsd-kind-icon">Tween<wbr>Update<wbr>Callback</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 						<a href="../modules/ftween.html#easing" class="tsd-kind-icon">Easing</a>
