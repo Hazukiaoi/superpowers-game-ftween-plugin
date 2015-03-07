@@ -1,27 +1,23 @@
-/// <reference path="../lib/sup-tween.js.d.ts" />
-
-var eventNames = [ "onStart", "onPause", "onResume", "onUpdate", "onComplete", "onStop" ];
-var shortEventNames = [ "start", "pause", "resume", "update", "complete", "stop" ];
 
 module fTween  {
 
   /**
   * The object containing the easing functions segregated into families (ie: `fTween.Easing.Cubic`) and variants (ie: `fTween.Easing.Cubic.In`).
   */
-  var Easing = SPTWEEN.Easing;
+  var Easing = SUPTWEEN.Easing;
   
   /**
   * The object containing the interpolation functions (ie: `fTween.Interpolation.Cubic`).
   */
-  var Interpolation = SPTWEEN.Interpolation;
+  var Interpolation = SUPTWEEN.Interpolation;
 
   /**
   * To be called from your game as often as possible (on every update).
-  * Call `SPTWEEN.update()` once to run all tweens once.
+  * Call `SUPTWEEN.update()` once to run all tweens once.
   * @param time The current timestamp in milliseconds.
   */
   function update( time?: number ) {
-    SPTWEEN.update();
+    SUPTWEEN.update();
   }
 
   export class Tween {
@@ -35,7 +31,7 @@ module fTween  {
     */
     constructor( from: Object, to: Object, duration: number, params?: Params );
     constructor( to: Object, duration: number, params?: Params );
-    constructor( params: fTween.Params );
+    constructor( params: Params );
     constructor();
     
     /**
@@ -136,69 +132,39 @@ module fTween  {
     * @param listener The listener function.
     * @returns The tween instance.
     */
-    on( eventName: string, listener: Listener ): Tween;
+    on( eventName: string, callback?: TweenCallback ): Tween;
     
     /**
     * @param listener The listener function for the `onUpdate` event.
     */
-    on( eventName: string, listener: UpdateListener ): Tween;
+    on( eventName: string, callback?: TweenUpdateCallback ): Tween;
 
-    on( eventName: string, listener: Function ): Tween {
-      if ( shortEventNames.indexOf( eventName ) !== -1 ) {
-        eventName = "on" + eventName.charAt(0).toUpperCase() + eventName.slice(1);
-      }
-      else if ( eventNames.indexOf( eventName ) === -1 ) {
-        console.error( "fTween.Tween.on(): ERROR: wrong event name: "+eventName );
+    on( eventName: string, callback?: Function ): Tween {
+      var shortEventNames = [ "start", "pause", "resume", "update", "complete", "stop" ];
+      var eventNames = [ "onStart", "onPause", "onResume", "onUpdate", "onComplete", "onStop" ];
+      var eventPos = shortEventNames.indexOf( eventName );
+      eventName = eventNames[ enventPos ] || eventName; // transform short event name in "long" name or leave it as it is.
+      if ( eventNames.indexOf( eventName ) === -1 ) {
+        console.error( "fTween.Tween.on(): ERROR: wrong event name: "+eventName+". Expected values are:", shortEventNames, eventNames );
         return;
       }
-      this._emitter.on( eventName, listener );
-
-      if ( this._emitter.listeners( eventName ).length === 1 ) { // first listener for this event
-        var ftween = this;
-        var func: any;
-        // the 'this' variable inside the callbacks is the 'from' object
-        if ( eventName === "onUpdate" ) {
-          func = function( progression: number ) {
-            ftween._emitter.emit( eventName, this, progression );
-          };
+      if ( callback === undefined ) {
+        callback = null;
+      }
+      if ( eventName === "onComplete" ) {
+        var userCallback = callback;
+        var self = this;
+        callback = function() {
+          self._isComplete = true;
+          if ( userCallback !== null ) {
+            userCallback.call( this );
+          }
+          if ( self._destroyOnComplete === true ) {
+            self.destroy();
+          }
         }
-        else if ( eventName === "onComplete" ) {
-          func = function() {
-            ftween._isComplete = true;
-            ftween._emitter.emit( "onComplete", this );
-            if ( ftween._destroyOnComplete === true ) {
-              ftween.destroy();
-            }
-          };
-        }
-        else {
-          func = function() { ftween._emitter.emit( eventName, this ); };
-        }
-        this._tween[ eventName ]( func );
       }
-      return this;
-    }
-
-
-    /**
-    * Remove the provided listener function from listening for the specified event.
-    * @param eventName The event name.
-    * @param listener The listener function.
-    * @returns The tween instance.
-    */
-    off( eventName: string, listener: Function ): Tween {
-      if ( shortEventNames.indexOf( eventName ) !== -1 ) {
-        eventName = "on" + eventName.charAt(0).toUpperCase() + eventName.slice(1);
-      }
-      else if ( eventNames.indexOf( eventName ) === -1 ) {
-        console.error( "fTween.Tween.off(): ERROR: wrong event name: "+eventName );
-        return;
-      }
-      this._emitter.removeListener( eventName, listener );
-
-      if ( this._emitter.listeners( eventName ).length === 0 ) {
-        this._tween[ eventName ]( null );
-      }
+      this._tween[ eventName ]( callback );
       return this;
     }
 
@@ -256,8 +222,6 @@ module fTween  {
       this._tween = null;
       this._from = null;
       this._to = null;
-      this._emitter.removeAllListeners();
-      this._emitter = null;
       this._isDestroyed = true;
     }
 
@@ -277,15 +241,9 @@ module fTween  {
     // --------------------------------------------------------------------------------
     // properties
 
-    // Ideally, I would have made the Tween calss extends EventEmitter
-    // but it doesn't seem to be possible with the current state of Superpowers
-    // used by the SPTWEEN callbacks (set in the constructor) and by on() and off()
-    private _emitter = new Event.EventEmitter();
-
-
-    private _tween = new SPTWEEN.Tween();
+    private _tween = new SUPTWEEN.Tween();
     /**
-    * The `SPTWEEN.Tween` instance that actually perform the tweening.
+    * The `SUPTWEEN.Tween` instance that actually perform the tweening.
     */
     get _inner() { return this._tween; }
 
@@ -451,29 +409,18 @@ module fTween  {
 
   // --------------------------------------------------------------------------------
 
-  /**
-  * Signature for `fTween.Tween`'s listener functions.
-  * @param object The `from` object containing the values.
-  */
-  export interface Listener {
-    (object?: Object): void;
-  }
-
-  
-  /**
-  * Signature for `fTween.Tween`'s `onUpdate` listener function.
-  * @param object The `from` object containing the values.
-  * @param progression The tween's percentage of progression as a number between 0 and 1.
-  */
-  export interface UpdateListener {
-    (object?: Object, progression?: number): void;
-  }
-
   export interface EasingFunction {
     (k:number): number;
   }
   export interface InterpolationFunction {
     (v:number[], k:number): number;
+  }
+
+  export interface TweenCallback {
+    (): void;
+  }
+  export interface TweenUpdateCallback {
+    (progression:number): void;
   }
 
   /**
@@ -525,29 +472,29 @@ module fTween  {
     */
     destroyOnComplete?: boolean;
     /**
-    * The listener for the `onStart` event.
+    * The callback for the `onStart` event.
     */
-    onStart?: Listener;
+    onStart?: TweenCallback;
     /**
-    * The listener for the `onPause` event.
+    * The callback for the `onPause` event.
     */
-    onPause?: Listener;
+    onPause?: TweenCallback;
     /**
-    * The listener for the `onResume` event.
+    * The callback for the `onResume` event.
     */
-    onResume?: Listener;
+    onResume?: TweenCallback;
     /**
-    * The listener for the `onUpdate` event.
+    * The callback for the `onUpdate` event.
     */
-    onUpdate?: UpdateListener;
+    onUpdate?: TweenUpdateCallback;
     /**
-    * The listener for the `onComple` event.
+    * The callback for the `onComple` event.
     */
-    onComplete?: Listener;
+    onComplete?: TweenCallback;
     /**
-    * The listener for the `onStop` event.
+    * The callback for the `onStop` event.
     */
-    onStop?: Listener;
+    onStop?: TweenCallback;
     /**
     * The time (a timetamp in milliseconds) at which to start the tween. Tweens are automatically started at the time they are created, so you may set the property to a negative value to prevent it to be started at all, or set any other time you like. 
     */

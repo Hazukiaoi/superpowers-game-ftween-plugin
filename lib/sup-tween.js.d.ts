@@ -1,4 +1,4 @@
-declare module SPTWEEN {
+declare module SUPTWEEN {
   var REVISION: string;
   function getAll(): Tween[];
   function removeAll(): void;

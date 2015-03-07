@@ -1,21 +1,20 @@
 
 declare module fTween {
-  var Easing: SPTWEEN.TweenEasing;
-  var Interpolation: SPTWEEN.TweenInterpolation;
+  var Easing: SUPTWEEN.TweenEasing;
+  var Interpolation: SUPTWEEN.TweenInterpolation;
   
   function update(time?: number);
   
   class Tween {
     constructor(from: Object, to: Object, duration: number, params?: Params);
     constructor(to: Object, duration: number, params?: Params);
-    constructor(time: number, onComplete: Listener, params?: Params);
+    constructor(time: number, onComplete: TweenCallback, params?: Params);
     constructor(params: Params);
     constructor();
     
     set(params: Params);
-    on(eventName: string, listener: Listener): Tween;
-    on(eventName: string, listener: UpdateListener): Tween;
-    off(eventName: string, listener: Function): Tween;
+    on(eventName: string, callback?: TweenCallback): Tween;
+    on(eventName: string, callback?: TweenUpdateCallback): Tween;
     start(time?: number);
     pause();
     resume();
@@ -23,7 +22,7 @@ declare module fTween {
     destroy();
 
     emitter: any;
-    _inner: SPTWEEN.Tween;
+    _inner: SUPTWEEN.Tween;
     to: Object;
     duration: number;
     time: number;
@@ -32,20 +31,12 @@ declare module fTween {
     delay: number;
     repeat: number;
     yoyo: boolean;
-    easing: SPTWEEN.EasingFunction;
-    interpolation: SPTWEEN.InterpolationFunction;
+    easing: EasingFunction;
+    interpolation: InterpolationFunction;
     isPaused: boolean;
     isCompleted: boolean;
     isDestroyed: boolean;
   } 
-
-  interface Listener {
-    (object: Object): void;
-  }
-  
-  interface UpdateListener {
-    (object: Object, progression: number): void;
-  }
   
   interface Params {
     from?: Object;
@@ -56,15 +47,15 @@ declare module fTween {
     delay?: number;
     repeat?: number;
     yoyo?: boolean;
-    easing?: SPTWEEN.EasingFunction;
-    interpolation?: SPTWEEN.InterpolationFunction;
+    easing?: EasingFunction;
+    interpolation?: InterpolationFunction;
     destroyOnComplete?: boolean;
-    onStart?: Listener;
-    onPause?: Listener;
-    onResume?: Listener;
-    onUpdate?: UpdateListener;
-    onComplete?: Listener;
-    onStop?: Listener;
+    onStart?: TweenCallback;
+    onPause?: TweenCallback;
+    onResume?: TweenCallback;
+    onUpdate?: TweenUpdateCallback;
+    onComplete?: TweenCallback;
+    onStop?: TweenCallback;
     start?: number;
   }
 
@@ -73,5 +64,12 @@ declare module fTween {
   }
   interface InterpolationFunction {
     (v:number[], k:number): number;
+  }
+
+  interface TweenCallback {
+    (): void;
+  }
+  interface TweenUpdateCallback {
+    (progression:number): void;
   }
 }
