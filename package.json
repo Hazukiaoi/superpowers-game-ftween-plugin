@@ -30,7 +30,7 @@
   },
   "scripts": {
     "gendoc": "typedoc --out docs/ api/fTween.ts --mode file --target ES5 --name \"fTween plugin\" --readme tutorial.md --verbose --includeDeclarations",
-    "compilets": "tsc api/fTween.ts --module commonjs --target ES5",
+    "compilets": "tsc api/fTween.ts --out gitignore/fTween.js --module commonjs --target ES5",
     "mklink": "mklink /j \"../../superpowers/plugins/florentpoujol/fTween\" \"./\""
   },
   "maintainers": [

@@ -21,7 +21,6 @@ declare module fTween {
     stop();
     destroy();
 
-    emitter: any;
     _inner: SUPTWEEN.Tween;
     to: Object;
     duration: number;

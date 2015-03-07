@@ -1,3 +1,4 @@
+/// <reference path="../lib/sup-tween.js.d.ts" />
 
 var shortEventNames = [ "start", "pause", "resume", "update", "complete", "stop" ];
 var eventNames = [ "onStart", "onPause", "onResume", "onUpdate", "onComplete", "onStop" ];
@@ -41,7 +42,7 @@ module fTween  {
     * @param time The time in seconds to complete the timer. Setting the `time` property makes the `from`, `to` and `duration` being ignored.
     * @param onComplete The listener for the `onComplete` event.
     */
-    constructor( time: number, onComplete: Listener, params?: Params );
+    constructor( time: number, onComplete: TweenCallback, params?: Params );
 
     constructor( ...args: any[] ) {
       var argsCount = args.length;
@@ -139,7 +140,7 @@ module fTween  {
 
     on( eventName: string, callback?: Function ): Tween {
       var eventPos = shortEventNames.indexOf( eventName );
-      eventName = eventNames[ enventPos ] || eventName; // transform short event name in "long" name or leave it as it is.
+      eventName = eventNames[ eventPos ] || eventName; // transform short event name in "long" name or leave it as it is.
       if ( eventNames.indexOf( eventName ) === -1 ) {
         console.error( "fTween.Tween.on(): ERROR: wrong event name: "+eventName+". Expected values are:", shortEventNames, eventNames );
         return;
