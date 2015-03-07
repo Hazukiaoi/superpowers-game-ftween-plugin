@@ -1,4 +1,7 @@
 
+var shortEventNames = [ "start", "pause", "resume", "update", "complete", "stop" ];
+var eventNames = [ "onStart", "onPause", "onResume", "onUpdate", "onComplete", "onStop" ];
+
 module fTween  {
 
   /**
@@ -93,7 +96,7 @@ module fTween  {
     * Sets several of the tweener's properties at once.
     * @param params The list of parameters.
     */
-    set( params: fTween.Params ) {
+    set( params: Params ) {
       if ( this._isDestroyed === true ) {
         console.error("fTween.Tween(): This tween instance has been destroyed. It can not be used anymore. Create a new instance.");
         return;
@@ -140,8 +143,6 @@ module fTween  {
     on( eventName: string, callback?: TweenUpdateCallback ): Tween;
 
     on( eventName: string, callback?: Function ): Tween {
-      var shortEventNames = [ "start", "pause", "resume", "update", "complete", "stop" ];
-      var eventNames = [ "onStart", "onPause", "onResume", "onUpdate", "onComplete", "onStop" ];
       var eventPos = shortEventNames.indexOf( eventName );
       eventName = eventNames[ enventPos ] || eventName; // transform short event name in "long" name or leave it as it is.
       if ( eventNames.indexOf( eventName ) === -1 ) {
@@ -175,7 +176,7 @@ module fTween  {
     */
     start( time?: number ) {
       if ( this._to === undefined || this._duration === 0  ) {
-        console.log( "fTween.start(): ERROR: Can't start the tweener now because The 'to' object and/or the duration have not been set: ", this._to, this._duration );
+        console.log( "fTween.Tween.start(): ERROR: Can't start the tweener now because The 'to' object and/or the duration have not been set: ", this._to, this._duration );
         return;
       }
 
