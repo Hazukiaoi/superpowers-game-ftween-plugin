@@ -26,7 +26,7 @@
     "animation"
   ],
   "bugs": {
-    "url": "https://github.com/florentpoujol/superpowers-fTween-plugin/issues"
+    "url": "https://github.com/florentpoujol/superpowers-ftween-plugin/issues"
   },
   "scripts": {
     "gendoc": "typedoc --out docs/ api/fTween.ts --mode file --target ES5 --name \"fTween plugin\" --readme tutorial.md --verbose --includeDeclarations",
