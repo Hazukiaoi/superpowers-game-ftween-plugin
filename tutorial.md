@@ -157,7 +157,7 @@ Let's use one more constructor :
     } );
 
 All the constructors, as well as the `set()` function share a `params` argument which is an object in which you can set the tween's properties (and more) in mass.  
-[Check out the `fTween.Params` interface](interfaces/ftween.params.html) for more informations about all the properties you can set in the `params` argument.
+[Check out the `fTween.Params` interface](interfaces/ftween.params.html) for more information about all the properties you can set in the `params` argument.
 
 
 ## Tween properties
@@ -279,7 +279,7 @@ Each family (except `Linear`) has 4 variants:
 
 The `Linear` family as a single variant named `None`. `fTween.Easing.Linear.None` is the default easing function.
 
-[See the easing examples](http://tweenjs.github.io/tween.js/examples/03_graphs.html) of the Tween.js library to get a visual clue at how the value schange over time.
+[See the easing examples](http://tweenjs.github.io/tween.js/examples/03_graphs.html) of the Tween.js library to get a visual clue at how the values change over time.
 
 
 ## Interpolation
