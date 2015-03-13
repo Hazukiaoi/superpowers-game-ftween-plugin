@@ -11,11 +11,17 @@ Just so that you don't get confused, be aware that the `tweenjs` plugin (by Spar
 
 ## Documentation
 
-http://florentpoujol.github.io/superpowers-ftween-plugin
+[http://florentpoujol.github.io/superpowers-ftween-plugin](http://florentpoujol.github.io/superpowers-ftween-plugin)
 
 ## Installation
 
 - [Get the last release from GitHub](https://github.com/florentpoujol/superpowers-ftween-plugin/releases/tag/v0.1.0),
-- unzip and rename the folder in `fTween`,
+- unzip and rename the folder if you want (its name doesn't matter),
 - move the folder inside `app/plugins/florentpoujol/`,
 - restart your server.
+
+If you know how to do it, you can also `npm install` it:
+
+    npm install sup-ftween-plugin
+
+Be sure to move the `sup-ftween-plugin` folder from the `node_modules/` where it has been created to `app/plugins/florentpoujol/`.

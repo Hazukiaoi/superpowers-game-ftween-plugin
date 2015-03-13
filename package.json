@@ -1,6 +1,6 @@
 {
   "name": "sup-ftween-plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Integration of Superpowers-tween.js and fTween module to Superpowers, the extensible HTML5 2D+3D game engine.",
   "homepage": "https://github.com/florentpoujol/superpowers-ftween-plugin",
   "repository": {
