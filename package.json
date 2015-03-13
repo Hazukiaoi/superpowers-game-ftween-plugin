@@ -1,24 +1,20 @@
 {
-  "name": "superpowers-florentpoujol-ftween-plugin",
+  "name": "sup-ftween-plugin",
   "version": "0.1.0",
   "description": "Integration of Superpowers-tween.js and fTween module to Superpowers, the extensible HTML5 2D+3D game engine.",
+  "homepage": "https://github.com/florentpoujol/superpowers-ftween-plugin",
   "repository": {
     "type": "git",
     "url": "https://github.com/florentpoujol/superpowers-ftween-plugin"
   },
-  "author": {
-    "name": "Florent Poujol",
-    "email": "florent.poujol@gmail.com",
-    "url": "http://florentpoujol.fr"
-  },
-  "dependencies": {
-  },
+  "author": "Florent Poujol <florent.poujol@gmail.com> (http://florentpoujol.fr)",
+  "dependencies": {},
   "devDependencies": {
     "typedoc": "0.2.x",
     "typescript": "1.4.x"
   },
-  "tags": [
-    "superpowers", 
+  "keywords": [
+    "superpowers",
     "plugin",
     "tween",
     "interpolation",
@@ -34,9 +30,10 @@
     "mklink": "mklink /j \"../../superpowers/plugins/florentpoujol/fTween\" \"./\""
   },
   "maintainers": [
-    {
-      "name": "Florent Poujol",
-      "email": "florent.poujol@gmail.com"
-    }
-  ]
+    "Florent Poujol <florent.poujol@gmail.com>"
+  ],
+  "directories": {
+    "doc": "docs"
+  },
+  "license": "MIT"
 }

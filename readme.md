@@ -12,3 +12,10 @@ Just so that you don't get confused, be aware that the `tweenjs` plugin (by Spar
 ## Documentation
 
 http://florentpoujol.github.io/superpowers-ftween-plugin
+
+## Installation
+
+- [Get the last release from GitHub](https://github.com/florentpoujol/superpowers-ftween-plugin/releases/tag/v0.1.0),
+- unzip and rename the folder in `fTween`,
+- move the folder inside `app/plugins/florentpoujol/`,
+- restart your server.
