@@ -15,13 +15,18 @@ Just so that you don't get confused, be aware that the `tweenjs` plugin (by Spar
 
 ## Installation
 
-- [Get the last release from GitHub](https://github.com/florentpoujol/superpowers-ftween-plugin/releases/tag/v0.1.0),
-- unzip and rename the folder if you want (its name doesn't matter),
-- move the folder inside `app/plugins/florentpoujol/`,
-- restart your server.
+[Download the latest release](https://github.com/florentpoujol/superpowers-ftween-plugin/releases) then unzip it.
 
-If you know how to do it, you can also `npm install` it:
+Rename the folder if you want then move it inside `app/plugins/florentpoujol/`.
+
+Finally restart your server.
+
+__Advanced:__
+
+plugin is published as an npm package so you can get any version of it via `npm`:
 
     npm install sup-ftween-plugin
 
-Be sure to move the `sup-ftween-plugin` folder from the `node_modules/` where it has been created to `app/plugins/florentpoujol/`.
+The name of the vendors in the `app/plugins/` folder actually don't matter, but the plugin folders must be inside a vendor's folder.
+
+So feel free to `npm install` plugins directly inside `app/plugins/` so that they are actually intalled in `app/plugins/node_modules/`.
