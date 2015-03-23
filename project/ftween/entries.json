@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Scene",
+    "type": "scene"
+  },
+  {
+    "id": 3,
+    "name": "Helpers",
+    "type": "script"
+  },
+  {
+    "id": 4,
+    "name": "Leonard",
+    "type": "sprite"
+  },
+  {
+    "id": 0,
+    "name": "Script",
+    "type": "script"
+  },
+  {
+    "id": 2,
+    "name": "Script2",
+    "type": "script"
+  }
+]

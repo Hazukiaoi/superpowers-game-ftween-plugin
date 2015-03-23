@@ -1,0 +1,62 @@
+
+class Dat extends Sup.Behavior {
+  awake() {
+    
+    Sup.log(this.actor.spriteRenderer.getColor());
+    
+    var fn = this.actor.spriteRenderer.setColor
+    this.actor.spriteRenderer.setColor = function(r:any, g?:any, b?:any): Sup.SpriteRenderer {
+      Sup.log("set color");
+      if (Array.isArray(r)) {
+        g = r[1];
+        b = r[2];
+        r = r[0];
+      }
+      
+      
+      Sup.log(r);
+      fn.call( this, r,g,b);
+      return this;
+    }
+    
+    /*var fn2 = this.actor.spriteRenderer.getColor
+    this.actor.spriteRenderer.getColor = function(): number[] {
+      Sup.log("set color");
+      Sup.log(r);
+      fn.call( this, r,g,b);
+      return this;
+    }*/
+    
+    var gui = new dat.GUI();
+    
+    gui.add( this.actor.spriteRenderer, "opacity", 0, 1 );
+    
+    gui.addColor( this.actor.spriteRenderer, "color", true );
+    
+    
+    //console.log(this.actor.spriteRenderer.getColor());
+    var params = {
+      from: this.actor,
+      to: { position: new Vector3(10,0,0) },
+      duration: 2,
+      onStart: function() {
+        Sup.log("start");
+      },
+      onUpdate: function(progression) {
+        //Sup.log("tween update");
+      }
+    }
+    //console.log(this.actor)
+    var tween = new Tween( params );
+    
+  }  
+  
+  update() {
+    // SUPTWEEN.update();
+  }
+}
+
+
+Sup.registerBehavior(Dat);
+Sup.loadScene( Sup.get('Scene', Sup.Scene ) );
+

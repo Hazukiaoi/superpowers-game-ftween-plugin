@@ -1,0 +1,14 @@
+
+var Tween = fTween.Tween;
+var Timer = fTween.Tween;
+
+var Vector3 = Sup.Math.Vector3;
+
+
+
+
+
+
+// override loadScene to register the onGameCodeReadCallback
+// if all the scripts have not been read yet
+

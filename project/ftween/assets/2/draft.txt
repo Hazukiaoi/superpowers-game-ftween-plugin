@@ -1,0 +1,17 @@
+
+module testModule
+{
+   class testClass {
+     
+   }
+}
+
+module Sup {
+  class testSupClass {}
+}
+    
+
+/*
+if (onGameCodeRead !== undefined)
+  onGameCodeRead();
+*/
