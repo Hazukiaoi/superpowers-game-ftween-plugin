@@ -132,11 +132,23 @@ module fTween  {
     * @param callback The callback function.
     * @returns The tween instance.
     */
+    on( eventName: "onStart", callback?: TweenCallback ): Tween;
+    on( eventName: "onUpdate", callback?: TweenCallback ): Tween;
+    on( eventName: "onPause", callback?: TweenCallback ): Tween;
+    on( eventName: "onResume", callback?: TweenCallback ): Tween;
+    on( eventName: "onComplete", callback?: TweenCallback ): Tween;
+    on( eventName: "onStop", callback?: TweenCallback ): Tween;
     on( eventName: string, callback?: TweenCallback ): Tween;
     
     /**
     * @param listener The callback function for the `onUpdate` event.
     */
+    on( eventName: "onStart", callback?: TweenUpdateCallback ): Tween;
+    on( eventName: "onUpdate", callback?: TweenUpdateCallback ): Tween;
+    on( eventName: "onPause", callback?: TweenUpdateCallback ): Tween;
+    on( eventName: "onResume", callback?: TweenUpdateCallback ): Tween;
+    on( eventName: "onComplete", callback?: TweenUpdateCallback ): Tween;
+    on( eventName: "onStop", callback?: TweenUpdateCallback ): Tween;
     on( eventName: string, callback?: TweenUpdateCallback ): Tween;
 
     on( eventName: string, callback?: Function ): Tween {

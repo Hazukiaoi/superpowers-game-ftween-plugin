@@ -5,7 +5,7 @@ This enables you to create fade or slide effects, or simple timer for instance, 
 
 - Read below for a tutorial and detailed explanations.
 - Or dive into the reference with the links on the right.
-- [Or back to the repository.](https://github.com/florentpoujol/superpowers-ftween-plugin)
+- [Or go back to the repository.](https://github.com/florentpoujol/superpowers-ftween-plugin)
 
 ## Tweens and the fTween.Tween class
 
