@@ -1,0 +1,5 @@
+// codemirror-mode:json
+// codemirror-theme:monokai
+{
+  
+}

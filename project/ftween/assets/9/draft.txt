@@ -1,0 +1,10 @@
+# codemirror-mode:cson
+# codemirror-theme:paraiso-dark
+
+[
+  "test1"
+  "test1" 
+  "test1" 
+  "test1" 
+]
+

@@ -1,44 +1,6 @@
 {
   "nodes": [
     {
-      "name": "Actor",
-      "children": [],
-      "components": [
-        {
-          "type": "Behavior",
-          "config": {
-            "behaviorName": "Dat"
-          },
-          "id": 0
-        },
-        {
-          "type": "SpriteRenderer",
-          "config": {
-            "spriteAssetId": 4,
-            "animationId": null
-          },
-          "id": 1
-        }
-      ],
-      "position": {
-        "x": 20,
-        "y": 5,
-        "z": 5
-      },
-      "orientation": {
-        "x": 0,
-        "y": 0,
-        "z": 0,
-        "w": 1
-      },
-      "scale": {
-        "x": 1,
-        "y": 1,
-        "z": 1
-      },
-      "id": 0
-    },
-    {
       "name": "Camera",
       "children": [],
       "components": [
@@ -61,7 +23,7 @@
       "position": {
         "x": 0,
         "y": 0,
-        "z": 20
+        "z": 5
       },
       "orientation": {
         "x": 0,
@@ -75,6 +37,37 @@
         "z": 1
       },
       "id": 1
+    },
+    {
+      "name": "Actor1",
+      "children": [],
+      "components": [
+        {
+          "type": "SpriteRenderer",
+          "config": {
+            "spriteAssetId": 4,
+            "animationId": null
+          },
+          "id": 1
+        }
+      ],
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "orientation": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "id": 0
     }
   ]
 }

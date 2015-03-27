@@ -1,13 +1,23 @@
 [
   {
+    "id": 3,
+    "name": "Init",
+    "type": "script"
+  },
+  {
     "id": 1,
     "name": "Scene",
     "type": "scene"
   },
   {
-    "id": 3,
-    "name": "Helpers",
-    "type": "script"
+    "id": 8,
+    "name": "Tests",
+    "type": "text"
+  },
+  {
+    "id": 9,
+    "name": "Tests2",
+    "type": "text"
   },
   {
     "id": 4,

@@ -1,7 +1,25 @@
 /// <reference path="../lib/sup-tween.js.d.ts" />
 
+/**
+* @private
+*/
 var shortEventNames = [ "start", "pause", "resume", "update", "complete", "stop" ];
+
+/**
+* @private
+*/
 var eventNames = [ "onStart", "onPause", "onResume", "onUpdate", "onComplete", "onStop" ];
+
+/**
+* @private
+*/
+var copyObject = function(source: Object): any {
+  var dest: any = {};
+  for (var property in source) {
+    dest[ property ] = source[ property ];
+  }
+  return dest;
+}
 
 module fTween  {
 
@@ -80,6 +98,7 @@ module fTween  {
       
       var start = params.start;
       delete params.start;
+      console.log("ftween constructor", params);
       if ( Object.keys( params ).length > 0 ) {
         this.set( params );
       }
@@ -98,6 +117,8 @@ module fTween  {
     * @param params The list of parameters.
     */
     set( params: Params ) {
+      params = copyObject( params );
+
       if ( params.from !== undefined ) {
         this.from = params.from;
         delete params.from;
@@ -184,6 +205,7 @@ module fTween  {
     * @param time The time (a timetamp in milliseconds) at which to start the tween.
     */
     start( time?: number ) {
+      console.log("ftween start", this);
       if ( this._to === undefined || this._duration === 0  ) {
         console.log( "fTween.Tween.start(): ERROR: Can't start the tweener now because The 'to' object and/or the duration have not been set: ", this._to, this._duration );
         return;

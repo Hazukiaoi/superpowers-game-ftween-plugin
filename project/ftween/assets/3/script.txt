@@ -1,14 +1,61 @@
-
-var Tween = fTween.Tween;
-var Timer = fTween.Tween;
-
 var Vector3 = Sup.Math.Vector3;
 
+Sup.loadScene( Sup.get('Scene', Sup.Scene ) );
+var actor = Sup.getActor("Actor1");
+var activeTween = null;
+
+var tests = (<any>Sup.get("Tests", Sup.Text).parseCSON());
+console.log(tests);
+var gui = new dat.GUI();
+var menu: any = {};
+
+var onStart = function() {
+  console.log("onStart", this);
+}
+var onComplete = function() {
+  console.log("onComplete", this, activeTween);
+}
+
+// add test title to html
+var titleElt = document.createElement("p");
+titleElt.className = "testtitle";
+titleElt.innerHTML = "testtitle";
+document.body.appendChild( titleElt );
+
+var style = document.createElement("style");
+style.innerHTML = ".testtitle { color: white; position:absolute; left:10px; }"
+document.head.appendChild( style );
 
 
 
+function createTestLauncher(test, i) {
+  return function() {      
+    if (activeTween != null && activeTween.isDestroyed === false) {
+      activeTween.destroy();
+    }
+    
+    actor.setEulerAngles( new Vector3() );
+    actor.setLocalScale( new Vector3(1,1,1) );
+    actor.setPosition( new Vector3(-15,0,0) );
+    actor.spriteRenderer.setColor(1,1,1);
+    
+    var params = test.params;
+    if (params.from == undefined) 
+      params.from = actor;
+    params.onStart = onStart;
+    params.onComplete = onComplete;
 
+    titleElt.innerHTML = test.name;
+    activeTween = new fTween.Tween( params );
+    console.log("launch test:", i, test.name, params );
+  };
+}
 
-// override loadScene to register the onGameCodeReadCallback
-// if all the scripts have not been read yet
+for (var i=0; i<tests.length; i++) {
+  var test = tests[i];
+  var name = <string>test.name;
+  menu[ name ] = createTestLauncher( test, i );
+  
+  gui.add( menu, name );
+}
 
