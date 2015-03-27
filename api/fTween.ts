@@ -21,7 +21,7 @@ var copyObject = function(source: Object): any {
   return dest;
 }
 
-module fTween  {
+module fTween {
 
   /**
   * The object containing the easing functions segregated into families (ie: `fTween.Easing.Cubic`) and variants (ie: `fTween.Easing.Cubic.In`).
@@ -32,15 +32,6 @@ module fTween  {
   * The object containing the interpolation functions (ie: `fTween.Interpolation.Cubic`).
   */
   var Interpolation = SUPTWEEN.Interpolation;
-
-  /**
-  * To be called from your game as often as possible (on every update).
-  * Call `SUPTWEEN.update()` once to run all tweens once.
-  * @param time The current timestamp in milliseconds.
-  */
-  function update( time?: number ) {
-    SUPTWEEN.update();
-  }
 
   export class Tween {
     /**
