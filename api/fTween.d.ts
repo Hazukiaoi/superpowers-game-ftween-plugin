@@ -13,8 +13,23 @@ declare module fTween {
     constructor();
     
     set(params: Params);
+
+    on(eventName: "onStart", callback?: TweenCallback): Tween;
+    on(eventName: "onUpdate", callback?: TweenCallback): Tween;
+    on(eventName: "onPause", callback?: TweenCallback): Tween;
+    on(eventName: "onResume", callback?: TweenCallback): Tween;
+    on(eventName: "onComplete", callback?: TweenCallback): Tween;
+    on(eventName: "onStop", callback?: TweenCallback): Tween;
     on(eventName: string, callback?: TweenCallback): Tween;
+
+    on(eventName: "onStart", callback?: TweenUpdateCallback): Tween;
+    on(eventName: "onUpdate", callback?: TweenUpdateCallback): Tween;
+    on(eventName: "onPause", callback?: TweenUpdateCallback): Tween;
+    on(eventName: "onResume", callback?: TweenUpdateCallback): Tween;
+    on(eventName: "onComplete", callback?: TweenUpdateCallback): Tween;
+    on(eventName: "onStop", callback?: TweenUpdateCallback): Tween;
     on(eventName: string, callback?: TweenUpdateCallback): Tween;
+
     start(time?: number);
     pause();
     resume();
