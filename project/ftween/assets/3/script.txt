@@ -2,19 +2,23 @@ var Vector3 = Sup.Math.Vector3;
 
 Sup.loadScene( Sup.get('Scene', Sup.Scene ) );
 var actor = Sup.getActor("Actor1");
-var activeTween = null;
+var actorStartPos = actor.getPosition();
+var activeTween: fTween.Tween = null;
 
 var tests = (<any>Sup.get("Tests", Sup.Text).parseCSON());
-console.log(tests);
 var gui = new dat.GUI();
 var menu: any = {};
 
 var onStart = function() {
   console.log("onStart", this);
 }
-var onComplete = function() {
-  console.log("onComplete", this, activeTween);
+var onUpdate = function() {
+  console.log("onUpdate", this);
 }
+var onComplete = function() {
+  console.log("onComplete", this);
+}
+
 
 // add test title to html
 var titleElt = document.createElement("p");
@@ -27,7 +31,6 @@ style.innerHTML = ".testtitle { color: white; position:absolute; left:10px; }"
 document.head.appendChild( style );
 
 
-
 function createTestLauncher(test, i) {
   return function() {      
     if (activeTween != null && activeTween.isDestroyed === false) {
@@ -36,18 +39,28 @@ function createTestLauncher(test, i) {
     
     actor.setEulerAngles( new Vector3() );
     actor.setLocalScale( new Vector3(1,1,1) );
-    actor.setPosition( new Vector3(-15,0,0) );
     actor.spriteRenderer.setColor(1,1,1);
     
     var params = test.params;
+    
+    if (params.isRelative == undefined || params.isRelative == false)
+      actor.setPosition( actorStartPos );
+    
     if (params.from == undefined) 
       params.from = actor;
     params.onStart = onStart;
+//     params.onUpdate = onUpdate;
     params.onComplete = onComplete;
+    
+    if (params.easingFamilly !== undefined) {
+      params.easing = fTween.Easing[params.easingFamilly][params.easingVariant];
+    }
 
     titleElt.innerHTML = test.name;
     activeTween = new fTween.Tween( params );
-    console.log("launch test:", i, test.name, params );
+    (<any>activeTween._inner).test = true;
+    
+//     console.log("launch test:", i, test.name, params );
   };
 }
 

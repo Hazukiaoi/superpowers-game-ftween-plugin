@@ -89,7 +89,7 @@ module fTween {
       
       var start = params.start;
       delete params.start;
-      console.log("ftween constructor", params);
+      // console.log("ftween constructor", params);
       if ( Object.keys( params ).length > 0 ) {
         this.set( params );
       }
@@ -118,10 +118,10 @@ module fTween {
         this.to = params.to;
         delete params.to;
       }
-
+      
       var start = params.start;
       delete params.start;
-            
+      
       for ( var key in params ) {
         if ( eventNames.indexOf( key ) !== -1 ) {
           this.on( key, params[ key ] )
@@ -145,24 +145,17 @@ module fTween {
     * @returns The tween instance.
     */
     on( eventName: "onStart", callback?: TweenCallback ): Tween;
-    on( eventName: "onUpdate", callback?: TweenCallback ): Tween;
     on( eventName: "onPause", callback?: TweenCallback ): Tween;
     on( eventName: "onResume", callback?: TweenCallback ): Tween;
     on( eventName: "onComplete", callback?: TweenCallback ): Tween;
     on( eventName: "onStop", callback?: TweenCallback ): Tween;
-    on( eventName: string, callback?: TweenCallback ): Tween;
     
     /**
-    * @param listener The callback function for the `onUpdate` event.
+    * @param callback The callback function for the `onUpdate` event.
     */
-    on( eventName: "onStart", callback?: TweenUpdateCallback ): Tween;
     on( eventName: "onUpdate", callback?: TweenUpdateCallback ): Tween;
-    on( eventName: "onPause", callback?: TweenUpdateCallback ): Tween;
-    on( eventName: "onResume", callback?: TweenUpdateCallback ): Tween;
-    on( eventName: "onComplete", callback?: TweenUpdateCallback ): Tween;
-    on( eventName: "onStop", callback?: TweenUpdateCallback ): Tween;
-    on( eventName: string, callback?: TweenUpdateCallback ): Tween;
-
+    
+    on( eventName: string, callback?: Function ): Tween;
     on( eventName: string, callback?: Function ): Tween {
       var eventPos = shortEventNames.indexOf( eventName );
       eventName = eventNames[ eventPos ] || eventName; // transform short event name in "long" name or leave it as it is.
@@ -196,7 +189,7 @@ module fTween {
     * @param time The time (a timetamp in milliseconds) at which to start the tween.
     */
     start( time?: number ) {
-      console.log("ftween start", this);
+      // console.log("ftween start", this);
       if ( this._to === undefined || this._duration === 0  ) {
         console.log( "fTween.Tween.start(): ERROR: Can't start the tweener now because The 'to' object and/or the duration have not been set: ", this._to, this._duration );
         return;
