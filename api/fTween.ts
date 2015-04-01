@@ -26,12 +26,12 @@ module fTween {
   /**
   * The object containing the easing functions segregated into families (ie: `fTween.Easing.Cubic`) and variants (ie: `fTween.Easing.Cubic.In`).
   */
-  var Easing = SUPTWEEN.Easing;
+  export var Easing = SUPTWEEN.Easing;
   
   /**
   * The object containing the interpolation functions (ie: `fTween.Interpolation.Cubic`).
   */
-  var Interpolation = SUPTWEEN.Interpolation;
+  export var Interpolation = SUPTWEEN.Interpolation;
 
   export class Tween {
     /**
