@@ -27,7 +27,7 @@
   },
   "scripts": {
     "compilets": "tsc api/fTween.ts --out test/fTween.js --module commonjs --target ES5",
-    "gendoc": "typedoc --out docs/ api/fTween.ts --mode file --target ES5 --name \"fTween plugin\" --readme tutorial.md --verbose --includeDeclarations",
+    "gendoc": "typedoc --out public/docs/ api/fTween.ts --mode file --target ES5 --name \"fTween plugin\" --readme tutorial.md --verbose --includeDeclarations",
 
     "test": "mocha test/index.js",
     
