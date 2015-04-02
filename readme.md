@@ -13,6 +13,8 @@ Just so that you don't get confused, be aware that the `tweenjs` plugin (by Spar
 
 [http://florentpoujol.github.io/superpowers-ftween-plugin](http://florentpoujol.github.io/superpowers-ftween-plugin)
 
+You can also find the doucmentation offline in the `public/docs` folder as well as access it offline via the [docs browser](https://github.com/florentpoujol/superpowers-docs-browser-plugin) plugin.
+
 ## Installation
 
 [Download the latest release](https://github.com/florentpoujol/superpowers-ftween-plugin/releases), unzip it, rename the folder to `ftween`, move it inside `app/plugins/florentpoujol/` then restart your server.
