@@ -13,7 +13,7 @@ Just so that you don't get confused, be aware that the `tweenjs` plugin (by Spar
 
 [http://florentpoujol.github.io/superpowers-ftween-plugin](http://florentpoujol.github.io/superpowers-ftween-plugin)
 
-You can also find the doucmentation offline in the `public/docs` folder as well as access it offline via the [docs browser](https://github.com/florentpoujol/superpowers-docs-browser-plugin) plugin.
+You can also access it offline in Superpowers' client with the [docs browser](https://github.com/florentpoujol/superpowers-docs-browser-plugin) plugin, or find it directly in the plugin's `public/docs` folder.
 
 ## Installation
 

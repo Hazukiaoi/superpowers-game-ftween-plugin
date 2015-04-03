@@ -58,7 +58,7 @@ function createTestLauncher(test, i) {
 
     titleElt.innerHTML = test.name;
     activeTween = new fTween.Tween( params );
-    (<any>activeTween._inner).test = true;
+//     (<any>activeTween._inner).test = true;
     
 //     console.log("launch test:", i, test.name, params );
   };
