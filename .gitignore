@@ -1,5 +1,5 @@
 gitignore/
-.sublimets
-api/tsconfig.json
 node_modules/
-public/
+project/*/builds
+project/*/internals.json
+project/*/members.json
