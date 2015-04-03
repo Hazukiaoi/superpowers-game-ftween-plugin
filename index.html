@@ -70,7 +70,7 @@
 				<ul>
 					<li>Read below for a tutorial and detailed explanations.</li>
 					<li>Or dive into the reference with the links on the right.</li>
-					<li><a href="https://github.com/florentpoujol/superpowers-ftween-plugin">Or back to the repository.</a></li>
+					<li><a href="https://github.com/florentpoujol/superpowers-ftween-plugin">Or go back to the repository.</a></li>
 				</ul>
 				<h2 id="tweens-and-the-ftween-tween-class">Tweens and the fTween.Tween class</h2>
 				<p>The <code>fTween</code> module mostly brings the <code>fTween.Tween</code> class, plus some interfaces.<br>The <code>fTween.Tween</code> class is the go-to way to create any animations, aka <strong>tweens</strong> (which are instances of <code>fTween.Tween</code>).</p>
@@ -189,7 +189,7 @@ var onUpdate = function() {
     isRelative: <span class="hljs-literal">true</span>,
     easing: fTween<span class="hljs-built_in">.</span>Easing<span class="hljs-built_in">.</span>Quadratic<span class="hljs-built_in">.</span>Out
 } );
-</code></pre><p>All the constructors, as well as the <code>set()</code> function share a <code>params</code> argument which is an object in which you can set the tween&#39;s properties (and more) in mass.<br><a href="interfaces/ftween.params.html">Check out the <code>fTween.Params</code> interface</a> for more informations about all the properties you can set in the <code>params</code> argument.</p>
+</code></pre><p>All the constructors, as well as the <code>set()</code> function share a <code>params</code> argument which is an object in which you can set the tween&#39;s properties (and more) in mass.<br><a href="interfaces/ftween.params.html">Check out the <code>fTween.Params</code> interface</a> for more information about all the properties you can set in the <code>params</code> argument.</p>
 				<h2 id="tween-properties">Tween properties</h2>
 				<p>As you have seen in the examples above the tween may have quite many properties beside the <code>from</code> and <code>to</code> object and the duration to control how the values gets animated.</p>
 				<p><a href="classes/ftween.tween.html#_inner">Find all these properties</a> in the <strong>Accessors</strong> section of the class&#39; page.</p>
@@ -272,7 +272,7 @@ tween.on( <span class="hljs-string">"update"</span>, null );
 					<li><code>OutIn</code> starts and ends fast, but it’s slow in the middle</li>
 				</ul>
 				<p>The <code>Linear</code> family as a single variant named <code>None</code>. <code>fTween.Easing.Linear.None</code> is the default easing function.</p>
-				<p><a href="http://tweenjs.github.io/tween.js/examples/03_graphs.html">See the easing examples</a> of the Tween.js library to get a visual clue at how the value schange over time.</p>
+				<p><a href="http://tweenjs.github.io/tween.js/examples/03_graphs.html">See the easing examples</a> of the Tween.js library to get a visual clue at how the values change over time.</p>
 				<h2 id="interpolation">Interpolation</h2>
 				<p>Interpolations functions are used instead of the easing function for the values in the <code>to</code> object that are set to an array of at least two values.</p>
 				<p>The value will be animated to all the values set in the array successively, optionally using an interpolation equation which allow for the movement to be smoothed or curved.</p>
@@ -301,11 +301,14 @@ tween.on( <span class="hljs-string">"update"</span>, null );
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-variable tsd-is-not-exported">
+					<li class=" tsd-kind-variable tsd-is-private tsd-is-not-exported">
 						<a href="globals.html#eventnames" class="tsd-kind-icon">event<wbr>Names</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
+					<li class=" tsd-kind-variable tsd-is-private tsd-is-not-exported">
 						<a href="globals.html#shorteventnames" class="tsd-kind-icon">short<wbr>Event<wbr>Names</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private tsd-is-not-exported">
+						<a href="globals.html#copyobject" class="tsd-kind-icon">copy<wbr>Object</a>
 					</li>
 				</ul>
 			</nav>
