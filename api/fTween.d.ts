@@ -1,7 +1,12 @@
-// Full documentation at:
+// fTween plugin
+// https://github.com/florentpoujol/superpowers-ftween-plugin
+// Module and class for easy tweening (animation of values).
+// Wrapper around SUPTWEEN, a fork of TWEEN.js.
+
+// Documentation:
 // http://florentpoujol.github.io/superpowers-ftween-plugin
 
-// You can also access it offline in the plugin's "public/docs" folder 
+// You can also access the documentation offline in the plugin's "public/docs" folder 
 // or via the "Plugins docs browser" tool provided by the "Docs browser" plugin: https://github.com/florentpoujol/superpowers-docs-browser-plugin
 
 declare module fTween {
