@@ -3,7 +3,7 @@
 
 [
   {
-  name: "move" 
+  name: "move"
   params:
     to: 
       position: 
