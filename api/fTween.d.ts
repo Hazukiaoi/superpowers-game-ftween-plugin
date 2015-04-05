@@ -12,14 +12,14 @@
 declare module fTween {
   var Easing: FTWEEN.Easings;
   var Interpolation: FTWEEN.Interpolations;
-  
+
   class Tween {
     constructor(from: Object, to: Object, duration: number, params?: Params);
     constructor(to: Object, duration: number, params?: Params);
     constructor(time: number, onComplete: Callback, params?: Params);
     constructor(params: Params);
     constructor();
-    
+
     set(params: Params);
 
     on(eventName: "onStart", callback?: Callback): Tween;
@@ -37,7 +37,6 @@ declare module fTween {
     stop();
     destroy();
 
-    _inner: FTWEEN.Tween;
     to: Object;
     duration: number;
     time: number;

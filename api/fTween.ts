@@ -86,7 +86,7 @@ module fTween {
           console.log( "argument #"+i+": type="+types[i]+" value=", args[i]);
         }
       }
-      
+
       var start = params.start;
       delete params.start;
       // console.log("ftween constructor", params);
@@ -137,7 +137,6 @@ module fTween {
       }
     }
 
-
     /**
     * Make the provided callback be called when the specified event occurs.
     * @param eventName The event name.
@@ -179,7 +178,7 @@ module fTween {
           }
         }
       }
-      this._tween[ eventName ]( callback );
+      this.__inner[ eventName ]( callback );
       return this;
     }
 
@@ -205,7 +204,7 @@ module fTween {
           time = 0
         }
       }
-      this._tween.start( time );
+      this.__inner.start( time );
     }
 
     /**
@@ -213,7 +212,7 @@ module fTween {
     */
     pause() { 
       this._isPaused = true;
-      this._tween.pause(); 
+      this.__inner.pause(); 
     }
 
     /**
@@ -221,21 +220,21 @@ module fTween {
     */
     resume() { 
       this._isPaused = false;
-      this._tween.resume(); 
+      this.__inner.resume(); 
     }
 
     /**
     * Stop the tween, stopping the update of its values. 
     * A stopped tween can not be resumed, but can be restarted by calling start() again, with unpredictable results.
     */
-    stop() { this._tween.stop(); }
+    stop() { this.__inner.stop(); }
     
     /**
     * Stop the tween and all its chained tweens then remove all its listeners and de-reference as much objects as possible to let them be garbage collected.
     */
     destroy() {
-      this._tween.destroy();
-      this._tween = null;
+      this.__inner.destroy();
+      this.__inner = null;
       this._from = null;
       this._to = null;
       this._isDestroyed = true;
@@ -257,12 +256,10 @@ module fTween {
     // --------------------------------------------------------------------------------
     // properties
 
-    private _tween = new FTWEEN.Tween();
     /**
     * The `FTWEEN.Tween` instance that actually perform the tweening.
     */
-    get _inner() { return this._tween; }
-
+    private __inner = new FTWEEN.Tween();
 
     private _to: Object;
     /**
@@ -270,7 +267,7 @@ module fTween {
     */
     set to( to: Object ) {
       this._to = to;
-      this._tween.to( to );
+      this.__inner.to( to );
     }
     get to(): Object { return this._to; }
 
@@ -284,7 +281,7 @@ module fTween {
         duration = 0
       }
       this._checkMilliseconds( duration, "duration" );
-      this._tween.duration( duration * 1000 );
+      this.__inner.duration( duration * 1000 );
       this._duration = duration;
     } 
     get duration(): number { return this._duration; }
@@ -311,7 +308,7 @@ module fTween {
     */
     set from( from: Object ) {
       this._from = from;  
-      this._tween.from( from );
+      this.__inner.from( from );
     }
     get from(): Object { return this._from; }
 
@@ -321,7 +318,7 @@ module fTween {
     * Tell whether to consider number values in the to object as relative (true) or absolute (false).
     */
     set isRelative( isRelative: boolean ) { 
-      this._tween.isRelative( isRelative );
+      this.__inner.isRelative( isRelative );
       this._isRelative = isRelative; 
     }
     get isRelative(): boolean { return this._isRelative; }
@@ -336,7 +333,7 @@ module fTween {
         delay = 0;
       }
       this._checkMilliseconds( delay, "delay" );
-      this._tween.delay( delay * 1000 );
+      this.__inner.delay( delay * 1000 );
       this._delay = delay;
     } 
     get delay(): number { return this._delay; }
@@ -350,7 +347,7 @@ module fTween {
       if ( repeat < 0 ) {
         repeat = 0;
       }
-      this._tween.repeat( repeat );
+      this.__inner.repeat( repeat );
       this._repeat = repeat; 
     }
     get repeat(): number { return this._repeat; }
@@ -361,7 +358,7 @@ module fTween {
     * After having completed once and when repeat is strictly positive, tell whether the tween restart from its original state (false) (from 'from' to 'to', and repeat) or its current state (true) (from 'from' to 'to', then from 'to' to 'from', and repeat).
     */
     set yoyo( yoyo: boolean ) { 
-      this._tween.yoyo( yoyo );
+      this.__inner.yoyo( yoyo );
       this._yoyo = yoyo; 
     }
     get yoyo(): boolean { return this._yoyo; }
@@ -372,7 +369,7 @@ module fTween {
     * The easing function to use..
     */
     set easing( easing : EasingFunction ) { 
-      this._tween.easing( easing );
+      this.__inner.easing( easing );
       this._easing = easing; 
     }
     get easing(): EasingFunction { return this._easing; }
@@ -383,7 +380,7 @@ module fTween {
     * The interpolation function to use.
     */
     set interpolation( interpolation: InterpolationFunction ) {
-      this._tween.interpolation( interpolation );
+      this.__inner.interpolation( interpolation );
       this._interpolation = interpolation; 
     }
     get interpolation(): InterpolationFunction { return this._interpolation; }
