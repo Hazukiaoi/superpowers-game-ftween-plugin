@@ -1,7 +1,7 @@
 // fTween plugin
 // https://github.com/florentpoujol/superpowers-ftween-plugin
 // Module and class for easy tweening (animation of values).
-// Wrapper around ftween.js, a fork of tween.js.
+// Wrapper around ftween.js (the FTWEEN module), a fork of tween.js.
 
 // Documentation:
 // http://florentpoujol.github.io/superpowers-ftween-plugin
@@ -25,10 +25,10 @@ declare module fTween {
     on(eventName: "onStart", callback?: Callback): Tween;
     on(eventName: "onPause", callback?: Callback): Tween;
     on(eventName: "onResume", callback?: Callback): Tween;
+    on(eventName: "onUpdate", callback?: UpdateCallback): Tween;
+    on(eventName: "onLoopComplete", callback?: LoopCompleteCallback): Tween;
     on(eventName: "onComplete", callback?: Callback): Tween;
     on(eventName: "onStop", callback?: Callback): Tween;
-
-    on(eventName: "onUpdate", callback?: UpdateCallback): Tween;
     on(eventName: string, callback?: Function): Tween;
 
     start(time?: number);
@@ -44,6 +44,7 @@ declare module fTween {
     isRelative: boolean;
     delay: number;
     repeat: number;
+    loops: number;
     yoyo: boolean;
     easing: EasingFunction;
     interpolation: InterpolationFunction;
@@ -60,6 +61,7 @@ declare module fTween {
     isRelative?: boolean;
     delay?: number;
     repeat?: number;
+    loops?: number;
     yoyo?: boolean;
     easing?: EasingFunction;
     interpolation?: InterpolationFunction;
@@ -68,6 +70,7 @@ declare module fTween {
     onPause?: Callback;
     onResume?: Callback;
     onUpdate?: UpdateCallback;
+    onLoopComplete?: LoopCompleteCallback;
     onComplete?: Callback;
     onStop?: Callback;
     start?: number;
@@ -85,5 +88,8 @@ declare module fTween {
   }
   interface UpdateCallback {
     (progression:number): void;
+  }
+  interface LoopCompleteCallback {
+    (remainingLoops:number): void;
   }
 }

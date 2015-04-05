@@ -207,7 +207,7 @@ tween.easing = fTween.Easing.Quadratic.Out;
 </code></pre><p>Now you can write:</p>
 				<pre><code>var tween = new Anim( [<span class="hljs-keyword">...</span>] );
 </code></pre><h2 id="timer">Timer</h2>
-				<p>Just want to do something after some time ?<br>Then just create a tween with this fourth constructor:<br><code>( time: number, onComplete: fTween.TweenCallback, params?: fTween.Params ): fTween.Tween</code></p>
+				<p>Just want to do something after some time ?<br>Then just create a tween with this fourth constructor:<br><code>( time: number, onComplete: fTween.Callback, params?: fTween.Params ): fTween.Tween</code></p>
 				<pre><code><span class="hljs-keyword">new</span> fTween.Tween( <span class="hljs-number">2</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
   Sup.log( <span class="hljs-string">"Time's up! Remaining time:"</span>+<span class="hljs-keyword">this</span>.remainingTime ); <span class="hljs-comment">// 0</span>
   doSomething();
@@ -237,14 +237,14 @@ tween.pause(); <span class="hljs-comment">// or tween.stop();</span>
 </code></pre><p>In this last case, tween has been started <em>before</em> being paused or stopped. Some operations have been done on the <code>from</code> object and setting a new <code>from</code> object will result in unexpected behaviors and maybe errors.</p>
 				<p><strong>As a rule of thumbs, your shouldn&#39;t modify any of your tween&#39;s property while it is started.</strong></p>
 				<h2 id="callbacks">Callbacks</h2>
-				<p>You may set callbacks for the following events: <code>onStart</code>, <code>onPause</code>, <code>onResume</code>, <code>onUpdate</code>, <code>onComplete</code> and <code>onStop</code> via the <code>on()</code> function</p>
-				<p>The callbacks must respect the <code>fTween.TweenCallback</code> signature (or <code>fTween.TweenUpdateCallback</code> for the <code>onUpdate</code> event).<br>They are called in the context of the <code>from</code>, so their <code>this</code> variable is the <code>from</code> object.
-				The <code>onUpdate</code> callback also receive an argument: the progression of the tween as a percentage between 0 and 1.</p>
+				<p>You may set callbacks for the following events: <code>onStart</code>, <code>onPause</code>, <code>onResume</code>, <code>onUpdate</code>, <code>onLoopComplete</code>, <code>onComplete</code> and <code>onStop</code> via the <code>on()</code> function</p>
+				<p>The callbacks must respect the <code>fTween.Callback</code> signature (or <code>fTween.UpdateCallback</code>/<code>fTween.LoopCompleteCallback</code> for the <code>onUpdate</code>/<code>onLoopComplete</code> events).<br>They are called in the context of the <code>from</code>, so their <code>this</code> variable is the <code>from</code> object.
+				The <code>onUpdate</code> and <code>onLoopComplete</code> callbacks also receive an argument: the progression of the tween as a percentage between 0 and 1 and the number of remaining loops, respectively.</p>
 				<pre><code>var tween = new fTween.Tween( <span class="hljs-keyword">...</span> );
 tween.on( <span class="hljs-string">"onUpdate"</span>, <span class="hljs-keyword">function</span>( progression: number ) { <span class="hljs-keyword">...</span> } );
 
 // as shotcut, you may provide the <span class="hljs-string">"short"</span> event name
-tween.on( <span class="hljs-string">"complete"</span>, <span class="hljs-keyword">function</span>() { <span class="hljs-keyword">...</span> } )
+tween.on( <span class="hljs-string">"complete"</span>, <span class="hljs-keyword">function</span>() { <span class="hljs-keyword">...</span> } ) // same as tween.on( <span class="hljs-string">"onComplete"</span>, <span class="hljs-keyword">...</span> )
 
 // you can also set a callback via the `params` object passed to the constructors or the `set()` <span class="hljs-keyword">function</span>:
 tween.set( {

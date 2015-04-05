@@ -189,7 +189,7 @@ Now you can write:
 
 Just want to do something after some time ?  
 Then just create a tween with this fourth constructor:  
-`( time: number, onComplete: fTween.TweenCallback, params?: fTween.Params ): fTween.Tween`
+`( time: number, onComplete: fTween.Callback, params?: fTween.Params ): fTween.Tween`
 
     new fTween.Tween( 2, function() {
       Sup.log( "Time's up! Remaining time:"+this.remainingTime ); // 0
@@ -235,17 +235,17 @@ __As a rule of thumbs, your shouldn't modify any of your tween's property while 
 
 ## Callbacks
 
-You may set callbacks for the following events: `onStart`, `onPause`, `onResume`, `onUpdate`, `onComplete` and `onStop` via the `on()` function
+You may set callbacks for the following events: `onStart`, `onPause`, `onResume`, `onUpdate`, `onLoopComplete`, `onComplete` and `onStop` via the `on()` function
 
-The callbacks must respect the `fTween.TweenCallback` signature (or `fTween.TweenUpdateCallback` for the `onUpdate` event).  
+The callbacks must respect the `fTween.Callback` signature (or `fTween.UpdateCallback`/`fTween.LoopCompleteCallback` for the `onUpdate`/`onLoopComplete` events).  
 They are called in the context of the `from`, so their `this` variable is the `from` object.
-The `onUpdate` callback also receive an argument: the progression of the tween as a percentage between 0 and 1.
+The `onUpdate` and `onLoopComplete` callbacks also receive an argument: the progression of the tween as a percentage between 0 and 1 and the number of remaining loops, respectively.
 
     var tween = new fTween.Tween( ... );
     tween.on( "onUpdate", function( progression: number ) { ... } );
 
     // as shotcut, you may provide the "short" event name
-    tween.on( "complete", function() { ... } )
+    tween.on( "complete", function() { ... } ) // same as tween.on( "onComplete", ... )
 
     // you can also set a callback via the `params` object passed to the constructors or the `set()` function:
     tween.set( {

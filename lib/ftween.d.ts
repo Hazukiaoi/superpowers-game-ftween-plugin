@@ -1,6 +1,9 @@
 // Type definitions for ftween.js
 // https://github.com/florentpoujol/ftween.js
 
+// Exposed in Superpowers by the fTween plugin
+// https://github.com/florentpoujol/superpowers-ftween-plugin
+
 // Origial definitions for Soledad Penadés's tween.js by: sunetos <https://github.com/sunetos>, jzarnikov <https://github.com/jzarnikov>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
@@ -38,6 +41,7 @@ declare module FTWEEN {
     onUpdate(callback?:UpdateCallback): Tween;
     onPause(callback?:Callback): Tween;
     onResume(callback?:Callback): Tween;
+    onLoopComplete(callback?:LoopCompleteCallback): Tween;
     onComplete(callback?:Callback): Tween;
     onStop(callback?:Callback): Tween;
     update(time:number): boolean;
@@ -48,6 +52,9 @@ declare module FTWEEN {
   }
   export interface UpdateCallback {
     (progression:number): void;
+  }
+  export interface LoopCompleteCallback {
+    (remainingLoops:number): void;
   }
 
   export interface EasingFunction {

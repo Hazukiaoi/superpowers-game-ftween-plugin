@@ -3,12 +3,12 @@
 /**
 * @private
 */
-var shortEventNames = [ "start", "pause", "resume", "update", "complete", "stop" ];
+var shortEventNames = [ "start", "pause", "resume", "update", "loopComplete", "complete", "stop" ];
 
 /**
 * @private
 */
-var eventNames = [ "onStart", "onPause", "onResume", "onUpdate", "onComplete", "onStop" ];
+var eventNames = [ "onStart", "onPause", "onResume", "onUpdate", "onLoopComplete", "onComplete", "onStop" ];
 
 /**
 * @private
@@ -146,15 +146,12 @@ module fTween {
     on( eventName: "onStart", callback?: Callback ): Tween;
     on( eventName: "onPause", callback?: Callback ): Tween;
     on( eventName: "onResume", callback?: Callback ): Tween;
+    on( eventName: "onUpdate", callback?: UpdateCallback ): Tween;
+    on( eventName: "onLoopComplete", callback?: LoopCompleteCallback ): Tween;
     on( eventName: "onComplete", callback?: Callback ): Tween;
     on( eventName: "onStop", callback?: Callback ): Tween;
-    
-    /**
-    * @param callback The callback function for the `onUpdate` event.
-    */
-    on( eventName: "onUpdate", callback?: UpdateCallback ): Tween;
-    
     on( eventName: string, callback?: Function ): Tween;
+
     on( eventName: string, callback?: Function ): Tween {
       var eventPos = shortEventNames.indexOf( eventName );
       eventName = eventNames[ eventPos ] || eventName; // transform short event name in "long" name or leave it as it is.
@@ -352,6 +349,17 @@ module fTween {
     }
     get repeat(): number { return this._repeat; }
 
+    /**
+    * The total number of times the tween will run.
+    */
+    set loops( loops: number ) { 
+      if ( loops < 0 ) {
+        loops = 0;
+      }
+      this._repeat = loops - 1; 
+      this.__inner.repeat( this._repeat );
+    }
+    get loops(): number { return this._repeat + 1; }
 
     private _yoyo: boolean = false;
     /**
@@ -366,7 +374,7 @@ module fTween {
 
     private _easing: EasingFunction;
     /**
-    * The easing function to use..
+    * The easing function to use.
     */
     set easing( easing : EasingFunction ) { 
       this.__inner.easing( easing );
@@ -430,7 +438,7 @@ module fTween {
     * @param k The progression toward the end (between 0 and 1).
     * @returns The eased progression (between 0 and 1), taking the easing into account.
     */
-    (k:number): number;
+    (k: number): number;
   }
 
   /**
@@ -442,7 +450,7 @@ module fTween {
     * @param k The progression toward the end (between 0 and 1).
     * @returns The interpolatied value.
     */
-    (v:number[], k:number): number;
+    (v: number[], k: number): number;
   }
 
   /**
@@ -459,7 +467,17 @@ module fTween {
     /**
     * @param progression The progression of the tween as a number between 0 and 1.
     */
-    (progression:number): void;
+    (progression: number): void;
+  }
+
+  /**
+  * Signature for the `onLoopComplete` callback, to be set via the `fTween.Tween.on()` function.
+  */
+  export interface LoopCompleteCallback {
+    /**
+    * @param remainingLoops The number of loops the tween has still to run.
+    */
+    (remainingLoops: number): void;
   }
 
   /**
@@ -492,8 +510,14 @@ module fTween {
     delay?: number;
     /**
     * The number of times the tween will repeat, __after having completed once__.
+    * Settings `x` repeats is the same as setting `x+1` loops.
     */
     repeat?: number;
+    /**
+    * The total number of times the tween will run.
+    * Settings `x` loops is the same as setting `x-1` repeats.
+    */
+    loops?: number;
     /**
     * After having completed once and when repeat is strictly positive, tell whether the tween restart from its original state (false) (from 'from' to 'to', and repeat) or its current state (true) (from 'from' to 'to', then from 'to' to 'from', and repeat).
     */
@@ -527,7 +551,11 @@ module fTween {
     */
     onUpdate?: UpdateCallback;
     /**
-    * The callback for the `onComple` event.
+    * The callback for the `onLoopComplete` event.
+    */
+    onLoopComplete?: LoopCompleteCallback;
+    /**
+    * The callback for the `onComplete` event.
     */
     onComplete?: Callback;
     /**
