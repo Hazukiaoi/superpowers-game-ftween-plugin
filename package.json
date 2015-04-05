@@ -29,8 +29,6 @@
     "compilets": "tsc api/fTween.ts --out test/fTween.js --module commonjs --target ES5",
     "gendoc": "typedoc --out public/docs/ api/fTween.ts --mode file --target ES5 --name \"fTween plugin\" --readme tutorial.md --verbose",
 
-    "test": "mocha test/index.js",
-    
     "linksrcdev": "mklink /j \"../../app/plugins/florentpoujol/fTween\" \"./\"",
     "linksrcrelease": "mklink /j \"../../../release/app/plugins/florentpoujol/fTween\" \"./\"",
 
@@ -40,8 +38,5 @@
   "maintainers": [
     "Florent Poujol <florent.poujol@gmail.com>"
   ],
-  "directories": {
-    "doc": "docs"
-  },
   "license": "MIT"
 }
