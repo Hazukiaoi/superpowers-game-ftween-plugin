@@ -87,9 +87,18 @@ module fTween {
         }
       }
 
+      if (params.onComplete === undefined) {
+        var self = this;
+        this.__inner.onComplete( function() { 
+          self._isComplete = true; 
+          if (self._destroyOnComplete === true)
+            self.destroy();
+        } );
+      }
+
       var start = params.start;
       delete params.start;
-      // console.log("ftween constructor", params);
+      
       if ( Object.keys( params ).length > 0 ) {
         this.set( params );
       }
@@ -159,21 +168,18 @@ module fTween {
         console.error( "fTween.Tween.on(): ERROR: wrong event name: "+eventName+". Expected values are:", shortEventNames, eventNames );
         return;
       }
-      if ( callback === undefined ) {
+      if (callback === undefined)
         callback = null;
-      }
-      if ( eventName === "onComplete" ) {
+      if (eventName === "onComplete") {
         var userCallback = callback;
         var self = this;
         callback = function() {
           self._isComplete = true;
-          if ( userCallback !== null ) {
+          if (userCallback !== null)
             userCallback.call( this );
-          }
-          if ( self._destroyOnComplete === true ) {
+          if (self._destroyOnComplete === true)
             self.destroy();
-          }
-        }
+        };
       }
       this.__inner[ eventName ]( callback );
       return this;
