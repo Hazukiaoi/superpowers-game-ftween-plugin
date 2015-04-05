@@ -51,7 +51,7 @@ module fTween {
     * @param time The time in seconds to complete the timer. Setting the `time` property makes the `from`, `to` and `duration` being ignored.
     * @param onComplete The listener for the `onComplete` event.
     */
-    constructor( time: number, onComplete: TweenCallback, params?: Params );
+    constructor( time: number, onComplete: Callback, params?: Params );
 
     constructor( ...args: any[] ) {
       var argsCount = args.length;
@@ -144,16 +144,16 @@ module fTween {
     * @param callback The callback function.
     * @returns The tween instance.
     */
-    on( eventName: "onStart", callback?: TweenCallback ): Tween;
-    on( eventName: "onPause", callback?: TweenCallback ): Tween;
-    on( eventName: "onResume", callback?: TweenCallback ): Tween;
-    on( eventName: "onComplete", callback?: TweenCallback ): Tween;
-    on( eventName: "onStop", callback?: TweenCallback ): Tween;
+    on( eventName: "onStart", callback?: Callback ): Tween;
+    on( eventName: "onPause", callback?: Callback ): Tween;
+    on( eventName: "onResume", callback?: Callback ): Tween;
+    on( eventName: "onComplete", callback?: Callback ): Tween;
+    on( eventName: "onStop", callback?: Callback ): Tween;
     
     /**
     * @param callback The callback function for the `onUpdate` event.
     */
-    on( eventName: "onUpdate", callback?: TweenUpdateCallback ): Tween;
+    on( eventName: "onUpdate", callback?: UpdateCallback ): Tween;
     
     on( eventName: string, callback?: Function ): Tween;
     on( eventName: string, callback?: Function ): Tween {
@@ -451,14 +451,14 @@ module fTween {
   /**
   * Signature for all callbacks except `onUpdate`, to be set via the `fTween.Tween.on()` function.
   */
-  export interface TweenCallback {
+  export interface Callback {
     (): void;
   }
 
   /**
   * Signature for the `onUpdate` callback, to be set via the `fTween.Tween.on()` function.
   */
-  export interface TweenUpdateCallback {
+  export interface UpdateCallback {
     /**
     * @param progression The progression of the tween as a number between 0 and 1.
     */
@@ -516,27 +516,27 @@ module fTween {
     /**
     * The callback for the `onStart` event.
     */
-    onStart?: TweenCallback;
+    onStart?: Callback;
     /**
     * The callback for the `onPause` event.
     */
-    onPause?: TweenCallback;
+    onPause?: Callback;
     /**
     * The callback for the `onResume` event.
     */
-    onResume?: TweenCallback;
+    onResume?: Callback;
     /**
     * The callback for the `onUpdate` event.
     */
-    onUpdate?: TweenUpdateCallback;
+    onUpdate?: UpdateCallback;
     /**
     * The callback for the `onComple` event.
     */
-    onComplete?: TweenCallback;
+    onComplete?: Callback;
     /**
     * The callback for the `onStop` event.
     */
-    onStop?: TweenCallback;
+    onStop?: Callback;
     /**
     * The time (a timetamp in milliseconds) at which to start the tween. Tweens are automatically started at the time they are created, so you may set the property to a negative value to prevent it to be started at all, or set any other time you like. 
     */

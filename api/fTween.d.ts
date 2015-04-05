@@ -1,7 +1,7 @@
 // fTween plugin
 // https://github.com/florentpoujol/superpowers-ftween-plugin
 // Module and class for easy tweening (animation of values).
-// Wrapper around FTWEEN.js, a fork of TWEEN.js.
+// Wrapper around ftween.js, a fork of tween.js.
 
 // Documentation:
 // http://florentpoujol.github.io/superpowers-ftween-plugin
@@ -10,25 +10,25 @@
 // or via the "Plugins docs browser" tool provided by the "Docs browser" plugin: https://github.com/florentpoujol/superpowers-docs-browser-plugin
 
 declare module fTween {
-  var Easing: FTWEEN.TweenEasing;
-  var Interpolation: FTWEEN.TweenInterpolation;
+  var Easing: FTWEEN.Easings;
+  var Interpolation: FTWEEN.Interpolations;
   
   class Tween {
     constructor(from: Object, to: Object, duration: number, params?: Params);
     constructor(to: Object, duration: number, params?: Params);
-    constructor(time: number, onComplete: TweenCallback, params?: Params);
+    constructor(time: number, onComplete: Callback, params?: Params);
     constructor(params: Params);
     constructor();
     
     set(params: Params);
 
-    on(eventName: "onStart", callback?: TweenCallback): Tween;
-    on(eventName: "onPause", callback?: TweenCallback): Tween;
-    on(eventName: "onResume", callback?: TweenCallback): Tween;
-    on(eventName: "onComplete", callback?: TweenCallback): Tween;
-    on(eventName: "onStop", callback?: TweenCallback): Tween;
+    on(eventName: "onStart", callback?: Callback): Tween;
+    on(eventName: "onPause", callback?: Callback): Tween;
+    on(eventName: "onResume", callback?: Callback): Tween;
+    on(eventName: "onComplete", callback?: Callback): Tween;
+    on(eventName: "onStop", callback?: Callback): Tween;
 
-    on(eventName: "onUpdate", callback?: TweenUpdateCallback): Tween;
+    on(eventName: "onUpdate", callback?: UpdateCallback): Tween;
     on(eventName: string, callback?: Function): Tween;
 
     start(time?: number);
@@ -65,12 +65,12 @@ declare module fTween {
     easing?: EasingFunction;
     interpolation?: InterpolationFunction;
     destroyOnComplete?: boolean;
-    onStart?: TweenCallback;
-    onPause?: TweenCallback;
-    onResume?: TweenCallback;
-    onUpdate?: TweenUpdateCallback;
-    onComplete?: TweenCallback;
-    onStop?: TweenCallback;
+    onStart?: Callback;
+    onPause?: Callback;
+    onResume?: Callback;
+    onUpdate?: UpdateCallback;
+    onComplete?: Callback;
+    onStop?: Callback;
     start?: number;
   }
 
@@ -81,10 +81,10 @@ declare module fTween {
     (v:number[], k:number): number;
   }
 
-  interface TweenCallback {
+  interface Callback {
     (): void;
   }
-  interface TweenUpdateCallback {
+  interface UpdateCallback {
     (progression:number): void;
   }
 }
