@@ -1,10 +1,10 @@
-if window? then window.SUPTWEEN = require( '../lib/sup-tween.js' )
+if window? then window.FTWEEN = require( '../lib/ftween.js' )
 
 fs = require 'fs'
 
-SupAPI.registerPlugin 'typescript', 'SUPTWEEN', {
-  code: "declare var SUPTWEEN;"
-  defs: fs.readFileSync(__dirname + '/../lib/sup-tween.js.d.ts', encoding: 'utf8')
+SupAPI.registerPlugin 'typescript', 'FTWEEN', {
+  code: "declare var FTWEEN;"
+  defs: fs.readFileSync(__dirname + '/../lib/ftween.d.ts', encoding: 'utf8')
 }
 
 SupAPI.registerPlugin 'typescript', 'fTween', {

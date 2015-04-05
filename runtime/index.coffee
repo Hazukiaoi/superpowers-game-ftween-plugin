@@ -1,3 +1,3 @@
 SupEngine.registerEarlyUpdateFunction "fTween", -> 
-  if window? then window.SUPTWEEN.update()
+  if window? then window.FTWEEN.update()
   return

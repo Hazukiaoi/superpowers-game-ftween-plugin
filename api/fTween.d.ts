@@ -1,7 +1,7 @@
 // fTween plugin
 // https://github.com/florentpoujol/superpowers-ftween-plugin
 // Module and class for easy tweening (animation of values).
-// Wrapper around SUPTWEEN, a fork of TWEEN.js.
+// Wrapper around FTWEEN.js, a fork of TWEEN.js.
 
 // Documentation:
 // http://florentpoujol.github.io/superpowers-ftween-plugin
@@ -10,8 +10,8 @@
 // or via the "Plugins docs browser" tool provided by the "Docs browser" plugin: https://github.com/florentpoujol/superpowers-docs-browser-plugin
 
 declare module fTween {
-  var Easing: SUPTWEEN.TweenEasing;
-  var Interpolation: SUPTWEEN.TweenInterpolation;
+  var Easing: FTWEEN.TweenEasing;
+  var Interpolation: FTWEEN.TweenInterpolation;
   
   class Tween {
     constructor(from: Object, to: Object, duration: number, params?: Params);
@@ -37,7 +37,7 @@ declare module fTween {
     stop();
     destroy();
 
-    _inner: SUPTWEEN.Tween;
+    _inner: FTWEEN.Tween;
     to: Object;
     duration: number;
     time: number;

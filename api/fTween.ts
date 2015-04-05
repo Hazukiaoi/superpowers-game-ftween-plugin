@@ -1,4 +1,4 @@
-/// <reference path="../lib/sup-tween.js.d.ts" />
+/// <reference path="../lib/ftween.d.ts" />
 
 /**
 * @private
@@ -26,12 +26,12 @@ module fTween {
   /**
   * The object containing the easing functions segregated into families (ie: `fTween.Easing.Cubic`) and variants (ie: `fTween.Easing.Cubic.In`).
   */
-  export var Easing = SUPTWEEN.Easing;
+  export var Easing = FTWEEN.Easing;
   
   /**
   * The object containing the interpolation functions (ie: `fTween.Interpolation.Cubic`).
   */
-  export var Interpolation = SUPTWEEN.Interpolation;
+  export var Interpolation = FTWEEN.Interpolation;
 
   export class Tween {
     /**
@@ -257,9 +257,9 @@ module fTween {
     // --------------------------------------------------------------------------------
     // properties
 
-    private _tween = new SUPTWEEN.Tween();
+    private _tween = new FTWEEN.Tween();
     /**
-    * The `SUPTWEEN.Tween` instance that actually perform the tweening.
+    * The `FTWEEN.Tween` instance that actually perform the tweening.
     */
     get _inner() { return this._tween; }
 
