@@ -64,7 +64,9 @@ declare module fTween {
     loops?: number;
     yoyo?: boolean;
     easing?: EasingFunction;
+    easingName?: string;
     interpolation?: InterpolationFunction;
+    interpolationName?: string;
     destroyOnComplete?: boolean;
     onStart?: Callback;
     onPause?: Callback;

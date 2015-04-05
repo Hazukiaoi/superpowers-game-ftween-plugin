@@ -186,7 +186,7 @@ module fTween {
     }
 
     /**
-    * Starts the tween.
+    * Starts the tween. <br>
     * Tweens are automatically started after their creation if the duration and the `to` object are supplied. You can prevent this by setting the `start` property to a negative value in the constructor's `params` argument. 
     * @param time The time (a timetamp in milliseconds) at which to start the tween.
     */
@@ -227,7 +227,7 @@ module fTween {
     }
 
     /**
-    * Stop the tween, stopping the update of its values. 
+    * Stop the tween, stopping the update of its values.  <br>
     * A stopped tween can not be resumed, but can be restarted by calling start() again, with unpredictable results.
     */
     stop() { this.__inner.stop(); }
@@ -244,8 +244,8 @@ module fTween {
     }
 
     /**
-    * Check that the provided value is not too big.
-    * If that's the case, suppose that it is a number of milliseconds instead of seconds and display a warning.
+    * Check that the provided value is not too big. <br>
+    * If that's the case, suppose that it is a number of milliseconds instead of seconds and display a warning. <br>
     * Called by duration, delay and time setters.
     * @param value The value.
     * @param propName The name of the evaluated property.
@@ -318,7 +318,7 @@ module fTween {
 
     private _isRelative: boolean = false;
     /**
-    * Tell whether to consider number values in the to object as relative (true) or absolute (false).
+    * Tell whether to consider number values in the to object as relative (true) or absolute (false). <br>
     * Default is `false`.
     */
     set isRelative( isRelative: boolean ) { 
@@ -330,7 +330,7 @@ module fTween {
 
     private _delay: number = 0;
     /**
-    * The time in milliseconds before the tween's values actually starts to updates after the tween has been started.
+    * The time in milliseconds before the tween's values actually starts to updates after the tween has been started. <br>
     * Default is `0`.
     */
     set delay( delay: number ) { 
@@ -346,8 +346,8 @@ module fTween {
 
     private _repeat: number = 0;
     /**
-    * The number of times the tween will repeat, after having completed once.
-    * Settings `x` repeats is the same as setting `x+1` loops.
+    * The number of times the tween will repeat, after having completed once. <br>
+    * Settings `x` repeats is the same as setting `x+1` loops. <br>
     * Default is `0`.
     */
     set repeat( repeat: number ) { 
@@ -359,9 +359,10 @@ module fTween {
     }
     get repeat(): number { return this._repeat; }
 
+
     /**
-    * The total number of times the tween will run.
-    * Settings `x` loops is the same as setting `x-1` repeats.
+    * The total number of times the tween will run. <br>
+    * Settings `x` loops is the same as setting `x-1` repeats. <br>
     * Default is `1`.
     */
     set loops( loops: number ) { 
@@ -373,9 +374,10 @@ module fTween {
     }
     get loops(): number { return this._repeat + 1; }
 
+
     private _yoyo: boolean = false;
     /**
-    * After having completed once and when repeat is strictly positive, tell whether the tween restart from its original state (false) (from 'from' to 'to', and repeat) or its current state (true) (from 'from' to 'to', then from 'to' to 'from', and repeat).
+    * After having completed once and when repeat is strictly positive, tell whether the tween restart from its original state (false) (from 'from' to 'to', and repeat) or its current state (true) (from 'from' to 'to', then from 'to' to 'from', and repeat). <br>
     * Default is `false`.
     */
     set yoyo( yoyo: boolean ) { 
@@ -385,32 +387,112 @@ module fTween {
     get yoyo(): boolean { return this._yoyo; }
 
 
-    private _easing: EasingFunction;
+    private _easing: EasingFunction = null;
     /**
     * The easing function to use.
     * Default is `fTween.Easing.Linear.None`.
     */
-    set easing( easing : EasingFunction ) { 
-      this.__inner.easing( easing );
-      this._easing = easing; 
+    set easing(fn: EasingFunction) { 
+      this._easing = fn; 
+      this.__inner.easing(this._easing);
+
+      var fnName: string = null;
+      if (fn !== null) {
+        for (var familly in fTween.Easing) {
+          for (var variant in fTween.Easing[familly]) {
+            if (fn === fTween.Easing[familly][variant]) {
+              fnName = familly+variant;
+              break;
+            }
+          }
+        }
+        if (fnName === null)
+          console.warn("fTween.Tween.easing property: An easing function has been set but it wasn't found in the fTween.Easing object. It is required if you want to set it by name, or get its name via the fTween.Tween.easingName property.");
+      }
+      this._easingName = fnName;
     }
     get easing(): EasingFunction { return this._easing; }
 
 
-    private _interpolation: InterpolationFunction;
+    private _easingName: string = null;
     /**
-    * The interpolation function to use.
+    * The name of the easing function to use, its "path" in the `fTween.Easing` object. <br>
+    * The name is composed of the familly followed by the variant. The `"None"` variant is optional. <br>
+    * Ie: `"QuadraticIn"` `"CircularInOut"` `"Linear"` `"LinearNone"`
+    * Default is `"LinearNone"`.
     */
-    set interpolation( interpolation: InterpolationFunction ) {
-      this.__inner.interpolation( interpolation );
-      this._interpolation = interpolation; 
+    set easingName(name: string) {
+      name = name.charAt(0).toUpperCase() + name.slice(1); // make sure first letter is uppercase
+      var result = /^([_A-Z]{1}[a-z0-9_-]+)(([A-Z]{1}.+)?)$/.exec(name);
+      if (result !== null) {
+
+        var familly: Object = fTween.Easing[ result[1] ]; // if result isn't null, there is no reason the familly should be null, undefined or ""
+        if (familly !== undefined) {
+
+          var variant: string = result[2] || "None"; // if the variant is not supplied, result[2] === ""
+          var fn: EasingFunction = familly[variant];
+
+          if (fn !== undefined) {
+            this._easing = fn; 
+            this.__inner.easing(this._easing);
+            this._easingName = name;
+            return;
+          }
+        }
+      }
+      console.warn("fTween.Tween.easingName property: No easing function found for name '${name}'. Nothing has been done.", result);
+    }
+    get easingName(): string { return this._easingName; }
+
+
+    private _interpolation: InterpolationFunction = null;
+    /**
+    * The interpolation function to use. <br>
+    * Default is `fTween.Interpolation.Linear`.
+    */
+    set interpolation(fn: InterpolationFunction) {
+      this._interpolation = fn;
+      this.__inner.interpolation(this._interpolation);
+
+      var fnName: string = null;
+      if (fn !== null) {
+        for (var _fnName in fTween.Interpolation) {
+          if (fn === fTween.Interpolation[_fnName]) {
+            fnName = _fnName;
+            break;
+          }
+        }
+        if (fnName === null)
+          console.warn("fTween.Tween.interpolation property: An interpolation function has been set but it wasn't found in the fTween.Interpolation object. It is required if you want to set it by name, or get its name via the fTween.Tween.interpolationName property.");
+      }
+      this._interpolationName = fnName;
     }
     get interpolation(): InterpolationFunction { return this._interpolation; }
 
 
+    private _interpolationName: string = null; // "name" of the interpolation function in the fTween.Interpolation object.
+    /**
+    * The name of interpolation function to use, its key in the `fTween.Interpolation` object. <br>
+    * Default is `"Linear"`.
+    */
+    set interpolationName(name: string) {
+      name = name.charAt(0).toUpperCase() + name.slice(1); // make sure first letter is uppercase
+      var fn = fTween.Interpolation[name];
+      if (fn !== undefined) {
+        this._interpolation = fn; 
+        this.__inner.interpolation(this._interpolation);
+        this._interpolationName = name;
+      }
+      else     
+        console.error("fTween.Tween.interpolationName property: No interpolation function found in the fTween.Interpolation object for name '${name}'.");
+    }
+    get interpolationName(): string { return this._interpolationName; }
+
+
     private _isPaused: boolean = false;
     /**
-    * The tween's paused state. Use the `pause()` and `resume()` methods to control the paused state.
+    * The tween's paused state. Use the `pause()` and `resume()` methods to control the paused state. <br>
+    * Default is `false`.
     */
     get isPaused(): boolean { return this._isPaused; }
 
@@ -420,13 +502,15 @@ module fTween {
     private _isComplete: boolean = false; 
     /**
     * The tween's completed state.
+    * Default is `false`.
     */
     get isComplete(): boolean { return this._isComplete; }
 
 
     private _destroyOnComplete: boolean = true;
     /**
-    * Tell whether to destroy the tween once it has completed (true), or not (false).
+    * Tell whether to destroy the tween once it has completed (true), or not (false). <br>
+    * Default is `true`.
     */
     set destroyOnComplete( destroyOnComplete: boolean ) {
       this._destroyOnComplete = destroyOnComplete;
@@ -436,7 +520,8 @@ module fTween {
 
     private _isDestroyed: boolean = false; 
     /**
-    * The tween's destroyed state. Call destroy() to destroy a tween and free some objects for GC.
+    * The tween's destroyed state. Call destroy() to destroy a tween and free some objects for GC. <br>
+    * Default is `false`.
     */
     get isDestroyed(): boolean { return this._isDestroyed; }
 
@@ -445,7 +530,7 @@ module fTween {
   // --------------------------------------------------------------------------------
 
   /**
-  * Signature for the easing functions. All available easing function can be found inside the `fTween.Easing` object.
+  * Signature for the easing functions. All available easing functions can be found inside the `fTween.Easing` object.
   */
   export interface EasingFunction {
     /**
@@ -523,12 +608,12 @@ module fTween {
     */
     delay?: number;
     /**
-    * The number of times the tween will repeat, __after having completed once__.
+    * The number of times the tween will repeat, __after having completed once__. <br>
     * Settings `x` repeats is the same as setting `x+1` loops.
     */
     repeat?: number;
     /**
-    * The total number of times the tween will run.
+    * The total number of times the tween will run. <br>
     * Settings `x` loops is the same as setting `x-1` repeats.
     */
     loops?: number;
@@ -541,9 +626,19 @@ module fTween {
     */
     easing?: EasingFunction;
     /**
+    * The name of the easing function to use, its "path" in the `fTween.Easing` object. <br>
+    * The name is composed of the familly followed by the variant. The `"None"` variant is optional. <br>
+    * Ie: `"QuadraticIn"` `"CircularInOut"` `"Linear"` `"LinearNone"`
+    */
+    easingName?: string;
+    /**
     * The interpolation function to use.
     */
     interpolation?: InterpolationFunction;
+    /**
+    * The name of interpolation function to use, its key in the `fTween.Interpolation` object.
+    */
+    interpolationName?: string;
     /**
     * Tell whether to destroy the tween once it has completed (true), or not (false).
     */
