@@ -313,6 +313,7 @@ module fTween {
     private _isRelative: boolean = false;
     /**
     * Tell whether to consider number values in the to object as relative (true) or absolute (false).
+    * Default is `false`.
     */
     set isRelative( isRelative: boolean ) { 
       this.__inner.isRelative( isRelative );
@@ -324,6 +325,7 @@ module fTween {
     private _delay: number = 0;
     /**
     * The time in milliseconds before the tween's values actually starts to updates after the tween has been started.
+    * Default is `0`.
     */
     set delay( delay: number ) { 
       if ( delay < 0 ) {
@@ -339,6 +341,8 @@ module fTween {
     private _repeat: number = 0;
     /**
     * The number of times the tween will repeat, after having completed once.
+    * Settings `x` repeats is the same as setting `x+1` loops.
+    * Default is `0`.
     */
     set repeat( repeat: number ) { 
       if ( repeat < 0 ) {
@@ -351,10 +355,12 @@ module fTween {
 
     /**
     * The total number of times the tween will run.
+    * Settings `x` loops is the same as setting `x-1` repeats.
+    * Default is `1`.
     */
     set loops( loops: number ) { 
-      if ( loops < 0 ) {
-        loops = 0;
+      if ( loops < 1 ) {
+        loops = 1;
       }
       this._repeat = loops - 1; 
       this.__inner.repeat( this._repeat );
@@ -364,6 +370,7 @@ module fTween {
     private _yoyo: boolean = false;
     /**
     * After having completed once and when repeat is strictly positive, tell whether the tween restart from its original state (false) (from 'from' to 'to', and repeat) or its current state (true) (from 'from' to 'to', then from 'to' to 'from', and repeat).
+    * Default is `false`.
     */
     set yoyo( yoyo: boolean ) { 
       this.__inner.yoyo( yoyo );
@@ -375,6 +382,7 @@ module fTween {
     private _easing: EasingFunction;
     /**
     * The easing function to use.
+    * Default is `fTween.Easing.Linear.None`.
     */
     set easing( easing : EasingFunction ) { 
       this.__inner.easing( easing );
