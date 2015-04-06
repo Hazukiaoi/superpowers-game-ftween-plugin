@@ -5,7 +5,7 @@ var actor = Sup.getActor("Actor1");
 var actorStartPos = actor.getPosition();
 var activeTween: fTween.Tween = null;
 
-var tests = (<any>Sup.get("Tests", Sup.Text).parseCSON());
+var tests = Sup.get("Tests", Sup.Text).parseCSON();
 var gui = new dat.GUI();
 var menu: any = {};
 
@@ -18,7 +18,9 @@ var onUpdate = function() {
 var onComplete = function() {
   console.log("onComplete", this);
 }
-
+var onLoopComplete = function( remainingLoops: number ) {
+  console.log("onLoopComplete", remainingLoops, this);
+}
 
 // add test title to html
 var titleElt = document.createElement("p");
@@ -48,17 +50,18 @@ function createTestLauncher(test, i) {
     
     if (params.from == undefined) 
       params.from = actor;
+    
     params.onStart = onStart;
 //     params.onUpdate = onUpdate;
     params.onComplete = onComplete;
+    if (params.onLoopComplete)
+      params.onLoopComplete = onLoopComplete;
     
-    if (params.easingFamilly !== undefined) {
-      params.easing = fTween.Easing[params.easingFamilly][params.easingVariant];
-    }
-
     titleElt.innerHTML = test.name;
     activeTween = new fTween.Tween( params );
-//     (<any>activeTween._inner).test = true;
+    
+    if (params.test)
+      (<any>(<any>activeTween).__inner).test = true;
     
 //     console.log("launch test:", i, test.name, params );
   };

@@ -1,55 +1,55 @@
 # codemirror-mode:cson
-# codemirror-theme:paraiso-dark
 
 [
   {
   name: "move"
   params:
-    to: 
-      position: 
+    to:
+      position:
         x: 10
     duration: 2
   }
-  
+
   {
-  name: "move+rotate" 
+  name: "move+rotate"
   params:
-    to: 
-      position: 
+    to:
+      position:
         x: 10
       eulerAngles:
         z: 6.28
     duration: 2
   }
-  
+
   {
-  name: "move+rotate repeat2" 
+  name: "move+rotate repeat2"
   params:
-    to: 
-      position: 
+    to:
+      position:
         x: 10
       eulerAngles:
         z: 6.25
     duration: 2
     repeat: 2
+    onLoopComplete: true
   }
-  
+
   {
-  name: "move+rotate repeat2 bounceIn" 
+  name: "move+rotate loops2 bounceIn"
   params:
-    to: 
-      position: 
+    to:
+      position:
         x: 10
       eulerAngles:
         z: 6.25
     duration: 2
-    repeat: 2
-    easingFamilly: "Bounce"
-    easingVariant: "In"
+    loops: 3
+    onLoopComplete: true
+    easingName: "bounceIn"
   }
-  
+
   {
-  name: "rel move+rotate" 
+  name: "rel move+rotate"
   params:
     to:
       position:
@@ -59,12 +59,12 @@
     duration: 2
     isRelative: true
   }
-  
+
   {
-  name: "move+rotate yoyo" 
+  name: "move+rotate yoyo"
   params:
-    to: 
-      position: 
+    to:
+      position:
         x: 10
       eulerAngles:
         z: 6.25
@@ -72,9 +72,9 @@
     repeat: 1
     yoyo: true
   }
-  
+
   {
-  name: "rel move+rotate yoyo" 
+  name: "rel move+rotate yoyo"
   params:
     to:
       position:
