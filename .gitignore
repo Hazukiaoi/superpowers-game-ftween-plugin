@@ -2,5 +2,4 @@ gitignore/
 node_modules/
 project/*/builds/
 project/*/internals.json
-/project/ftween/internals.json
 project/*/members.json
