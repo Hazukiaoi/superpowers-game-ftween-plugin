@@ -28,6 +28,8 @@ titleElt.className = "testtitle";
 titleElt.innerHTML = "testtitle";
 document.body.appendChild( titleElt );
 
+
+
 var style = document.createElement("style");
 style.innerHTML = ".testtitle { color: white; position:absolute; left:10px; }"
 document.head.appendChild( style );
@@ -64,6 +66,8 @@ function createTestLauncher(test, i) {
       (<any>(<any>activeTween).__inner).test = true;
     
 //     console.log("launch test:", i, test.name, params );
+    
+    
   };
 }
 
