@@ -32,7 +32,7 @@
     "linksrcdev": "mklink /j \"../../app/plugins/florentpoujol/fTween\" \"./\"",
     "linksrcrelease": "mklink /j \"../../../release/app/plugins/florentpoujol/fTween\" \"./\"",
 
-    "linkprojdev": "mklink /j \"../../app/projects/fTween\" \"./project/fTween\"",
+    "linkprojdev": "mklink /j \"../../data/projects/fTween\" \"./project/fTween\"",
     "linkprojrelease": "mklink /j \"../../../localprojects/fTween\" \"./project/fTween\""
   },
   "maintainers": [
