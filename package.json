@@ -8,12 +8,6 @@
     "url": "https://github.com/florentpoujol/superpowers-ftween-plugin"
   },
   "author": "Florent Poujol <florent.poujol@gmail.com> (http://florentpoujol.fr)",
-  "dependencies": {},
-  "devDependencies": {
-    "typedoc": "0.2.x",
-    "typescript": "1.4.x",
-    "mocha": "2.2.x"
-  },
   "keywords": [
     "superpowers",
     "plugin",
