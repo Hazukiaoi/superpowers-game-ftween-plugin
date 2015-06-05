@@ -677,3 +677,6 @@ module fTween {
     start?: number;
   }
 } // end of fTween module
+
+// expose to the runtime
+(<any>window).fTween = fTween;
