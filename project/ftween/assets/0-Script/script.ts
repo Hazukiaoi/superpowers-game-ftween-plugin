@@ -1,9 +1,9 @@
-
+/*
 class fTweenBehavior extends Sup.Behavior {
   awake() {
     var masterParams = Sup.get("Test Params", Sup.Text).parseCSON();
     console.log(masterParams);
-    /*
+    /
     var params = {
       from: this.actor,
       to: { position: new Vector3(10,0,0) },
@@ -17,13 +17,13 @@ class fTweenBehavior extends Sup.Behavior {
     }
     //console.log(this.actor)
     var tween = new Tween( params );
-    */
+    
   }  
   
   update() {
     
   }
-}
+}*/
 
 
 // Sup.registerBehavior( fTweenBehavior );
