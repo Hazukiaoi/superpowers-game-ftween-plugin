@@ -1,7 +1,7 @@
 /*
 class fTweenBehavior extends Sup.Behavior {
   awake() {
-    var masterParams = Sup.get("Test Params", Sup.Text).parseCSON();
+    var masterParams = Sup.get("Test Params", fText).parse();
     console.log(masterParams);
     /
     var params = {

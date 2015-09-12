@@ -5,7 +5,7 @@ var actor = Sup.getActor("Actor1");
 var actorStartPos = actor.getPosition();
 var activeTween: fTween.Tween = null;
 
-var tests = Sup.get("Tests", Sup.Text).parseCSON();
+var tests = Sup.get("test1.cson", fText).parse();
 var gui = new dat.GUI();
 var menu: any = {};
 

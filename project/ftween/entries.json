@@ -10,16 +10,6 @@
     "type": "scene"
   },
   {
-    "id": "8",
-    "name": "Tests",
-    "type": "text"
-  },
-  {
-    "id": "9",
-    "name": "Tests2",
-    "type": "text"
-  },
-  {
     "id": "4",
     "name": "Leonard",
     "type": "sprite"
@@ -28,5 +18,15 @@
     "id": "0",
     "name": "Script",
     "type": "script"
+  },
+  {
+    "id": "10",
+    "name": "test1.cson",
+    "type": "fText"
+  },
+  {
+    "id": "11",
+    "name": "test2.cson",
+    "type": "fText"
   }
 ]

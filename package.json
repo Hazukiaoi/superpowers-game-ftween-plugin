@@ -1,6 +1,6 @@
 {
   "name": "sup-ftween-plugin",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Easy tweening (animation of values) for Superpowers, the extensible HTML5 2D+3D game engine.",
   "homepage": "https://github.com/florentpoujol/superpowers-ftween-plugin",
   "repository": {
