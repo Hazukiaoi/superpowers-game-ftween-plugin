@@ -15,11 +15,6 @@
     "type": "sprite"
   },
   {
-    "id": "0",
-    "name": "Script",
-    "type": "script"
-  },
-  {
     "id": "10",
     "name": "test1.cson",
     "type": "fText"
