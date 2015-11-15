@@ -1,5 +1,7 @@
 {
   "name": "fTween",
   "description": "",
-  "id": "vdhR"
+  "id": "vdhR",
+  "formatVersion": 2,
+  "system": "supGame"
 }
