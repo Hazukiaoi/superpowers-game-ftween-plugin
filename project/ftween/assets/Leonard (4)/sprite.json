@@ -17,7 +17,6 @@
   ],
   "opacity": 1,
   "frameOrder": "rows",
-  "advancedTextures": false,
   "mapSlots": {
     "map": "map",
     "light": null,
@@ -25,5 +24,6 @@
     "alpha": null,
     "normal": null
   },
-  "formatVersion": 1
+  "formatVersion": 3,
+  "wrapping": "clampToEdge"
 }
