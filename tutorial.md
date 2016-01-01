@@ -1,6 +1,6 @@
 # Animations with the fTween module
 
-The `fTween` plugin for Superpowers allows to easily create tweens that animate properties on objects.  
+The `fTween` plugin for the Superpowers Game system allows to easily create tweens that animate properties on objects.  
 This enables you to create fade or slide effects, or simple timer for instance, in no time and no hassle.
 
 - Read below for a tutorial and detailed explanations.

@@ -41,7 +41,7 @@
       eulerAngles:
         z: 6.25
     duration: 2
-    loops: 3
+    loops: 2
     onLoopComplete: true
     easingName: "bounceIn"
   }
