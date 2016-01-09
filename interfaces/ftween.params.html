@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html class="default no-js">
 <head>
 	<meta charset="utf-8">
@@ -96,10 +96,14 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#destroyoncomplete" class="tsd-kind-icon">destroy<wbr>OnComplete</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#duration" class="tsd-kind-icon">duration</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#easing" class="tsd-kind-icon">easing</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#easingname" class="tsd-kind-icon">easing<wbr>Name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#from" class="tsd-kind-icon">from</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#interpolation" class="tsd-kind-icon">interpolation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#interpolationname" class="tsd-kind-icon">interpolation<wbr>Name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#isrelative" class="tsd-kind-icon">is<wbr>Relative</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#loops" class="tsd-kind-icon">loops</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#oncomplete" class="tsd-kind-icon">on<wbr>Complete</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#onloopcomplete" class="tsd-kind-icon">on<wbr>Loop<wbr>Complete</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#onpause" class="tsd-kind-icon">on<wbr>Pause</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#onresume" class="tsd-kind-icon">on<wbr>Resume</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ftween.params.html#onstart" class="tsd-kind-icon">on<wbr>Start</a></li>
@@ -123,7 +127,7 @@
 					<div class="tsd-signature tsd-kind-icon">delay<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L495">api/fTween.ts:495</a></li>
+							<li>Defined in fTween.ts:614</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -138,7 +142,7 @@
 					<div class="tsd-signature tsd-kind-icon">destroy<wbr>OnComplete<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L515">api/fTween.ts:515</a></li>
+							<li>Defined in fTween.ts:650</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -153,7 +157,7 @@
 					<div class="tsd-signature tsd-kind-icon">duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L483">api/fTween.ts:483</a></li>
+							<li>Defined in fTween.ts:602</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -168,7 +172,7 @@
 					<div class="tsd-signature tsd-kind-icon">easing<span class="tsd-signature-symbol">:</span> <a href="ftween.easingfunction.html" class="tsd-signature-type">EasingFunction</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L507">api/fTween.ts:507</a></li>
+							<li>Defined in fTween.ts:632</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -178,12 +182,29 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="easingname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> easing<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">easing<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in fTween.ts:638</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The name of the easing function to use, its &quot;path&quot; in the <code>fTween.Easing</code> object. <br>
+								The name is composed of the familly followed by the variant. The <code>&quot;None&quot;</code> variant is optional. <br>
+							Ie: <code>&quot;QuadraticIn&quot;</code> <code>&quot;CircularInOut&quot;</code> <code>&quot;Linear&quot;</code> <code>&quot;LinearNone&quot;</code></p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="from" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> from</h3>
 					<div class="tsd-signature tsd-kind-icon">from<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L475">api/fTween.ts:475</a></li>
+							<li>Defined in fTween.ts:594</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -198,7 +219,7 @@
 					<div class="tsd-signature tsd-kind-icon">interpolation<span class="tsd-signature-symbol">:</span> <a href="ftween.interpolationfunction.html" class="tsd-signature-type">InterpolationFunction</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L511">api/fTween.ts:511</a></li>
+							<li>Defined in fTween.ts:642</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -208,12 +229,27 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="interpolationname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> interpolation<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">interpolation<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in fTween.ts:646</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The name of interpolation function to use, its key in the <code>fTween.Interpolation</code> object.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="isrelative" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> is<wbr>Relative</h3>
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Relative<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L491">api/fTween.ts:491</a></li>
+							<li>Defined in fTween.ts:610</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -223,27 +259,58 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="oncomplete" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Complete</h3>
-					<div class="tsd-signature tsd-kind-icon">on<wbr>Complete<span class="tsd-signature-symbol">:</span> <a href="ftween.tweencallback.html" class="tsd-signature-type">TweenCallback</a></div>
+					<a name="loops" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> loops</h3>
+					<div class="tsd-signature tsd-kind-icon">loops<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L535">api/fTween.ts:535</a></li>
+							<li>Defined in fTween.ts:624</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The callback for the <code>onComple</code> event.</p>
+							<p>The total number of times the tween will run. <br>
+							Settings <code>x</code> loops is the same as setting <code>x-1</code> repeats.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="oncomplete" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Complete</h3>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Complete<span class="tsd-signature-symbol">:</span> <a href="ftween.callback.html" class="tsd-signature-type">Callback</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in fTween.ts:674</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The callback for the <code>onComplete</code> event.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="onloopcomplete" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Loop<wbr>Complete</h3>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Loop<wbr>Complete<span class="tsd-signature-symbol">:</span> <a href="ftween.loopcompletecallback.html" class="tsd-signature-type">LoopCompleteCallback</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in fTween.ts:670</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The callback for the <code>onLoopComplete</code> event.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="onpause" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Pause</h3>
-					<div class="tsd-signature tsd-kind-icon">on<wbr>Pause<span class="tsd-signature-symbol">:</span> <a href="ftween.tweencallback.html" class="tsd-signature-type">TweenCallback</a></div>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Pause<span class="tsd-signature-symbol">:</span> <a href="ftween.callback.html" class="tsd-signature-type">Callback</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L523">api/fTween.ts:523</a></li>
+							<li>Defined in fTween.ts:658</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -255,10 +322,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="onresume" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Resume</h3>
-					<div class="tsd-signature tsd-kind-icon">on<wbr>Resume<span class="tsd-signature-symbol">:</span> <a href="ftween.tweencallback.html" class="tsd-signature-type">TweenCallback</a></div>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Resume<span class="tsd-signature-symbol">:</span> <a href="ftween.callback.html" class="tsd-signature-type">Callback</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L527">api/fTween.ts:527</a></li>
+							<li>Defined in fTween.ts:662</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -270,10 +337,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="onstart" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Start</h3>
-					<div class="tsd-signature tsd-kind-icon">on<wbr>Start<span class="tsd-signature-symbol">:</span> <a href="ftween.tweencallback.html" class="tsd-signature-type">TweenCallback</a></div>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Start<span class="tsd-signature-symbol">:</span> <a href="ftween.callback.html" class="tsd-signature-type">Callback</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L519">api/fTween.ts:519</a></li>
+							<li>Defined in fTween.ts:654</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -285,10 +352,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="onstop" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Stop</h3>
-					<div class="tsd-signature tsd-kind-icon">on<wbr>Stop<span class="tsd-signature-symbol">:</span> <a href="ftween.tweencallback.html" class="tsd-signature-type">TweenCallback</a></div>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Stop<span class="tsd-signature-symbol">:</span> <a href="ftween.callback.html" class="tsd-signature-type">Callback</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L539">api/fTween.ts:539</a></li>
+							<li>Defined in fTween.ts:678</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -300,10 +367,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="onupdate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Update</h3>
-					<div class="tsd-signature tsd-kind-icon">on<wbr>Update<span class="tsd-signature-symbol">:</span> <a href="ftween.tweenupdatecallback.html" class="tsd-signature-type">TweenUpdateCallback</a></div>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Update<span class="tsd-signature-symbol">:</span> <a href="ftween.updatecallback.html" class="tsd-signature-type">UpdateCallback</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L531">api/fTween.ts:531</a></li>
+							<li>Defined in fTween.ts:666</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -318,12 +385,13 @@
 					<div class="tsd-signature tsd-kind-icon">repeat<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L499">api/fTween.ts:499</a></li>
+							<li>Defined in fTween.ts:619</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The number of times the tween will repeat, <strong>after having completed once</strong>.</p>
+							<p>The number of times the tween will repeat, <strong>after having completed once</strong>. <br>
+							Settings <code>x</code> repeats is the same as setting <code>x+1</code> loops.</p>
 						</div>
 					</div>
 				</section>
@@ -333,7 +401,7 @@
 					<div class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L543">api/fTween.ts:543</a></li>
+							<li>Defined in fTween.ts:682</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -348,7 +416,7 @@
 					<div class="tsd-signature tsd-kind-icon">time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L487">api/fTween.ts:487</a></li>
+							<li>Defined in fTween.ts:606</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -363,7 +431,7 @@
 					<div class="tsd-signature tsd-kind-icon">to<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L479">api/fTween.ts:479</a></li>
+							<li>Defined in fTween.ts:598</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -378,7 +446,7 @@
 					<div class="tsd-signature tsd-kind-icon">yoyo<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/florentpoujol/superpowers-ftween-plugin/blob/dev/api/fTween.ts#L503">api/fTween.ts:503</a></li>
+							<li>Defined in fTween.ts:628</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -395,17 +463,8 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class="label tsd-is-external">
-						<span>Internals</span>
-					</li>
-					<li class="current tsd-kind-module tsd-is-not-exported">
+					<li class="current tsd-kind-module">
 						<a href="../modules/ftween.html">f<wbr>Tween</a>
-					</li>
-					<li class="label tsd-is-external">
-						<span>Externals</span>
-					</li>
-					<li class=" tsd-kind-module tsd-is-external tsd-is-not-exported">
-						<a href="../modules/suptween.html">SUPTWEEN</a>
 					</li>
 				</ul>
 			</nav>
@@ -415,10 +474,16 @@
 						<a href="../classes/ftween.tween.html" class="tsd-kind-icon">Tween</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="ftween.callback.html" class="tsd-kind-icon">Callback</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="ftween.easingfunction.html" class="tsd-kind-icon">Easing<wbr>Function</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="ftween.interpolationfunction.html" class="tsd-kind-icon">Interpolation<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="ftween.loopcompletecallback.html" class="tsd-kind-icon">Loop<wbr>Complete<wbr>Callback</a>
 					</li>
 				</ul>
 				<ul class="current">
@@ -438,16 +503,28 @@
 								<a href="ftween.params.html#easing" class="tsd-kind-icon">easing</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="ftween.params.html#easingname" class="tsd-kind-icon">easing<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="ftween.params.html#from" class="tsd-kind-icon">from</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="ftween.params.html#interpolation" class="tsd-kind-icon">interpolation</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="ftween.params.html#interpolationname" class="tsd-kind-icon">interpolation<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="ftween.params.html#isrelative" class="tsd-kind-icon">is<wbr>Relative</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="ftween.params.html#loops" class="tsd-kind-icon">loops</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="ftween.params.html#oncomplete" class="tsd-kind-icon">on<wbr>Complete</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="ftween.params.html#onloopcomplete" class="tsd-kind-icon">on<wbr>Loop<wbr>Complete</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="ftween.params.html#onpause" class="tsd-kind-icon">on<wbr>Pause</a>
@@ -484,10 +561,7 @@
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="ftween.tweencallback.html" class="tsd-kind-icon">Tween<wbr>Callback</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="ftween.tweenupdatecallback.html" class="tsd-kind-icon">Tween<wbr>Update<wbr>Callback</a>
+						<a href="ftween.updatecallback.html" class="tsd-kind-icon">Update<wbr>Callback</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="../modules/ftween.html#easing" class="tsd-kind-icon">Easing</a>
