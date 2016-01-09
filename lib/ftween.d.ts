@@ -1,13 +1,13 @@
 // Type definitions for ftween.js
 // https://github.com/florentpoujol/ftween.js
 
-// Exposed in Superpowers by the fTween plugin
-// https://github.com/florentpoujol/superpowers-ftween-plugin
+// Exposed by the fTween plugin in the Superpowers Game system.
+// https://github.com/florentpoujol/superpowers-game-ftween-plugin
 
 // Origial definitions for Soledad Penadés's tween.js by: sunetos <https://github.com/sunetos>, jzarnikov <https://github.com/jzarnikov>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
-declare module FTWEEN {
+declare namespace FTWEEN {
   export var Easing: Easings;
   export var Interpolation: Interpolations;
 

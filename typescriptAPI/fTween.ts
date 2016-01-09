@@ -21,17 +21,17 @@ var copyObject = function(source: Object): any {
   return dest;
 }
 
-module fTween {
+namespace fTween {
 
   /**
   * The object containing the easing functions segregated into families (ie: `fTween.Easing.Cubic`) and variants (ie: `fTween.Easing.Cubic.In`).
   */
-  export var Easing = FTWEEN.Easing;
+  export const Easing = FTWEEN.Easing;
   
   /**
   * The object containing the interpolation functions (ie: `fTween.Interpolation.Cubic`).
   */
-  export var Interpolation = FTWEEN.Interpolation;
+  export const Interpolation = FTWEEN.Interpolation;
 
   export class Tween {
     /**
@@ -54,12 +54,12 @@ module fTween {
     constructor( time: number, onComplete: Callback, params?: Params );
 
     constructor( ...args: any[] ) {
-      var argsCount = args.length;
-      var types: string[] = [];
+      const argsCount = args.length;
+      let types: string[] = [];
       for ( var i=0; i<argsCount; i++ ) {
         types[i] = typeof args[i];
       }
-      var params: any = {};
+      let params: any = {};
 
       if ( (argsCount === 3 || argsCount === 4) && types[0] === "object" && types[1] === "object" && types[2] === "number" ) {
         params = args[3] || {};
@@ -82,21 +82,26 @@ module fTween {
       }
       else if (argsCount > 0) {
         console.error( "fTween.Tween(): Unknow constructor with "+argsCount+" arguments, see details below" );
-        for (var i = 0; i < args.length; i++) {
+        for (let i = 0; i < args.length; i++) {
           console.log( "argument #"+i+": type="+types[i]+" value=", args[i]);
         }
       }
 
       if (params.onComplete === undefined) {
-        var self = this;
+        /*var self = this;
         this.__inner.onComplete( function() { 
           self._isComplete = true; 
           if (self._destroyOnComplete === true)
             self.destroy();
+        } );*/
+        this.__inner.onComplete( () => { 
+          this._isComplete = true; 
+          if (this._destroyOnComplete === true)
+            this.destroy();
         } );
       }
 
-      var start = params.start;
+      const start = params.start;
       delete params.start;
       
       if ( Object.keys( params ).length > 0 ) {
@@ -128,10 +133,10 @@ module fTween {
         delete params.to;
       }
       
-      var start = params.start;
+      const start = params.start;
       delete params.start;
       
-      for ( var key in params ) {
+      for ( let key in params ) {
         if ( eventNames.indexOf( key ) !== -1 ) {
           this.on( key, params[ key ] )
         }
@@ -162,7 +167,7 @@ module fTween {
     on( eventName: string, callback?: Function ): Tween;
 
     on( eventName: string, callback?: Function ): Tween {
-      var eventPos = shortEventNames.indexOf( eventName );
+      const eventPos = shortEventNames.indexOf( eventName );
       eventName = eventNames[ eventPos ] || eventName; // transform short event name in "long" name or leave it as it is.
       if ( eventNames.indexOf( eventName ) === -1 ) {
         console.error( "fTween.Tween.on(): ERROR: wrong event name: "+eventName+". Expected values are:", shortEventNames, eventNames );
@@ -171,14 +176,14 @@ module fTween {
       if (callback === undefined)
         callback = null;
       if (eventName === "onComplete") {
-        var userCallback = callback;
-        var self = this;
-        callback = function() {
-          self._isComplete = true;
+        const userCallback = callback;
+        // var self = this;
+        callback = () => {
+          this._isComplete = true;
           if (userCallback !== null)
             userCallback.call( this );
-          if (self._destroyOnComplete === true)
-            self.destroy();
+          if (this._destroyOnComplete === true)
+            this.destroy();
         };
       }
       this.__inner[ eventName ]( callback );
@@ -252,7 +257,7 @@ module fTween {
     */
     private _checkMilliseconds( value: number, propName: string ) {
       if ( value >= 500 ) {
-        console.log( "fTween."+propName+": WARNING: The provided value '"+value+"' is superior to 500! The value has to be expressed in seconds, not in milliseconds. Are you sure you didn't meant the value to be '"+value/1000+"' seconds instead ?" );
+        console.warn( "fTween."+propName+": WARNING: The provided value '"+value+"' is superior to 500! The value has to be expressed in seconds, not in milliseconds. Are you sure you didn't meant the value to be '"+value/1000+"' seconds instead ?" );
       }
     }
 
@@ -396,10 +401,10 @@ module fTween {
       this._easing = fn; 
       this.__inner.easing(this._easing);
 
-      var fnName: string = null;
+      let fnName: string = null;
       if (fn !== null) {
-        for (var familly in fTween.Easing) {
-          for (var variant in fTween.Easing[familly]) {
+        for (let familly in fTween.Easing) {
+          for (let variant in fTween.Easing[familly]) {
             if (fn === fTween.Easing[familly][variant]) {
               fnName = familly+variant;
               break;
@@ -423,14 +428,14 @@ module fTween {
     */
     set easingName(name: string) {
       name = name.charAt(0).toUpperCase() + name.slice(1); // make sure first letter is uppercase
-      var result = /^([_A-Z]{1}[a-z0-9_-]+)(([A-Z]{1}.+)?)$/.exec(name);
+      const result = /^([_A-Z]{1}[a-z0-9_-]+)(([A-Z]{1}.+)?)$/.exec(name);
       if (result !== null) {
 
-        var familly: Object = fTween.Easing[ result[1] ]; // if result isn't null, there is no reason the familly should be null, undefined or ""
+        const familly: Object = fTween.Easing[ result[1] ]; // if result isn't null, there is no reason the familly should be null, undefined or ""
         if (familly !== undefined) {
 
-          var variant: string = result[2] || "None"; // if the variant is not supplied, result[2] === ""
-          var fn: EasingFunction = familly[variant];
+          const variant: string = result[2] || "None"; // if the variant is not supplied, result[2] === ""
+          const fn: EasingFunction = familly[variant];
 
           if (fn !== undefined) {
             this._easing = fn; 
@@ -454,9 +459,9 @@ module fTween {
       this._interpolation = fn;
       this.__inner.interpolation(this._interpolation);
 
-      var fnName: string = null;
+      let fnName: string = null;
       if (fn !== null) {
-        for (var _fnName in fTween.Interpolation) {
+        for (let _fnName in fTween.Interpolation) {
           if (fn === fTween.Interpolation[_fnName]) {
             fnName = _fnName;
             break;
@@ -477,7 +482,7 @@ module fTween {
     */
     set interpolationName(name: string) {
       name = name.charAt(0).toUpperCase() + name.slice(1); // make sure first letter is uppercase
-      var fn = fTween.Interpolation[name];
+      const fn = fTween.Interpolation[name];
       if (fn !== undefined) {
         this._interpolation = fn; 
         this.__inner.interpolation(this._interpolation);
@@ -676,7 +681,7 @@ module fTween {
     */
     start?: number;
   }
-} // end of fTween module
+} // end of fTween namespace
 
 // expose to the runtime
-(<any>window).fTween = fTween;
+(window as any).fTween = fTween;

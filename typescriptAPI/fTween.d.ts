@@ -1,15 +1,15 @@
 // fTween plugin
-// https://github.com/florentpoujol/superpowers-ftween-plugin
+// https://github.com/florentpoujol/superpowers-game-ftween-plugin
 // Module and class for easy tweening (animation of values).
 // Wrapper around ftween.js (the FTWEEN module), a fork of tween.js.
 
 // Documentation:
-// http://florentpoujol.github.io/superpowers-ftween-plugin
+// http://florentpoujol.github.io/superpowers-game-ftween-plugin
 
 // You can also access the documentation offline in the plugin's "public/docs" folder 
-// or via the "Docs browser" tool provided by the "Docs browser" plugin: https://github.com/florentpoujol/superpowers-docs-browser-plugin
+// or via the "Plugins documentation" tool provided by the "Plugins documentation" plugin: https://github.com/florentpoujol/superpowers-common-pluginsdocs-plugin
 
-declare module fTween {
+declare namespace fTween {
   var Easing: FTWEEN.Easings;
   var Interpolation: FTWEEN.Interpolations;
 

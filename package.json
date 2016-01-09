@@ -1,11 +1,11 @@
 {
-  "name": "sup-ftween-plugin",
-  "version": "0.3.1",
+  "name": "superpowers-game-ftween-plugin",
+  "version": "0.4.0",
   "description": "Easy tweening (animation of values) for the supGame system for Superpowers, the extensible HTML5 2D+3D game engine.",
-  "homepage": "https://github.com/florentpoujol/superpowers-ftween-plugin",
+  "homepage": "https://github.com/florentpoujol/superpowers-game-ftween-plugin",
   "repository": {
     "type": "git",
-    "url": "https://github.com/florentpoujol/superpowers-ftween-plugin"
+    "url": "https://github.com/florentpoujol/superpowers-game-ftween-plugin"
   },
   "author": "Florent Poujol <florent.poujol@gmail.com> (http://florentpoujol.fr)",
   "keywords": [
@@ -17,17 +17,15 @@
     "animation"
   ],
   "bugs": {
-    "url": "https://github.com/florentpoujol/superpowers-ftween-plugin/issues"
+    "url": "https://github.com/florentpoujol/superpowers-game-ftween-plugin/issues"
   },
   "scripts": {
-    "compilets": "tsc api/fTween.ts --out gitignore/fTween.js --module commonjs --target ES5",
-    "gendoc": "typedoc --out gitignore/docs/ api/fTween.ts --mode file --target ES5 --name \"fTween plugin\" --readme tutorial.md --verbose",
-
+    "gendoc": "typedoc --out gitignore/docs/ typescriptAPI/fTween.ts --mode file --target ES5 --name \"fTween plugin\" --readme tutorial.md",
     "linkplugindev": "mklink /j \"../../app/systems/supGame/plugins/florentpoujol/fTween\" \"./\"",
     "linkprojectdev": "mklink /j \"../../data/projects/fTween\" \"./project/fTween\"",
-
     "linkpluginrelease": "mklink /j \"../../../release/app/systems/supGame/plugins/florentpoujol/fTween\" \"./\"",
-    "linkprojectrelease": "mklink /j \"../../../release/data/projects/fTween\" \"./project/fTween\""
+    "linkprojectrelease": "mklink /j \"../../../release/data/projects/fTween\" \"./project/fTween\"",
+    "build": "gulp --gulpfile=../../app/scripts/pluginGulpfile.js --cwd=."
   },
   "maintainers": [
     "Florent Poujol <florent.poujol@gmail.com>"
